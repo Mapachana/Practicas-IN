@@ -22,6 +22,20 @@
 
 ## Introducción
 
+En esta práctica se trabajará en cuatro problemas de clasificación reales mediante diversos algoritmos de clasificación supervisada implementados en knime, con el objetivo de obtener una predicción y analizar la calidad de esta comparándola con predicciones de otros algoritmos en el mismo problema.
+
+Ahora estudiaremos las particularidades de cada problema por separado:
+
+### Heart 
+
+### Mobile Price
+
+
+
+### Bank
+
+### Tanzania
+
 
 
 ## Resultados obtenidos
