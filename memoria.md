@@ -7,7 +7,12 @@
 - [Práctica 1: Análisis predictivo mediante clasificación](#práctica-1-análisis-predictivo-mediante-clasificación)
   - [Índice](#índice)
   - [Introducción](#introducción)
+    - [Heart](#heart)
+    - [Mobile Price](#mobile-price)
+    - [Bank](#bank)
+    - [Tanzania](#tanzania)
   - [Resultados obtenidos](#resultados-obtenidos)
+    - [ZeroR](#zeror)
     - [Árboles de decisión (DT)](#árboles-de-decisión-dt)
     - [Random Forest (RF)](#random-forest-rf)
     - [Naive Bayes (NB)](#naive-bayes-nb)
@@ -228,6 +233,73 @@ Las distintas medidas obtenidas para k-NN son:
 En general, funciona bien, no se ve tanta disparidad entre el dataset para el que mejor funciona y para el que peor. 
 
 ## Análisis de resultados
+
+Para analizar correctamente los resultados obtenidos, realizaremos el análisis individualmente para cada conjunto de datos que se ha trabajado.
+
+Realizaremos un análisis centrado en comparar los distintos algoritmos usados en cada problema, tratando de buscar motivos a por qué unos mejoran mejor que otros y finalmente extraer conclusiones.
+
+### Heart
+
+Para comenzar, analizamos el problema sobre enfermedades del corazón. En la siguiente tavbla se pueden ver las medidas obtenidas por los diferentes algoritmos en este problema.
+
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 417           | 87             | 323           | 90             | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086           |
+| RF    | 455           | 71             | 339           | 53             | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225           |
+| ZeroR | 508           | 410            | 0             | 0              | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819           |
+| NB    | 436           | 75             | 335           | 72             | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152           |
+| XGB   | 372           | 116            | 294           | 136            | 0,7623    | 0,7323      | 0,7171      | 0,7470    | 0,7255   | 0,4473        | 0,7246 | 0,7832           |
+| k-NN  | 450           | 83             | 327           | 58             | 0,8443    | 0,8858      | 0,7976      | 0,8646    | 0,8464   | 0,6874        | 0,8405 | 0,8417           |
+
+Para facilitar la lectura de estos datos, vamos a representar en un gráfico de barras apilado los valores de la matriz de confusión.
+
+![](./img/stackbar_heart.svg)
+
+En esta gráfica se puede ver que el algoritmo con mayor número de verdaderos positivos es Random Forest. Además, tiene un número bastante bajo de falsos positivos, por lo que a primera vista, lo consideraríamos el mejor algroitmo para este dataset.
+
+En general, se observa que todos los algoritmos realizan predicciones bastante buenas, aunque el peor es XGBoost. Esto puede deberse a que XGBoost trabaja solamente con variables nominales o categóricas, y el conjunto de datos del corazón tiene muchas variables relevantes numéricas. Por este mismo motivo, k-NN, que solo trabaja con variables numéricas funciona bastante bien.
+
+Los algoritmos basados en árboles y naive bayes, al poder trabajar con variables tanto categóricas como numéricas, no parece afectarles mucho.
+
+Veamos ahora la curva ROC:
+
+![](./img/ROC_heart.svg)
+
+En esta curva de nuevo se aprecia que el algoritmo random forest es el mejor, seguido de cerca por Naive Bayes y después k-NN.
+
+También cabe destacar que en esta gráfica se aprecia como el algoritmo XGBoost es el peor de nuevo, y como el algoritmo ZeroR es ligeramente peor que un selector aleatorio.
+
+Representamos también la precisión de cada algoritmo:
+
+![](./img/roundedbar_heart.svg)
+
+Se observa que los únicos algoritmos con precisión menor a 0.8 son ZeroR y XGBoost.
+
+En este problema hemos notado que Naive bayes funciona bastante bien, como ya se mencionó en la seccióna nterior, este algoritmo asume que todos los atributos son independientes entre sí. Para comprobar si esta asunción es cierta, hemos representado como un heatmap la matriz de correlación.
+
+![](./img/corr_heart.svg)
+
+Se puede ver que la correación entre atributos es nula o muy baja, por lo tanto la asunción de que los atributos son independientes no afecta demasiado negativamente.
+
+En conclusión, los algoritmos que mejor han funcionado en este conjunto de datos, de mejor a peor son:
+
+- Random forest
+- Naive bayes
+- k-NN
+- Decission tree
+- XGBoost
+
+### Mobile
+
+
+
+### Bank
+
+
+
+### Tanzania
+
+
 
 
 
