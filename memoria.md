@@ -240,7 +240,7 @@ Realizaremos un análisis centrado en comparar los distintos algoritmos usados e
 
 ### Heart
 
-Para comenzar, analizamos el problema sobre enfermedades del corazón. En la siguiente tavbla se pueden ver las medidas obtenidas por los diferentes algoritmos en este problema.
+Para comenzar, analizamos el problema sobre enfermedades del corazón. En la siguiente tabla se pueden ver las medidas obtenidas por los diferentes algoritmos en este problema.
 
 | RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
 | ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
@@ -283,19 +283,131 @@ Se puede ver que la correación entre atributos es nula o muy baja, por lo tanto
 
 En conclusión, los algoritmos que mejor han funcionado en este conjunto de datos, de mejor a peor son:
 
-- Random forest
-- Naive bayes
-- k-NN
-- Decission tree
-- XGBoost
+- Random forest.
+- Naive bayes.
+- k-NN.
+- Decission tree.
+- XGBoost.
 
 ### Mobile
 
+Analizamos ahora el conjunto de datos sobre estimaciones de precios de móviles según sus características. De nuevo, hemos tomado medidas con los distintos algoritmos:
 
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 452           | 40             | 1460          | 48             | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591           |
+| RF    | 471           | 43             | 1457          | 29             | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947           |
+| ZeroR | 188           | 612            | 888           | 312            | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787           |
+| NB    | 436           | 67             | 1433          | 64             | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796           |
+| XGB   | 173           | 326            | 1174          | 327            | 0,3467    | 0,3460      | 0,7827      | 0,3463    | 0,3210   | 0,0947        | 0,5204 | 0,6109           |
+| k-NN  | 233           | 243            | 1257          | 267            | 0,4895    | 0,4660      | 0,8380      | 0,4775    | 0,3705   | 0,1607        | 0,6249 | 0,7451           |
+
+Para hacer el análisis más sencillo, vamos a representar algunos de estos datos.
+
+Comenzamos representando la matriz de confusión de cada algoritmo usando un gráfico de barras apiladas.
+
+![](./img/stackedbar_mobile.svg)
+
+Lo primero que llama la atención de esta gráfica es que el algoritmo ZeroR no tiene solo positivos y falsos positivos, esto se debe a que, como vimos en la introducción al analizar los datos, todas las clases están igualmente representadas, es decir, no hay una clase mayoritaria que el algoritmo pueda seleccionar para asignar siempre.
+
+De nuevo, el algoritmo con mayor número de verdaderos positivos y menor número de falsos positivos es el random forest, y el peor vuelve a ser XGBoost.
+
+En este dataset se nota algo más de diferencia entre los algoritmos, y k-NN funciona peor que en el anterior, pese a que en este conjunto de datos todas las variables son numéricas. Esto puede deberse a que muchos de los atributos, pese a considerarse números enteros, realmente solo toman el valor 0 o 1 para indicar si un móvl tiene o no una característica, es decir, aunque las variables están calificadas como numéricas, realmente actúan como categóricas (sí o no).
+
+De nuevo, los algoritmos basados en árboles y naive bayes, que trabajan con variables numéricas y nominales no tienen este problema.
+
+Estudiamos ahora la curva ROC:
+
+![](./img/ROC_mobile.svg)
+
+En la curva ROC de nuevo se aprecia que el mejor algoritmo es random forest, que deja la mayor área por debajo suya, seguido de naive bayes y el árbol de decisión.
+
+También se ve claramente la diferencia que hay entre los tres mejores, ya comentados, y después k-NN y XGBoost.
+
+De nuevo, el mal rendimiento de XGBoost puede deberse a que los atributos del conjunto de datos son numéricos y este algroitmo solo admite atributos nominales.
+
+Representamos ahora la precisión de los distintos algoritmos:
+
+![](./img/roundedbar_mobile.svg)
+
+En este caso, los únicos algoritmos con precisión mayor a 0.8 son los basados en árboles, seguidos de cerca por Naive Bayes y después por k-NN.
+
+También llama la atención la baja precisión del XGBoost en comparación con el resto de algoritmos.
+
+De nuevo, en este problema Naive Bayes funciona considerablemente bien, comprobamos de nuevo la matriz de correlación de los atributos del problema:
+
+![](./img/corr_mobile.svg)
+
+En efecto, de nuevo comprobamos que los atributos tienen poca o nula correlación entre ellos en general, luego el principal problema de naive bayes, que es suponer que losa tributos son independientes, no lo perjudica.
+
+En conclusión, lo algoritmos que mejor han funcionado en este dataset son, de mejor a peor:
+
+- Random forest.
+- Decission tree.
+- Naive bayes.
+- k-NN.
+- XGBoosting.
 
 ### Bank
 
+Pasamos a analizar ahora el conjunto de datos de un banco que quiere predecir cuándo conceder créditos o no.
 
+Veamos de nuevo las medidas obtenidas para cada algoritmo aplicado a este conjunto de datos.
+
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 2321          | 1973           | 34365         | 2158           | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508           |
+| RF    | 2048          | 980            | 35568         | 2592           | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428           |
+| ZeroR | 0             | 0              | 36548         | 4640           |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892           |
+| NB    | 2511          | 3594           | 32954         | 2129           | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336           |
+| XGB   | 2174          | 1415           | 35133         | 2466           | 0,6057    | 0,4685      | 0,9613      | 0,5284    | 0,9058   | 0,4770        | 0,6711 | 0,8785           |
+| k-NN  | 1488          | 1310           | 35238         | 3152           | 0,5318    | 0,3207      | 0,9642      | 0,4001    | 0,8917   | 0,3446        | 0,5561 | 0,7517           |
+
+Ahora vamos a visualizar como en los ejemplos anteriores estos datos, comenzando por la matriz de confusión representada en un gráfico de barras apiladas:
+
+![](./img/stackedbar_bank.svg)
+
+Lo primero a destacar de la gráfica es como la mayoría de valores son verdaderos negaitvos. Si nos fijamos en ZeroR veremos que solo predice negativos, lo cuál es congruente con el análisis inicial de los datos, en el que se veían muy desbalanceados, y con la clase predominante no.
+
+Nosotros hemos considerado la clase positiva como sí, por lo tanto la gráfica tiene sentido, ya que indica que predominan los valores negativos, que son la clase no.
+
+El algoritmo que mayor número de verdaderos positivos proporciona es naive bayes, pero también predice muchos falsos positivos, lo que puede ser peligroso para un banco que quiera saber cuándo conceder un préstamo. Teniendo esto en cuenta, los algoritmos que nos llaman la atención son random forest, XGBoosting y decission tree.
+
+Estudiamos ahora la curva ROC:
+
+![](./img/ROC_bank.svg)
+
+En la curva ROC se observa de nuevo que el mejor algoritmo es random forest, seguido de XGBoosting, como ya se pudo observar en la gráfica anterior.
+
+El tercer mejor algoritmo es naive bayes, después decission tree y por último k-NN.
+
+De nuevo, al haber atributos nominales el algoritmo k-NN parece funcionar bastante peor que en los datasets anteriores, ya que solo admite variables numéricas y por tanto se deben transformar aquellas que no lo sean.
+
+Representamos finalmente la precisión de todos los algoritmos:
+
+![](./img/roundedbar_bank.svg)
+
+Lo primero que nos llama la atención de este gráfico es como todos los algoritmos tienen una precisión mayor que 0.8.
+
+A la vista de todos los gráficos y los datos obtenidos, random forest parece ser el mejor algoritmo, seguido de XGBoosting y árboles de decisión.
+
+También se refleja en este gráfico de barras como naive bayes predice más falsos positivos, ya que es el algoritmo con menor precisión de todos.
+
+Por otro lado, se observa que XGBoosting ahora es un algoritmo bastante bueno, ya que la mayoría de variables son nominales o categóricas.
+
+Representamos finalmente la matriz de correlaciones de los atributos del conjunto de datos:
+
+![](./img/corr_bank.svg)
+
+Se puede ver que la correlación entre los distintos atributos es más alta que en los otros conjuntos de datos, lo que ha podido afectar al rendimiento de Naive Bayes al asumir que son independientes.
+
+En conclusión, los mejores algoritmos para este conjunto de datos son, de mejor a peor:
+
+- Random forest.
+- XGBoost.
+- Decission tree.
+- Naive bayes.
+- k-NN.
 
 ### Tanzania
 
