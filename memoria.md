@@ -115,16 +115,16 @@ A continuación tenemos la tabla con las medidas obtenidas por este algoritmo en
 
 En la siguiente tabla se muestran las medidas tomadas:
 
-| Dataset  | TP   | FP   | TN    | FN    | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
-| -------- | ---- | ---- | ----- | ----- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
-| Heart    | 508  | 410  | 0     | 0     | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819 |
-| Mobile   | 188  | 612  | 888   | 312   | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787 |
-| Bank     | 0    | 0    | 36548 | 4640  |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892 |
-| Tanzania | 0    | 0    | 32259 | 22824 |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974 |
+| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| Heart    | 508           | 410            | 0             | 0              | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819           |
+| Mobile   | 188           | 612            | 888           | 312            | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787           |
+| Bank     | 0             | 0              | 36548         | 4640           |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892           |
+| Tanzania | 0             | 0              | 32259         | 22824          |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974           |
 
 Como se puede observar el algoritmo no da buenos resultados, pero como comentamos antes solo lo usaremos para tener una cota inferior en las medidas de los demás algoritmos.
 
-También llama la atención que hay valores que no han podido calcularse en la tabla, ya que como este algroitmo siempre asigna como predicción la clase mayoritaria, algunas medidas no pueden calcularse, pues requerirían dividir por cero.
+También llama la atención que hay valores que no han podido calcularse en la tabla, ya que como este algoritmo siempre asigna como predicción la clase mayoritaria, algunas medidas no pueden calcularse, pues requerirían dividir por cero.
 
 
 ### Árboles de decisión (DT)
@@ -138,12 +138,12 @@ Como criterio de selección se ha usado el índice Gini, este índice mide con q
 Sea $p_i$  la frecuencia relativa de la clase $i$ en un conjunto de datos $T$, que contiene ejemplos de $n$ clases, entonces se define:
 $$\displaystyle\text{gini}(T)=1-\sum_{i=1}^{n}p_i^2$$
 
-| Dataset  | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
-| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
-| Heart    | 417   | 87   | 323   | 90   | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086 | 69          |
-| Mobile   | 452   | 40   | 1460  | 48   | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591 | 109         |
-| Bank     | 2321  | 1973 | 34365 | 2158 | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508 | 2689        |
-| Tanzania | 17045 | 4426 | 27655 | 5631 | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444 | 5042        |
+| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
+| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
+| Heart    | 417           | 87             | 323           | 90             | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086           | 69          |
+| Mobile   | 452           | 40             | 1460          | 48             | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591           | 109         |
+| Bank     | 2321          | 1973           | 34365         | 2158           | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508           | 2689        |
+| Tanzania | 17045         | 4426           | 27655         | 5631           | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444           | 5042        |
 
 Observamos que funcionó mejor en el dataset e los móviles, y peor en el del banco, aún así ha dado muy buenos resultados en todos los conjuntos de datos, ya que los árboles de decisión trabajan con cualquier valor de datos y gestionan bien los valores perdidos.
 
@@ -165,12 +165,12 @@ En algunos problemas, como en el de Tanzania, ha sido necesario usar el nodo dom
 
 Veamos la tabla con las medidas tomadas en cada conjunto de datos:
 
-| Dataset  | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
-| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
-| Heart    | 455   | 71   | 339   | 53   | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225 | 100         |
-| Mobile   | 471   | 43   | 1457  | 29   | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947 | 100         |
-| Bank     | 2048  | 980  | 35568 | 2592 | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428 | 100         |
-| Tanzania | 14060 | 8517 | 23742 | 8764 | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418 | 100         |
+| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
+| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
+| Heart    | 455           | 71             | 339           | 53             | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225           | 100         |
+| Mobile   | 471           | 43             | 1457          | 29             | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947           | 100         |
+| Bank     | 2048          | 980            | 35568         | 2592           | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428           | 100         |
+| Tanzania | 14060         | 8517           | 23742         | 8764           | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418           | 100         |
 
 Podemos observar que Random Forest obtiene resultados muy buenos en todos los datos, aunque su valor más bajo sn duda está en el problema de Tanzania. En tres de los cuatro problemas a estudiar se ve que random forest es el que mejores resultados obtiene. 
 
@@ -186,12 +186,12 @@ Para este algoritmo no ha sido necesario realizar preprocesamiento, ya que aunqu
 
 Veamos ahora las medidas tomadas con este algoritmo:
 
-| Dataset  | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
-| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
-| Heart    | 436   | 75   | 335   | 72   | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152 | 22          |
-| Mobile   | 436   | 67   | 1433  | 64   | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796 | 80          |
-| Bank     | 2511  | 3594 | 32954 | 2129 | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336 | 40          |
-| Tanzania | 16149 | 5813 | 26446 | 6675 | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489 | 117         |
+| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
+| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
+| Heart    | 436           | 75             | 335           | 72             | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152           | 22          |
+| Mobile   | 436           | 67             | 1433          | 64             | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796           | 80          |
+| Bank     | 2511          | 3594           | 32954         | 2129           | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336           | 40          |
+| Tanzania | 16149         | 5813           | 26446         | 6675           | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489           | 117         |
 
 Se observa que proporciona predicciones bastante buenas, en especial en los problemas con datos numéricos.
 
@@ -205,20 +205,22 @@ XGBoosting es una algoritmo "ensemble" basado en árboles de decisión que usa "
 
 Se ha escogido este algoritmo ya que se ha considerado que puede competir en medidas con el random forest.
 
-Aunque XGBoosting no requiere de un preprocesamiento de los missing values, sí ha sido necesario convertir todos los atributos a nominales.
+Aunque XGBoosting no requiere de un preprocesamiento de los missing values, sí ha sido necesario convertir todos los atributos a numéricos.
+
+TODO CAMBIAR ESTA CAPTURA
 
 ![](./img/XGB1.png)
 
 Las medidas obtenidas para este algoritmo en los distintos problemas son:
 
-| Dataset  | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
-| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
-| Heart    | 372   | 116  | 294   | 136  | 0,7623    | 0,7323      | 0,7171      | 0,7470    | 0,7255   | 0,4473        | 0,7246 | 0,7832 | 100         |
-| Mobile   | 173   | 326  | 1174  | 327  | 0,3467    | 0,3460      | 0,7827      | 0,3463    | 0,3210   | 0,0947        | 0,5204 | 0,6109 | 100         |
-| Bank     | 2174  | 1415 | 35133 | 2466 | 0,6057    | 0,4685      | 0,9613      | 0,5284    | 0,9058   | 0,4770        | 0,6711 | 0,8785 | 100         |
-| Tanzania | 16536 | 4366 | 27893 | 6288 | 0,7911    | 0,7245      | 0,8647      | 0,7563    | 0,8066   | 0,5965        | 0,7915 | 0,8746 | 100         |
+| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
+| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
+| Heart    | 449           | 71             | 339           | 59             | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241           | 100         |
+| Mobile   | 450           | 55             | 1445          | 50             | 0,8911    | 0,9000      | 0,9633      | 0,8955    | 0,7555   | 0,6740        | 0,9311 | 0,9863           | 100         |
+| Bank     | 1709          | 935            | 35613         | 2931           | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239           | 100         |
+| Tanzania | 11718         | 5447           | 26812         | 11106          | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422           | 100         |
 
-Al contrario que en el algoritmo anterior, XGBoosting obtiene mejores resultados en los problemas con datos nominales, ya que no acepta atributos numéricos.
+Al contrario que en el algoritmo anterior, XGBoosting obtiene mejores resultados en los problemas con datos numéricos, ya que los nominales o categóricos han sido transformados a atributos numéricos.
 
 Para XGBoost la complejidad es el número de rondas de boost.
 
@@ -236,12 +238,12 @@ El algoritmo se ha implementado considerando $k=3$.
 
 Las distintas medidas obtenidas para k-NN son:
 
-| Dataset  | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
-| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
-| Heart    | 450   | 83   | 327   | 58   | 0,8443    | 0,8858      | 0,7976      | 0,8646    | 0,8464   | 0,6874        | 0,8405 | 0,8417 | 735         |
-| Mobile   | 233   | 243  | 1257  | 267  | 0,4895    | 0,4660      | 0,8380      | 0,4775    | 0,3705   | 0,1607        | 0,6249 | 0,7451 | 1600        |
-| Bank     | 1488  | 1310 | 35238 | 3152 | 0,5318    | 0,3207      | 0,9642      | 0,4001    | 0,8917   | 0,3446        | 0,5561 | 0,7517 | 32951       |
-| Tanzania | 16702 | 4670 | 27589 | 6122 | 0,7815    | 0,7318      | 0,8552      | 0,7558    | 0,8041   | 0,5925        | 0,7911 | 0,8555 | 44067       |
+| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
+| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
+| Heart    | 450           | 86             | 324           | 58             | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380           | 735         |
+| Mobile   | 300           | 187            | 1313          | 200            | 0,6160    | 0,6000      | 0,8753      | 0,6079    | 0,4765   | 0,3020        | 0,7247 | 0,8432           | 1600        |
+| Bank     | 1992          | 1638           | 34910         | 2648           | 0,5488    | 0,4293      | 0,9552      | 0,4817    | 0,8959   | 0,4249        | 0,6404 | 0,8191           | 32951       |
+| Tanzania | 16889         | 4585           | 27674         | 5935           | 0,7865    | 0,7400      | 0,8579      | 0,7625    | 0,8090   | 0,6031        | 0,7967 | 0,8599           | 44067       |
 
 En general, funciona bien, no se ve tanta disparidad entre el dataset para el que mejor funciona y para el que peor. 
 
@@ -257,38 +259,38 @@ Realizaremos un análisis centrado en comparar los distintos algoritmos usados e
 
 Para comenzar, analizamos el problema sobre enfermedades del corazón. En la siguiente tabla se pueden ver las medidas obtenidas por los diferentes algoritmos en este problema.
 
-| Alg   | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
-| ----- | ---- | ---- | ---- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
-| DT    | 417  | 87   | 323  | 90   | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086 |
-| RF    | 455  | 71   | 339  | 53   | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225 |
-| ZeroR | 508  | 410  | 0    | 0    | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819 |
-| NB    | 436  | 75   | 335  | 72   | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152 |
-| XGB   | 372  | 116  | 294  | 136  | 0,7623    | 0,7323      | 0,7171      | 0,7470    | 0,7255   | 0,4473        | 0,7246 | 0,7832 |
-| k-NN  | 450  | 83   | 327  | 58   | 0,8443    | 0,8858      | 0,7976      | 0,8646    | 0,8464   | 0,6874        | 0,8405 | 0,8417 |
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 417           | 87             | 323           | 90             | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086           |
+| RF    | 455           | 71             | 339           | 53             | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225           |
+| ZeroR | 508           | 410            | 0             | 0              | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819           |
+| NB    | 436           | 75             | 335           | 72             | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152           |
+| XGB   | 449           | 71             | 339           | 59             | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241           |
+| k-NN  | 450           | 86             | 324           | 58             | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380           |
 
 Para facilitar la lectura de estos datos, vamos a representar en un gráfico de barras apilado los valores de la matriz de confusión.
 
-![](./img/stackbar_heart.svg)
+![](./img/stackedbar_heart.svg)
 
 En esta gráfica se puede ver que el algoritmo con mayor número de verdaderos positivos es Random Forest. Además, tiene un número bastante bajo de falsos positivos, por lo que a primera vista, lo consideraríamos el mejor algroitmo para este dataset.
 
-En general, se observa que todos los algoritmos realizan predicciones bastante buenas, aunque el peor es XGBoost. Esto puede deberse a que XGBoost trabaja solamente con variables nominales o categóricas, y el conjunto de datos del corazón tiene muchas variables relevantes numéricas. Por este mismo motivo, k-NN, que solo trabaja con variables numéricas funciona bastante bien.
+En general, se observa que todos los algoritmos realizan predicciones bastante buenas, aunque el peor es árboles de decisión. Aún así, todos los algoritmos parecen bastante igualados en los resultados de la matriz de confusión.
 
-Los algoritmos basados en árboles y naive bayes, al poder trabajar con variables tanto categóricas como numéricas, no parece afectarles mucho.
+Los algoritmos basados en árboles y naive bayes, al poder trabajar con variables tanto categóricas como numéricas, no parece afectarles mucho que todos los valores sean numéricos, lo que por otro lado claramente beneficia a XGBoost y k-NN, que solo trabajan con este tipo de atributos.
 
 Veamos ahora la curva ROC:
 
 ![](./img/ROC_heart.svg)
 
-En esta curva de nuevo se aprecia que el algoritmo random forest es el mejor, seguido de cerca por Naive Bayes y después k-NN.
+En esta curva de nuevo se aprecia que el algoritmoXGBoost es el mejor, seguido de cerca por Random forest, y después, con mayor diferencia, Naive Bayes y k-NN.
 
-También cabe destacar que en esta gráfica se aprecia como el algoritmo XGBoost es el peor de nuevo, y como el algoritmo ZeroR es ligeramente peor que un selector aleatorio.
+También cabe destacar que en esta gráfica se aprecia como el algoritmo de árboles de decisión es el peor de nuevo, y como el algoritmo ZeroR es ligeramente peor que un selector aleatorio.
 
 Representamos también la precisión de cada algoritmo:
 
 ![](./img/roundedbar_heart.svg)
 
-Se observa que los únicos algoritmos con precisión menor a 0.8 son ZeroR y XGBoost.
+Se observa que todos los algoritmos (salvo ZeroR) tienen precisión mayor a 0.8.
 
 En este problema hemos notado que Naive bayes funciona bastante bien, como ya se mencionó en la seccióna nterior, este algoritmo asume que todos los atributos son independientes entre sí. Para comprobar si esta asunción es cierta, hemos representado como un heatmap la matriz de correlación.
 
@@ -303,23 +305,23 @@ Finalmente, se hará un ránking de los algoritmos en función de G-mean. Para h
 En conclusión, el ránking es, de mejor a peor:
 
 - Random forest.
-- k-NN
-- Naive bayes.
-- Decission tree.
 - XGBoost.
+- Naive bayes.
+- k-NN
+- Decission tree.
 
 ### Mobile
 
 Analizamos ahora el conjunto de datos sobre estimaciones de precios de móviles según sus características. De nuevo, hemos tomado medidas con los distintos algoritmos:
 
-| Alg   | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
-| ----- | ---- | ---- | ---- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
-| DT    | 452  | 40   | 1460 | 48   | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591 |
-| RF    | 471  | 43   | 1457 | 29   | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947 |
-| ZeroR | 188  | 612  | 888  | 312  | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787 |
-| NB    | 436  | 67   | 1433 | 64   | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796 |
-| XGB   | 173  | 326  | 1174 | 327  | 0,3467    | 0,3460      | 0,7827      | 0,3463    | 0,3210   | 0,0947        | 0,5204 | 0,6109 |
-| k-NN  | 233  | 243  | 1257 | 267  | 0,4895    | 0,4660      | 0,8380      | 0,4775    | 0,3705   | 0,1607        | 0,6249 | 0,7451 |
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 452           | 40             | 1460          | 48             | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591           |
+| RF    | 471           | 43             | 1457          | 29             | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947           |
+| ZeroR | 188           | 612            | 888           | 312            | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787           |
+| NB    | 436           | 67             | 1433          | 64             | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796           |
+| XGB   | 450           | 55             | 1445          | 50             | 0,8911    | 0,9000      | 0,9633      | 0,8955    | 0,7555   | 0,6740        | 0,9311 | 0,9863           |
+| k-NN  | 300           | 187            | 1313          | 200            | 0,6160    | 0,6000      | 0,8753      | 0,6079    | 0,4765   | 0,3020        | 0,7247 | 0,8432           |
 
 Para hacer el análisis más sencillo, vamos a representar algunos de estos datos.
 
@@ -329,7 +331,7 @@ Comenzamos representando la matriz de confusión de cada algoritmo usando un gr�
 
 Lo primero que llama la atención de esta gráfica es que el algoritmo ZeroR no tiene solo positivos y falsos positivos, esto se debe a que, como vimos en la introducción al analizar los datos, todas las clases están igualmente representadas, es decir, no hay una clase mayoritaria que el algoritmo pueda seleccionar para asignar siempre.
 
-De nuevo, el algoritmo con mayor número de verdaderos positivos y menor número de falsos positivos es el random forest, y el peor vuelve a ser XGBoost.
+De nuevo, el algoritmo con mayor número de verdaderos positivos y menor número de falsos positivos es el random forest, y el peor es k-NN.
 
 En este dataset se nota algo más de diferencia entre los algoritmos, y k-NN funciona peor que en el anterior, pese a que en este conjunto de datos todas las variables son numéricas. Esto puede deberse a que muchos de los atributos, pese a considerarse números enteros, realmente solo toman el valor 0 o 1 para indicar si un móvl tiene o no una característica, es decir, aunque las variables están calificadas como numéricas, realmente actúan como categóricas (sí o no).
 
@@ -339,9 +341,9 @@ Estudiamos ahora la curva ROC:
 
 ![](./img/ROC_mobile.svg)
 
-En la curva ROC de nuevo se aprecia que el mejor algoritmo es random forest, que deja la mayor área por debajo suya, seguido de naive bayes y el árbol de decisión.
+En la curva ROC de nuevo se aprecia que el mejor algoritmo es random forest, que deja la mayor área por debajo suya, seguido de XGBoost, casi igualado por naive bayes y tras ellos el árbol de decisión.
 
-También se ve claramente la diferencia que hay entre los tres mejores, ya comentados, y después k-NN y XGBoost.
+También se ve claramente la diferencia que hay entre todos los algoritmos y k-NN, que queda bastante por detrás.
 
 De nuevo, el mal rendimiento de XGBoost puede deberse a que los atributos del conjunto de datos son numéricos y este algroitmo solo admite atributos nominales.
 
@@ -349,9 +351,9 @@ Representamos ahora la precisión de los distintos algoritmos:
 
 ![](./img/roundedbar_mobile.svg)
 
-En este caso, los únicos algoritmos con precisión mayor a 0.8 son los basados en árboles, seguidos de cerca por Naive Bayes y después por k-NN.
+En este caso, los únicos algoritmos con precisión mayor a 0.8 son los basados en árboles, seguidos de cerca por Naive Bayes y XGBoost.
 
-También llama la atención la baja precisión del XGBoost en comparación con el resto de algoritmos.
+También llama la atención la baja precisión de k-NN, que ni siquiera llega a 0.6, en comparación con el resto de algoritmos.
 
 De nuevo, en este problema Naive Bayes funciona considerablemente bien, comprobamos de nuevo la matriz de correlación de los atributos del problema:
 
@@ -367,9 +369,9 @@ En conclusión, el ránking es, de mejor a peor:
 
 - Random forest.
 - Decission tree.
+- XGBoost.
 - Naive bayes.
 - k-NN.
-- XGBoosting.
 
 ### Bank
 
@@ -377,14 +379,14 @@ Pasamos a analizar ahora el conjunto de datos de un banco que quiere predecir cu
 
 Veamos de nuevo las medidas obtenidas para cada algoritmo aplicado a este conjunto de datos.
 
-| Alg   | TP   | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
-| ----- | ---- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
-| DT    | 2321 | 1973 | 34365 | 2158 | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508 |
-| RF    | 2048 | 980  | 35568 | 2592 | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428 |
-| ZeroR | 0    | 0    | 36548 | 4640 |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892 |
-| NB    | 2511 | 3594 | 32954 | 2129 | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336 |
-| XGB   | 2174 | 1415 | 35133 | 2466 | 0,6057    | 0,4685      | 0,9613      | 0,5284    | 0,9058   | 0,4770        | 0,6711 | 0,8785 |
-| k-NN  | 1488 | 1310 | 35238 | 3152 | 0,5318    | 0,3207      | 0,9642      | 0,4001    | 0,8917   | 0,3446        | 0,5561 | 0,7517 |
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 2321          | 1973           | 34365         | 2158           | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508           |
+| RF    | 2048          | 980            | 35568         | 2592           | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428           |
+| ZeroR | 0             | 0              | 36548         | 4640           |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892           |
+| NB    | 2511          | 3594           | 32954         | 2129           | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336           |
+| XGB   | 1709          | 935            | 35613         | 2931           | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239           |
+| k-NN  | 1992          | 1638           | 34910         | 2648           | 0,5488    | 0,4293      | 0,9552      | 0,4817    | 0,8959   | 0,4249        | 0,6404 | 0,8191           |
 
 Ahora vamos a visualizar como en los ejemplos anteriores estos datos, comenzando por la matriz de confusión representada en un gráfico de barras apiladas:
 
@@ -394,17 +396,17 @@ Lo primero a destacar de la gráfica es como la mayoría de valores son verdader
 
 Nosotros hemos considerado la clase positiva como sí, por lo tanto la gráfica tiene sentido, ya que indica que predominan los valores negativos, que son la clase no.
 
-El algoritmo que mayor número de verdaderos positivos proporciona es naive bayes, pero también predice muchos falsos positivos, lo que puede ser peligroso para un banco que quiera saber cuándo conceder un préstamo. Teniendo esto en cuenta, los algoritmos que nos llaman la atención son random forest, XGBoosting y decission tree.
+El algoritmo que mayor número de verdaderos positivos proporciona es naive bayes, pero también predice muchos falsos positivos, aunque para este problema no nos preocupan en exceso los falsos positivos, más bien nos interesa reducir los falsos negativos.
 
 Estudiamos ahora la curva ROC:
 
 ![](./img/ROC_bank.svg)
 
-En la curva ROC se observa de nuevo que el mejor algoritmo es random forest, seguido de XGBoosting, como ya se pudo observar en la gráfica anterior.
+En la curva ROC se observa de nuevo que el mejor algoritmo es random forest, seguido de XGBoost, como ya se pudo observar en la gráfica anterior.
 
-El tercer mejor algoritmo es naive bayes, después decission tree y por último k-NN.
+El tercer mejor algoritmo es naive bayes, después k-NN y por último árboles de decisión.
 
-De nuevo, al haber atributos nominales el algoritmo k-NN parece funcionar bastante peor que en los datasets anteriores, ya que solo admite variables numéricas y por tanto se deben transformar aquellas que no lo sean.
+Pese a que muchos atributos ahora son nominales, esto no parece afectar demasiado a XGBoost y k-NN. Por otro lado, los árboles de decisión, como son sensibles a las clases desbalanceadas, en este conjunto de datos obtiene mucho peores resultados que los demás algoritmos.
 
 Representamos finalmente la precisión de todos los algoritmos:
 
@@ -412,11 +414,9 @@ Representamos finalmente la precisión de todos los algoritmos:
 
 Lo primero que nos llama la atención de este gráfico es como todos los algoritmos tienen una precisión mayor que 0.8.
 
-A la vista de todos los gráficos y los datos obtenidos, random forest parece ser el mejor algoritmo, seguido de XGBoosting y árboles de decisión.
+A la vista de todos los gráficos y los datos obtenidos, random forest parece ser el mejor algoritmo, seguido de XGBoost y árboles de decisión, aunque todos los algoritmos están bastante igualados.
 
 También se refleja en este gráfico de barras como naive bayes predice más falsos positivos, ya que es el algoritmo con menor precisión de todos.
-
-Por otro lado, se observa que XGBoosting ahora es un algoritmo bastante bueno, ya que la mayoría de variables son nominales o categóricas.
 
 Representamos finalmente la matriz de correlaciones de los atributos del conjunto de datos:
 
@@ -432,9 +432,9 @@ En conclusión, el ránking es, de mejor a peor:
 
 - Decission tree.
 - Naive Bayes.
-- XGBoosting.
 - Random forest.
 - k-NN.
+- XGBoost.
 
 ### Tanzania
 
@@ -442,14 +442,14 @@ Por último, analizamos el problema de las bombas de agua en Tanzania, cuyo obje
 
 Las medidas obtenidas para cada uno de los algoritmos son:
 
-| Alg   | TP    | FP   | TN    | FN    | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
-| ----- | ----- | ---- | ----- | ----- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
-| DT    | 17045 | 4426 | 27655 | 5631  | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444 |
-| RF    | 14060 | 8517 | 23742 | 8764  | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418 |
-| ZeroR | 0     | 0    | 32259 | 22824 |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974 |
-| NB    | 16149 | 5813 | 26446 | 6675  | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489 |
-| XGB   | 16536 | 4366 | 27893 | 6288  | 0,7911    | 0,7245      | 0,8647      | 0,7563    | 0,8066   | 0,5965        | 0,7915 | 0,8746 |
-| k-NN  | 16702 | 4670 | 27589 | 6122  | 0,7815    | 0,7318      | 0,8552      | 0,7558    | 0,8041   | 0,5925        | 0,7911 | 0,8555 |
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT    | 17045         | 4426           | 27655         | 5631           | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444           |
+| RF    | 14060         | 8517           | 23742         | 8764           | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418           |
+| ZeroR | 0             | 0              | 32259         | 22824          |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974           |
+| NB    | 16149         | 5813           | 26446         | 6675           | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489           |
+| XGB   | 11718         | 5447           | 26812         | 11106          | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422           |
+| k-NN  | 16889         | 4585           | 27674         | 5935           | 0,7865    | 0,7400      | 0,8579      | 0,7625    | 0,8090   | 0,6031        | 0,7967 | 0,8599           |
 
 Visualizamos la matriz de confusión mediante el gráfico de barras apiladas, como en los casos anteriores:
 
@@ -457,24 +457,24 @@ Visualizamos la matriz de confusión mediante el gráfico de barras apiladas, co
 
 Lo primero que destacamos es que, como en el ejemplo anterior, la clase mayoritaria es la considerada negativa, lo que se refleja en el algoritmo ZeroR, que asigna a todos los ejemplos esta clase.
 
-El algoritmo con mayor número de verdaderos positivos es los árboles de decisión, aunque destaca que todos los algoritmos producen resultados similares de verdaderos positivos. El algoritmo que peor funciona es random forest, que predice menos verdaderos positivos y más falsos positivos que el resto de algoritmos probados.
+El algoritmo con mayor número de verdaderos positivos es los árboles de decisión, aunque destaca que todos los algoritmos producen resultados similares de verdaderos positivos. El algoritmo que peor funciona es XGBoost, que predice menos verdaderos positivos y bastantes falsos positivos. Random forest también genera menos verdaderos positivos que los demás, y a esto se le suma que predice muchos falsos positivos, que nos convienen evitar en este problema.
 
 Para analizar mejor las diferencias entre los algoritmos analizamos ahora ala curva ROC:
 ![](./img/ROC_tanzania.svg)
 
-En la curva ROC se aprecia que el mejor algoritmo es XGBoosting, seguido por k-NN.
+En la curva ROC se aprecia que el mejor algoritmo es k-NN, seguido de Naive Bayes.
 
 Se observa también que la diferencia entre los árboles de decisión y naive bayes es mínima, por lo que para analizar más fácilmente qué algoritmo realiza mejores predicciones nos apoyaremos en el resto de datos.
 
-Finalmente, cabe destacar que Random Forest sigue siendo el peor algoritmo con bastante diferencia respecto a los demás.
+Finalmente, cabe destacar que Random Forest y XGBoost siguen siendo los peores algoritmos con bastante diferencia respecto a los demás.
 
 Representamos ahora la precisión de cada uno:
 
 ![](./img/roundedbar_tanzania.svg)
 
-Los únicos tres algoritmos que alcanzan la precisión de 0.8 son árboles de decisión, XGBoosting y k-NN. En precisión se aprecia que XGBoosting es ligeramente mejor, por una diferencia ínfima.
+Los únicos tres algoritmos que alcanzan la precisión de 0.8 son árboles de decisión y k-NN. En precisión se aprecia que árboles de decisión es mejor, por una diferencia mínima.
 
-De nuevo, la precisión de random forest es la más baja y naive bayes no destaca.
+De nuevo, la precisión de random forest y XGBoost son las más bajas y naive bayes no destaca.
 
 Analizamos ahora la matriz de correlaciones de los atributos:
 
@@ -489,10 +489,10 @@ Finalmente, se hará un ránking de los algoritmos en función de G-mean. Para h
 En conclusión, el ránking es, de mejor a peor:
 
 - Decission tree.
-- XGBoosting.
 - k-NN.
 - Naive bayes.
 - Random forest.
+- XGBoost.
 
 ### Los algoritmos
 
@@ -502,23 +502,21 @@ Vamos a asignar a cada algoritmo 5, 4, 3, 2 y 1 puntos según su posición en lo
 
 Así, el ránking final es:
 
-- Decission tree.
-- Random forest.
+- Decission tree y Random forest.
 - Naive Bayes.
-- k-NN.
-- XGBoosting.
+- k-NN y XGBoost.
 
 Se aprecia entonces que según este criterio, los algoritmos basados en árboles son los que mejor funcionan, lo que parece razonable, ya que admiten todo tipo de atributos, tanto numéricos como categóricos y pueden trabajar con missing values.
 
 El tercer mejor algoritmo es Naive bayes, que tampoco requiere que los datos con los que se va a trabajar sean de un tipo determinado y admite también valores perdidos, pero asume que todos los atributos son independientes entre sí, lo cuál ya hemos comprobado que no es cierto.
 
-Finalmente los últimos algoritmos tienen restricciones del tipo de datos, ya que k-NN requiere que todos sean numéricos y XGBoost solo trabaja con nominales.
+Finalmente los últimos algoritmos tienen restricciones del tipo de datos, ya que k-NN y XGBoost requieren que todos sean numéricos.
 
-En general, se ha comprobado que XGBoost no realiza buenos predicciones para los conjuntos de datos con muchos atributos numéricos, lo cuál se ha reflejado en la clasificación ya que la mitad de los conjutnos que se han estudiado tenían principalmente atributos no nominales, pero al trabajar con atributos categóricos el algoritmo consigue buenos resultados.
+En general, se ha comprobado que XGBoost no realiza buenas predicciones para los conjuntos de datos con muchos atributos nominales, lo cuál se ha reflejado en la clasificación ya que la mitad de los conjuntos que se han estudiado tenían principalmente atributos de este tipo, pero al trabajar con atributosnuméricos el algoritmo consigue buenos resultados.
 
-Así mismo, se comprueba que k-NN también se ve afectado si hay muchos atributos nominales con los que trabajar, en especial si tienen muchas claves distintas, ya que causa problemas al convertirlo a atributos numéricos.
+Así mismo, se comprueba que k-NN también se ve afectado si hay muchos atributos nominales con los que trabajar, en especial si tienen muchos valores perdidos, ya que insertarlos usando estrategias como sustituir por la media o la mediana no es la mejor forma de tratarlos.
 
-En general, el algoritmo que mejor parece realizar predicciones es árboles de decisión para cualquier conjunto de datos, seguido de random forest.
+En general, los algoritmos que mejor parecen generar predicciones para cualquier conjunto de datos son los basados en árboles.
 
 Naive bayes mejora a random forest al realizar predicciones en algunos conjuntos de datos y tarda menos tiempo en ejecutarse, por lo que si se comprueba la matriz de correlación entre los atributos para ver si la asunción de independencia entre ellos es razonable, puede ser mejor opción a random forest dependiendo de los datos.
 
