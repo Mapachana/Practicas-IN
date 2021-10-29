@@ -542,6 +542,8 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 
 ![](./img/ROC_paramDT_heart.svg)
 
+![](./img/paramDT_heart.svg)
+
 #### Mobile
 
 | RowID | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
@@ -553,6 +555,8 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 | DT-20 | 443  | 43   | 1457 | 57   | 0,9115    | 0,8860      | 0,9713      | 0,8986    | 0,8300   | 0,7733        | 0,9277 | 0,9757 |
 
 ![](./img/ROC_paramDT_mobile.svg)
+
+![](./img/paramDT_mobile.svg)
 
 #### Bank
 
@@ -566,6 +570,8 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 
 ![](./img/ROC_paramDT_bank.svg)
 
+![](./img/paramDT_bank.svg)
+
 #### Tanzania
 
 | RowID | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
@@ -578,13 +584,13 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 
 ![](./img/ROC_paramDT_tanzania.svg)
 
+![](./img/paramDT_tanzania.svg)
+
 
 
 Fijándonos en las curvas ROC y en la precisión de cada algoritmo se puede ver como tanto el área que deja debajo de la curva como su precisión aumentan conforme se incrementa el valor del parámetro progresivamente, hasta que al pasar de 15 a 20, la precisión y área que deja por debajo baja en todos los conjuntos de datos salvo en el dataset del banco.
 
 Esto puede deberse a que incrementando el número mínimo de ejemplos por nodo estamos bajando el sobreajuste que el árbol pueda tener a los datos de entrenamiento, pero a partir de un cierto valor, en este caso 20 por ejemplo, el número mínimo de instancias por nodo es demasiado grande y esto produce que el árbol no se esté desarrollando lo suficiente, haciendo así que realice peores predicciones. 
-
-TODO METER GRAFICOS ACCURACY CON MULTI BAR
 
 ### XGBoost
 
@@ -604,6 +610,8 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 
 ![](./img/ROC_paramXGB_heart.svg)
 
+![](./img/paramXGB_heart.svg)
+
 #### Mobile
 
 | RowID   | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
@@ -615,6 +623,8 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 | XGB-200 | 455  | 41   | 1459 | 45   | 0,9173    | 0,9100      | 0,9727      | 0,9137    | 0,8010   | 0,7347        | 0,9408 | 0,9920 |
 
 ![](./img/ROC_paramXGB_mobile.svg)
+
+![](./img/paramXGB_mobile.svg)
 
 #### Bank
 
@@ -628,6 +638,8 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 
 ![](./img/ROC_paramXGB_bank.svg)
 
+![](./img/paramXGB_bank.svg)
+
 #### Tanzania
 
 | RowID   | TP    | FP   | TN    | FN    | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
@@ -640,11 +652,11 @@ Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en c
 
 ![](./img/ROC_paramXGB_tanzania.svg)
 
+![](./img/paramXGB_tanzania.svg)
+
 
 
 Fijándonos en las curvas ROC y en la precisión de cada algoritmo se puede ver como tanto el área que deja debajo de la curva como su precisión aumentan conforme se incrementa el número de iteraciones a realizar progresivamente. Aumentan lentamente, pero aumentan en todos los conjuntos probados conforme sube el parámetro. La curva ROC donde más gráficamente se ve este comportamiento es la del dataset mobile.
-
-TODO METER GRAFICOS ACCURACY CON MULTI BAR
 
 ## Procesado de datos
 
@@ -655,6 +667,21 @@ Como el conjunto de datos cuenta con muchos valores de la columna de colesterol 
 El preprocesado que vamos a realizar consiste en, usando un predictor basado en árboles de decisión, se van a imputar los valores predichos por este para el colesterol. En resumen, estamos tratando los valores perdidos usando un predictor adecuado para ello.
 
 Se han ejecutado todos los algoritmos tras realizar este preprocesado y las medidas tomadas y curva ROC obtenidas han sido:
+
+#### Resultado sin preprocesado
+
+| RowID | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
+| ----- | ---- | ---- | ---- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
+| DT    | 417  | 87   | 323  | 90   | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086 |
+| RF    | 455  | 71   | 339  | 53   | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225 |
+| ZeroR | 508  | 410  | 0    | 0    | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819 |
+| NB    | 436  | 75   | 335  | 72   | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152 |
+| XGB   | 449  | 71   | 339  | 59   | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241 |
+| k-NN  | 450  | 86   | 324  | 58   | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380 |
+
+![](./img/ROC_heart.svg)
+
+#### Resultado con preprocesado
 
 | RowID | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
 | ----- | ---- | ---- | ---- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
@@ -674,8 +701,6 @@ Cabe destacar que los árboles de decisión, al poder gestionar los valores perd
 El algoritmo k-NN, al no poder trabajar con valores perdidos, ha mejorado respecto a la ejecución sin preprocesado, ya que mediante un predictor se obtienen valores más realistas que sustituir todos los valores perdidos del colesterol por su media o mediana.
 
 En general, el preprocesado no ha afectado mucho a la eficacia de los algoritmos. 
-
-TODO METER GRAFICA COMPARATIVA ACCURACY
 
 ## Interpretación de resultados
 
