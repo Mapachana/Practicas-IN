@@ -67,7 +67,7 @@ Se ha considerado como la clase positiva el rango 0 de precio, aunque se podría
 
 ### Bank
 
-El objetivo de este problema es realizar predicciones sobre si va a concenderse un crédito en un banco o no basándose en diversos factores.
+El objetivo de este problema es realizar predicciones sobre si va a aceptarse un depósito en un banco o no basándose en diversos factores.
 
 Para este propósito se nos proporciona un fichero de datos que consta de 41188 instancias, de las cuales conocemos 20 atributos y la clase a la que pertencen, que será sí o no.
 
@@ -704,7 +704,181 @@ En general, el preprocesado no ha afectado mucho a la eficacia de los algoritmos
 
 ## Interpretación de resultados
 
+A continuación vamos a estudiar qué atributos son los más relevantes a la hora de realizar predicciones. Para ello, vamos a usar los modelos de árboles de decisión y el número de veces que se usa un atributo para realizar una división en random forest.
 
+### Heart
+
+Primero hemos obtenido los primeros niveles del árbol de decisión generado para observar qué atributos se usan para dividirlo.
+
+![](./img/arbol2_heart.svg)
+
+![](./img/arbol_heart.svg)
+
+Vemos que el primer nivel usa ST_Slope, y después en el segundo nivel, en 2 de los 3 nodos hijos se divide usando ChestPainType, por lo que parecen atributos importantes.
+
+Analizamos ahora los atributos más usados por random forest:
+
+| #splits (level 0) | Atributo       |
+| ----------------- | -------------- |
+| 29                | ST\_Slope      |
+| 25                | ChestPainType  |
+| 15                | ExerciseAngina |
+| 10                | MaxHR          |
+| 10                | Oldpeak        |
+| 5                 | Sex            |
+| 4                 | Age            |
+| 1                 | Cholesterol    |
+| 1                 | FastingBS      |
+| 0                 | RestingBP      |
+| 0                 | RestingECG     |
+
+![](./img/criterioRF_heart.png)
+
+De nuevo, el atributo más usado es ST_Slope, seguido de ChestPainType.
+
+Por tanto, podemos concluir que estos dos atributos son los más relevantes de cara a realizar buenas predicciones.
+
+### Mobile
+
+Análogamente, analizamos el árbol de decisión generado para este conjunto de datos.
+
+![](./img/arbol_mobile.svg)
+
+Observamos que el atributo RAM se usa dos veces en los primeros niveles, y después los más relevantes parecen ser px_height y battery_power, ya que se usan en todos los nodos hijos para realizar la división.
+
+Analizamos ahora los atributos más usados por random forest:
+
+| #splits (level 0) | Atributo       |
+| ----------------- | -------------- |
+| 20                | ram            |
+| 16                | battery\_power |
+| 13                | px\_width      |
+| 11                | px\_height     |
+| 9                 | sc\_w          |
+| 7                 | int\_memory    |
+| 7                 | mobile\_wt     |
+| 4                 | sc\_h          |
+| 3                 | fc             |
+| 3                 | n\_cores       |
+| 3                 | talk\_time     |
+| 1                 | clock\_speed   |
+| 1                 | m\_dep         |
+| 1                 | pc             |
+| 1                 | touch\_screen  |
+| 0                 | blue           |
+| 0                 | dual\_sim      |
+| 0                 | four\_g        |
+| 0                 | three\_g       |
+| 0                 | wifi           |
+
+![](./img/criterioRF_mobile.png)
+
+De nuevo, el atributo mmás usado es ram, seguido de battery_power y después px_width.
+
+Podemos concluir entonces que los dos atributos más importantes en este conjunto de datos son ram y después battery_power.
+
+### Bank
+
+Análogamente, analizamos el árbol de decisión generado para este conjunto de datos.
+
+![](./img/arbol2_bank.svg)
+
+![](./img/arbol_bank.svg)
+
+El primer atributo usado es nr.employed y después, en ambos nodos hijos, se usa duration.
+
+Analizamos ahora los atributos más usados por random forest:
+
+| #splits (level 0) | Atributo       |
+| ----------------- | -------------- |
+| 22                | euribor3m      |
+| 21                | nr.employed    |
+| 16                | duration       |
+| 10                | pdays          |
+| 9                 | poutcome       |
+| 8                 | emp.var.rate   |
+| 5                 | month          |
+| 2                 | age            |
+| 2                 | previous       |
+| 2                 | cons.price.idx |
+| 2                 | cons.conf.idx  |
+| 1                 | contact        |
+| 0                 | job            |
+| 0                 | marital        |
+| 0                 | education      |
+| 0                 | default        |
+| 0                 | housing        |
+| 0                 | loan           |
+| 0                 | day\_of\_week  |
+| 0                 | campaign       |
+
+![](./img/criterioRF_bank.png)
+
+Al contrario que en los conjuntos de datos anteriores, ahora el más usado en random forest es euriborn3m, que es distinto al primer usado por árboles de decisión. Después los siguientes más importantes son nr.employed y duration. 
+
+Concluimos entonces que los atributos nr.employed y duration son muy relevantes en este dataset.
+
+### Tanzania
+
+Finalmente obtenemos el modelo de árbol de decisión generado:
+
+![](./img/arbol2_tanzania.svg)
+
+![](./img/arbol_tanzania.svg)
+
+La primera decisión de realiza usando el atributo quantity_group y después region, por lo que primero planteamos que estos atributos sean bastante relevantes o determinantes.
+
+Analizamos ahora los atributos más usados por random forest:
+
+| #splits (level 0) | Atributo                |
+| ----------------- | ----------------------- |
+| 15                | wpt\_name               |
+| 15                | ward                    |
+| 14                | subvillage              |
+| 10                | waterpoint\_type        |
+| 9                 | scheme\_name            |
+| 8                 | quantity                |
+| 5                 | installer               |
+| 5                 | quantity\_group         |
+| 4                 | waterpoint\_type\_group |
+| 3                 | funder                  |
+| 3                 | extraction\_type        |
+| 2                 | extraction\_type\_class |
+| 1                 | date\_recorded          |
+| 1                 | region                  |
+| 1                 | lga                     |
+| 1                 | extraction\_type\_group |
+| 1                 | payment                 |
+| 1                 | payment\_type           |
+| 1                 | source\_type            |
+| 0                 | amount\_tsh             |
+| 0                 | gps\_height             |
+| 0                 | longitude               |
+| 0                 | latitude                |
+| 0                 | num\_private            |
+| 0                 | basin                   |
+| 0                 | region\_code            |
+| 0                 | district\_code          |
+| 0                 | population              |
+| 0                 | public\_meeting         |
+| 0                 | recorded\_by            |
+| 0                 | scheme\_management      |
+| 0                 | permit                  |
+| 0                 | construction\_year      |
+| 0                 | management              |
+| 0                 | management\_group       |
+| 0                 | water\_quality          |
+| 0                 | quality\_group          |
+| 0                 | source                  |
+| 0                 | source\_class           |
+
+![](./img/criterioRF_tanzania.png)
+
+Llama la atención que en este caso, los atributos más usados en random forest no coinciden con los más usados en el árbol de decisión. 
+
+Como en este conjunto de datos el rendimiento de random forest no era bueno, parece razonable pensar que el fallo sea no usar los mejores atributos para separar el árbol.
+
+Además, es más razonable que las variables quantity_group y region, que hacen referencia a la calidad o cantidad del agua y región donde se encuentra la bomba sean determinantes en este caso de estudio.
 
 ## Contenido adicional
 
