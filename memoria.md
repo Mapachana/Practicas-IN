@@ -115,12 +115,12 @@ A continuación tenemos la tabla con las medidas obtenidas por este algoritmo en
 
 En la siguiente tabla se muestran las medidas tomadas:
 
-| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
-| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
-| Heart    | 508           | 410            | 0             | 0              | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819           |
-| Mobile   | 188           | 612            | 888           | 312            | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787           |
-| Bank     | 0             | 0              | 36548         | 4640           |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892           |
-| Tanzania | 0             | 0              | 32259         | 22824          |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974           |
+| RowID    | TP   | FP   | TN    | FN    | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
+| -------- | ---- | ---- | ----- | ----- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
+| Heart    | 508  | 410  | 0     | 0     | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819 |
+| Mobile   | 188  | 612  | 888   | 312   | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787 |
+| Bank     | 0    | 0    | 36548 | 4640  |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892 |
+| Tanzania | 0    | 0    | 32259 | 22824 |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974 |
 
 Como se puede observar el algoritmo no da buenos resultados, pero como comentamos antes solo lo usaremos para tener una cota inferior en las medidas de los demás algoritmos.
 
@@ -138,12 +138,12 @@ Como criterio de selección se ha usado el índice Gini, este índice mide con q
 Sea $p_i$  la frecuencia relativa de la clase $i$ en un conjunto de datos $T$, que contiene ejemplos de $n$ clases, entonces se define:
 $$\displaystyle\text{gini}(T)=1-\sum_{i=1}^{n}p_i^2$$
 
-| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
-| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
-| Heart    | 417           | 87             | 323           | 90             | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086           | 69          |
-| Mobile   | 452           | 40             | 1460          | 48             | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591           | 109         |
-| Bank     | 2321          | 1973           | 34365         | 2158           | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508           | 2689        |
-| Tanzania | 17045         | 4426           | 27655         | 5631           | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444           | 5042        |
+| RowID    | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
+| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
+| Heart    | 417   | 87   | 323   | 90   | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086 | 69          |
+| Mobile   | 452   | 40   | 1460  | 48   | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591 | 109         |
+| Bank     | 2321  | 1973 | 34365 | 2158 | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508 | 2689        |
+| Tanzania | 17045 | 4426 | 27655 | 5631 | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444 | 5042        |
 
 Observamos que funcionó mejor en el dataset e los móviles, y peor en el del banco, aún así ha dado muy buenos resultados en todos los conjuntos de datos, ya que los árboles de decisión trabajan con cualquier valor de datos y gestionan bien los valores perdidos.
 
@@ -165,12 +165,12 @@ En algunos problemas, como en el de Tanzania, ha sido necesario usar el nodo dom
 
 Veamos la tabla con las medidas tomadas en cada conjunto de datos:
 
-| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
-| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
-| Heart    | 455           | 71             | 339           | 53             | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225           | 100         |
-| Mobile   | 471           | 43             | 1457          | 29             | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947           | 100         |
-| Bank     | 2048          | 980            | 35568         | 2592           | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428           | 100         |
-| Tanzania | 14060         | 8517           | 23742         | 8764           | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418           | 100         |
+| RowID    | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
+| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
+| Heart    | 455   | 71   | 339   | 53   | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225 | 100         |
+| Mobile   | 471   | 43   | 1457  | 29   | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947 | 100         |
+| Bank     | 2048  | 980  | 35568 | 2592 | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428 | 100         |
+| Tanzania | 14060 | 8517 | 23742 | 8764 | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418 | 100         |
 
 Podemos observar que Random Forest obtiene resultados muy buenos en todos los datos, aunque su valor más bajo sn duda está en el problema de Tanzania. En tres de los cuatro problemas a estudiar se ve que random forest es el que mejores resultados obtiene. 
 
@@ -186,12 +186,12 @@ Para este algoritmo no ha sido necesario realizar preprocesamiento, ya que aunqu
 
 Veamos ahora las medidas tomadas con este algoritmo:
 
-| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
-| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
-| Heart    | 436           | 75             | 335           | 72             | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152           | 22          |
-| Mobile   | 436           | 67             | 1433          | 64             | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796           | 80          |
-| Bank     | 2511          | 3594           | 32954         | 2129           | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336           | 40          |
-| Tanzania | 16149         | 5813           | 26446         | 6675           | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489           | 117         |
+| RowID    | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
+| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
+| Heart    | 436   | 75   | 335   | 72   | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152 | 22          |
+| Mobile   | 436   | 67   | 1433  | 64   | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796 | 80          |
+| Bank     | 2511  | 3594 | 32954 | 2129 | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336 | 40          |
+| Tanzania | 16149 | 5813 | 26446 | 6675 | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489 | 117         |
 
 Se observa que proporciona predicciones bastante buenas, en especial en los problemas con datos numéricos.
 
@@ -213,12 +213,12 @@ TODO CAMBIAR ESTA CAPTURA
 
 Las medidas obtenidas para este algoritmo en los distintos problemas son:
 
-| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
-| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
-| Heart    | 449           | 71             | 339           | 59             | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241           | 100         |
-| Mobile   | 450           | 55             | 1445          | 50             | 0,8911    | 0,9000      | 0,9633      | 0,8955    | 0,7555   | 0,6740        | 0,9311 | 0,9863           | 100         |
-| Bank     | 1709          | 935            | 35613         | 2931           | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239           | 100         |
-| Tanzania | 11718         | 5447           | 26812         | 11106          | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422           | 100         |
+| RowID    | TP    | FP   | TN    | FN    | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
+| -------- | ----- | ---- | ----- | ----- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
+| Heart    | 449   | 71   | 339   | 59    | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241 | 100         |
+| Mobile   | 450   | 55   | 1445  | 50    | 0,8911    | 0,9000      | 0,9633      | 0,8955    | 0,7555   | 0,6740        | 0,9311 | 0,9863 | 100         |
+| Bank     | 1709  | 935  | 35613 | 2931  | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239 | 100         |
+| Tanzania | 11718 | 5447 | 26812 | 11106 | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422 | 100         |
 
 Al contrario que en el algoritmo anterior, XGBoosting obtiene mejores resultados en los problemas con datos numéricos, ya que los nominales o categóricos han sido transformados a atributos numéricos.
 
@@ -238,12 +238,12 @@ El algoritmo se ha implementado considerando $k=3$.
 
 Las distintas medidas obtenidas para k-NN son:
 
-| RowID    | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve | Complejidad |
-| -------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- | ----------- |
-| Heart    | 450           | 86             | 324           | 58             | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380           | 735         |
-| Mobile   | 300           | 187            | 1313          | 200            | 0,6160    | 0,6000      | 0,8753      | 0,6079    | 0,4765   | 0,3020        | 0,7247 | 0,8432           | 1600        |
-| Bank     | 1992          | 1638           | 34910         | 2648           | 0,5488    | 0,4293      | 0,9552      | 0,4817    | 0,8959   | 0,4249        | 0,6404 | 0,8191           | 32951       |
-| Tanzania | 16889         | 4585           | 27674         | 5935           | 0,7865    | 0,7400      | 0,8579      | 0,7625    | 0,8090   | 0,6031        | 0,7967 | 0,8599           | 44067       |
+| RowID    | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
+| -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
+| Heart    | 450   | 86   | 324   | 58   | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380 | 735         |
+| Mobile   | 300   | 187  | 1313  | 200  | 0,6160    | 0,6000      | 0,8753      | 0,6079    | 0,4765   | 0,3020        | 0,7247 | 0,8432 | 1600        |
+| Bank     | 1992  | 1638 | 34910 | 2648 | 0,5488    | 0,4293      | 0,9552      | 0,4817    | 0,8959   | 0,4249        | 0,6404 | 0,8191 | 32951       |
+| Tanzania | 16889 | 4585 | 27674 | 5935 | 0,7865    | 0,7400      | 0,8579      | 0,7625    | 0,8090   | 0,6031        | 0,7967 | 0,8599 | 44067       |
 
 En general, funciona bien, no se ve tanta disparidad entre el dataset para el que mejor funciona y para el que peor. 
 
@@ -259,14 +259,14 @@ Realizaremos un análisis centrado en comparar los distintos algoritmos usados e
 
 Para comenzar, analizamos el problema sobre enfermedades del corazón. En la siguiente tabla se pueden ver las medidas obtenidas por los diferentes algoritmos en este problema.
 
-| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
-| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
-| DT    | 417           | 87             | 323           | 90             | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086           |
-| RF    | 455           | 71             | 339           | 53             | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225           |
-| ZeroR | 508           | 410            | 0             | 0              | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819           |
-| NB    | 436           | 75             | 335           | 72             | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152           |
-| XGB   | 449           | 71             | 339           | 59             | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241           |
-| k-NN  | 450           | 86             | 324           | 58             | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380           |
+| RowID | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
+| ----- | ---- | ---- | ---- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
+| DT    | 417  | 87   | 323  | 90   | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086 |
+| RF    | 455  | 71   | 339  | 53   | 0,8650    | 0,8957      | 0,8268      | 0,8801    | 0,8649   | 0,7256        | 0,8606 | 0,9225 |
+| ZeroR | 508  | 410  | 0    | 0    | 0,5534    | 1,0000      | 0,0000      | 0,7125    | 0,5534   | 0,0000        | 0,0000 | 0,4819 |
+| NB    | 436  | 75   | 335  | 72   | 0,8532    | 0,8583      | 0,8171      | 0,8557    | 0,8399   | 0,6758        | 0,8374 | 0,9152 |
+| XGB   | 449  | 71   | 339  | 59   | 0,8635    | 0,8839      | 0,8268      | 0,8735    | 0,8584   | 0,7127        | 0,8549 | 0,9241 |
+| k-NN  | 450  | 86   | 324  | 58   | 0,8396    | 0,8858      | 0,7902      | 0,8621    | 0,8431   | 0,6806        | 0,8367 | 0,8380 |
 
 Para facilitar la lectura de estos datos, vamos a representar en un gráfico de barras apilado los valores de la matriz de confusión.
 
@@ -314,14 +314,14 @@ En conclusión, el ránking es, de mejor a peor:
 
 Analizamos ahora el conjunto de datos sobre estimaciones de precios de móviles según sus características. De nuevo, hemos tomado medidas con los distintos algoritmos:
 
-| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
-| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
-| DT    | 452           | 40             | 1460          | 48             | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591           |
-| RF    | 471           | 43             | 1457          | 29             | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947           |
-| ZeroR | 188           | 612            | 888           | 312            | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787           |
-| NB    | 436           | 67             | 1433          | 64             | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796           |
-| XGB   | 450           | 55             | 1445          | 50             | 0,8911    | 0,9000      | 0,9633      | 0,8955    | 0,7555   | 0,6740        | 0,9311 | 0,9863           |
-| k-NN  | 300           | 187            | 1313          | 200            | 0,6160    | 0,6000      | 0,8753      | 0,6079    | 0,4765   | 0,3020        | 0,7247 | 0,8432           |
+| RowID | TP   | FP   | TN   | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
+| ----- | ---- | ---- | ---- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
+| DT    | 452  | 40   | 1460 | 48   | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591 |
+| RF    | 471  | 43   | 1457 | 29   | 0,9163    | 0,9420      | 0,9713      | 0,9290    | 0,8785   | 0,8380        | 0,9566 | 0,9947 |
+| ZeroR | 188  | 612  | 888  | 312  | 0,2350    | 0,3760      | 0,5920      | 0,2892    | 0,2330   | \-0,0227      | 0,4718 | 0,4787 |
+| NB    | 436  | 67   | 1433 | 64   | 0,8668    | 0,8720      | 0,9553      | 0,8694    | 0,7890   | 0,7187        | 0,9127 | 0,9796 |
+| XGB   | 450  | 55   | 1445 | 50   | 0,8911    | 0,9000      | 0,9633      | 0,8955    | 0,7555   | 0,6740        | 0,9311 | 0,9863 |
+| k-NN  | 300  | 187  | 1313 | 200  | 0,6160    | 0,6000      | 0,8753      | 0,6079    | 0,4765   | 0,3020        | 0,7247 | 0,8432 |
 
 Para hacer el análisis más sencillo, vamos a representar algunos de estos datos.
 
@@ -379,14 +379,14 @@ Pasamos a analizar ahora el conjunto de datos de un banco que quiere predecir cu
 
 Veamos de nuevo las medidas obtenidas para cada algoritmo aplicado a este conjunto de datos.
 
-| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
-| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
-| DT    | 2321          | 1973           | 34365         | 2158           | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508           |
-| RF    | 2048          | 980            | 35568         | 2592           | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428           |
-| ZeroR | 0             | 0              | 36548         | 4640           |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892           |
-| NB    | 2511          | 3594           | 32954         | 2129           | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336           |
-| XGB   | 1709          | 935            | 35613         | 2931           | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239           |
-| k-NN  | 1992          | 1638           | 34910         | 2648           | 0,5488    | 0,4293      | 0,9552      | 0,4817    | 0,8959   | 0,4249        | 0,6404 | 0,8191           |
+| RowID | TP   | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
+| ----- | ---- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
+| DT    | 2321 | 1973 | 34365 | 2158 | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508 |
+| RF    | 2048 | 980  | 35568 | 2592 | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428 |
+| ZeroR | 0    | 0    | 36548 | 4640 |           | 0,0000      | 1,0000      |           | 0,8873   | 0,0000        | 0,0000 | 0,4892 |
+| NB    | 2511 | 3594 | 32954 | 2129 | 0,4113    | 0,5412      | 0,9017      | 0,4674    | 0,8611   | 0,3892        | 0,6985 | 0,8336 |
+| XGB   | 1709 | 935  | 35613 | 2931 | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239 |
+| k-NN  | 1992 | 1638 | 34910 | 2648 | 0,5488    | 0,4293      | 0,9552      | 0,4817    | 0,8959   | 0,4249        | 0,6404 | 0,8191 |
 
 Ahora vamos a visualizar como en los ejemplos anteriores estos datos, comenzando por la matriz de confusión representada en un gráfico de barras apiladas:
 
@@ -442,14 +442,14 @@ Por último, analizamos el problema de las bombas de agua en Tanzania, cuyo obje
 
 Las medidas obtenidas para cada uno de los algoritmos son:
 
-| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
-| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
-| DT    | 17045         | 4426           | 27655         | 5631           | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444           |
-| RF    | 14060         | 8517           | 23742         | 8764           | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418           |
-| ZeroR | 0             | 0              | 32259         | 22824          |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974           |
-| NB    | 16149         | 5813           | 26446         | 6675           | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489           |
-| XGB   | 11718         | 5447           | 26812         | 11106          | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422           |
-| k-NN  | 16889         | 4585           | 27674         | 5935           | 0,7865    | 0,7400      | 0,8579      | 0,7625    | 0,8090   | 0,6031        | 0,7967 | 0,8599           |
+| RowID | TP    | FP   | TN    | FN    | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    |
+| ----- | ----- | ---- | ----- | ----- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ |
+| DT    | 17045 | 4426 | 27655 | 5631  | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444 |
+| RF    | 14060 | 8517 | 23742 | 8764  | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418 |
+| ZeroR | 0     | 0    | 32259 | 22824 |           | 0,0000      | 1,0000      |           | 0,5856   | 0,0000        | 0,0000 | 0,4974 |
+| NB    | 16149 | 5813 | 26446 | 6675  | 0,7353    | 0,7075      | 0,8198      | 0,7212    | 0,7733   | 0,5303        | 0,7616 | 0,8489 |
+| XGB   | 11718 | 5447 | 26812 | 11106 | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422 |
+| k-NN  | 16889 | 4585 | 27674 | 5935  | 0,7865    | 0,7400      | 0,8579      | 0,7625    | 0,8090   | 0,6031        | 0,7967 | 0,8599 |
 
 Visualizamos la matriz de confusión mediante el gráfico de barras apiladas, como en los casos anteriores:
 
@@ -522,7 +522,129 @@ Naive bayes mejora a random forest al realizar predicciones en algunos conjuntos
 
 ## Configuración de algoritmos
 
+A continuación vamos a probar a modificar distintos parámetros de los algoritmos árbol de decisión y XGBoost, con el fin de estudiar cómo afectan estos a las predicciones realizadas.
 
+### Árbol de decisión
+
+Comenzamos estudiando el comportamiento de los árboles de decisión si aumentamos progresivamente el valor de número mínimo de ejemplos por nodo. Es decir, si un nodo tiene un número de ejemplos menor o igual al número indicado por este parámetro no se sigue desarrollando.
+
+Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en cada conjunto de datos de la práctica. A continuación se muestran las medidas y curvas ROC tomadas en cada conjunto de datos para cada valor del parámetro.
+
+#### Heart
+
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT-2  | 417           | 87             | 323           | 90             | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086           |
+| DT-5  | 429           | 76             | 334           | 79             | 0,8495    | 0,8445      | 0,8146      | 0,8470    | 0,8312   | 0,6587        | 0,8294 | 0,8807           |
+| DT-10 | 436           | 86             | 324           | 72             | 0,8352    | 0,8583      | 0,7902      | 0,8466    | 0,8279   | 0,6507        | 0,8236 | 0,8866           |
+| DT-15 | 440           | 78             | 332           | 68             | 0,8494    | 0,8661      | 0,8098      | 0,8577    | 0,8410   | 0,6775        | 0,8375 | 0,8921           |
+| DT-20 | 450           | 94             | 316           | 58             | 0,8272    | 0,8858      | 0,7707      | 0,8555    | 0,8344   | 0,6622        | 0,8263 | 0,8628           |
+
+![](./img/ROC_paramDT_heart.svg)
+
+#### Mobile
+
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT-2  | 452           | 40             | 1460          | 48             | 0,9187    | 0,9040      | 0,9733      | 0,9113    | 0,8455   | 0,7940        | 0,9380 | 0,9591           |
+| DT-5  | 457           | 55             | 1445          | 43             | 0,8926    | 0,9140      | 0,9633      | 0,9032    | 0,8420   | 0,7893        | 0,9383 | 0,9744           |
+| DT-10 | 453           | 44             | 1456          | 47             | 0,9115    | 0,9060      | 0,9707      | 0,9087    | 0,8475   | 0,7967        | 0,9378 | 0,9828           |
+| DT-15 | 452           | 36             | 1464          | 48             | 0,9262    | 0,9040      | 0,9760      | 0,9150    | 0,8435   | 0,7913        | 0,9393 | 0,9809           |
+| DT-20 | 443           | 43             | 1457          | 57             | 0,9115    | 0,8860      | 0,9713      | 0,8986    | 0,8300   | 0,7733        | 0,9277 | 0,9757           |
+
+![](./img/ROC_paramDT_mobile.svg)
+
+#### Bank
+
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT-2  | 2321          | 1973           | 34365         | 2158           | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508           |
+| DT-5  | 2415          | 1822           | 34675         | 2164           | 0,5700    | 0,5274      | 0,9501      | 0,5479    | 0,9030   | 0,4936        | 0,7079 | 0,8690           |
+| DT-10 | 2444          | 1678           | 34841         | 2177           | 0,5929    | 0,5289      | 0,9541      | 0,5591    | 0,9063   | 0,5068        | 0,7103 | 0,9174           |
+| DT-15 | 2463          | 1591           | 34942         | 2167           | 0,6075    | 0,5320      | 0,9565      | 0,5673    | 0,9087   | 0,5165        | 0,7133 | 0,9211           |
+| DT-20 | 2473          | 1514           | 35027         | 2160           | 0,6203    | 0,5338      | 0,9586      | 0,5738    | 0,9108   | 0,5243        | 0,7153 | 0,9200           |
+
+![](./img/ROC_paramDT_bank.svg)
+
+#### Tanzania
+
+| RowID | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ----- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| DT-2  | 17045         | 4426           | 27655         | 5631           | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444           |
+| DT-5  | 16893         | 4222           | 27917         | 5824           | 0,8000    | 0,7436      | 0,8686      | 0,7708    | 0,8169   | 0,6187        | 0,8037 | 0,8803           |
+| DT-10 | 16584         | 3899           | 28268         | 6154           | 0,8096    | 0,7294      | 0,8788      | 0,7674    | 0,8169   | 0,6171        | 0,8006 | 0,8862           |
+| DT-15 | 16285         | 3648           | 28541         | 6475           | 0,8170    | 0,7155      | 0,8867      | 0,7629    | 0,8158   | 0,6133        | 0,7965 | 0,8851           |
+| DT-20 | 16049         | 3752           | 28449         | 6718           | 0,8105    | 0,7049      | 0,8835      | 0,7540    | 0,8095   | 0,5999        | 0,7892 | 0,8820           |
+
+![](./img/ROC_paramDT_tanzania.svg)
+
+
+
+Fijándonos en las curvas ROC y en la precisión de cada algoritmo se puede ver como tanto el área que deja debajo de la curva como su precisión aumentan conforme se incrementa el valor del parámetro progresivamente, hasta que al pasar de 15 a 20, la precisión y área que deja por debajo baja en todos los conjuntos de datos salvo en el dataset del banco.
+
+Esto puede deberse a que incrementando el número mínimo de ejemplos por nodo estamos bajando el sobreajuste que el árbol pueda tener a los datos de entrenamiento, pero a partir de un cierto valor, en este caso 20 por ejemplo, el número mínimo de instancias por nodo es demasiado grande y esto produce que el árbol no se esté desarrollando lo suficiente, haciendo así que realice peores predicciones. 
+
+TODO METER GRAFICOS ACCURACY CON MULTI BAR
+
+### XGBoost
+
+Estudiamos ahora el comportamiento de XGBoost si cambiamos el número de iteraciones que realiza.
+
+Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en cada conjunto de datos de la práctica. A continuación se muestran las medidas y curvas ROC tomadas en cada conjunto de datos para cada valor del parámetro.
+
+#### Heart
+
+| RowID   | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| XGB-50  | 447           | 76             | 334           | 61             | 0,8547    | 0,8799      | 0,8146      | 0,8671    | 0,8508   | 0,6970        | 0,8466 | 0,9066           |
+| XGB-75  | 445           | 75             | 335           | 63             | 0,8558    | 0,8760      | 0,8171      | 0,8658    | 0,8497   | 0,6950        | 0,8460 | 0,9066           |
+| XGB-100 | 445           | 74             | 336           | 63             | 0,8574    | 0,8760      | 0,8195      | 0,8666    | 0,8508   | 0,6973        | 0,8473 | 0,9068           |
+| XGB-150 | 445           | 74             | 336           | 63             | 0,8574    | 0,8760      | 0,8195      | 0,8666    | 0,8508   | 0,6973        | 0,8473 | 0,9067           |
+| XGB-200 | 445           | 74             | 336           | 63             | 0,8574    | 0,8760      | 0,8195      | 0,8666    | 0,8508   | 0,6973        | 0,8473 | 0,9067           |
+
+![](./img/ROC_paramXGB_heart.svg)
+
+#### Mobile
+
+| RowID   | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| XGB-50  | 454           | 81             | 1419          | 46             | 0,8486    | 0,9080      | 0,9460      | 0,8773    | 0,7120   | 0,6160        | 0,9268 | 0,9795           |
+| XGB-75  | 451           | 67             | 1433          | 49             | 0,8707    | 0,9020      | 0,9553      | 0,8861    | 0,7385   | 0,6513        | 0,9283 | 0,9840           |
+| XGB-100 | 451           | 54             | 1446          | 49             | 0,8931    | 0,9020      | 0,9640      | 0,8975    | 0,7575   | 0,6767        | 0,9325 | 0,9864           |
+| XGB-150 | 452           | 42             | 1458          | 48             | 0,9150    | 0,9040      | 0,9720      | 0,9095    | 0,7870   | 0,7160        | 0,9374 | 0,9898           |
+| XGB-200 | 455           | 41             | 1459          | 45             | 0,9173    | 0,9100      | 0,9727      | 0,9137    | 0,8010   | 0,7347        | 0,9408 | 0,9920           |
+
+![](./img/ROC_paramXGB_mobile.svg)
+
+#### Bank
+
+| RowID   | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| XGB-50  | 1695          | 936            | 35612         | 2945           | 0,6442    | 0,3653      | 0,9744      | 0,4662    | 0,9058   | 0,4189        | 0,5966 | 0,9238           |
+| XGB-75  | 1702          | 939            | 35609         | 2938           | 0,6445    | 0,3668      | 0,9743      | 0,4675    | 0,9059   | 0,4201        | 0,5978 | 0,9239           |
+| XGB-100 | 1712          | 932            | 35616         | 2928           | 0,6475    | 0,3690      | 0,9745      | 0,4701    | 0,9063   | 0,4229        | 0,5996 | 0,9239           |
+| XGB-150 | 1719          | 929            | 35619         | 2921           | 0,6492    | 0,3705      | 0,9746      | 0,4717    | 0,9065   | 0,4246        | 0,6009 | 0,9239           |
+| XGB-200 | 1729          | 926            | 35622         | 2911           | 0,6512    | 0,3726      | 0,9747      | 0,4740    | 0,9068   | 0,4270        | 0,6027 | 0,9237           |
+
+![](./img/ROC_paramXGB_bank.svg)
+
+#### Tanzania
+
+| RowID   | TruePositives | FalsePositives | TrueNegatives | FalseNegatives | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | Area Under Curve |
+| ------- | ------------- | -------------- | ------------- | -------------- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ---------------- |
+| XGB-50  | 11720         | 5567           | 26692         | 11104          | 0,6780    | 0,5135      | 0,8274      | 0,5844    | 0,6973   | 0,3535        | 0,6518 | 0,7395           |
+| XGB-75  | 11694         | 5528           | 26731         | 11130          | 0,6790    | 0,5124      | 0,8286      | 0,5840    | 0,6976   | 0,3537        | 0,6516 | 0,7411           |
+| XGB-100 | 11737         | 5459           | 26800         | 11087          | 0,6825    | 0,5142      | 0,8308      | 0,5866    | 0,6996   | 0,3579        | 0,6536 | 0,7422           |
+| XGB-150 | 11760         | 5440           | 26819         | 11064          | 0,6837    | 0,5152      | 0,8314      | 0,5876    | 0,7004   | 0,3596        | 0,6545 | 0,7433           |
+| XGB-200 | 11794         | 5466           | 26793         | 11030          | 0,6833    | 0,5167      | 0,8306      | 0,5885    | 0,7005   | 0,3601        | 0,6551 | 0,7439           |
+
+![](./img/ROC_paramXGB_tanzania.svg)
+
+
+
+Fijándonos en las curvas ROC y en la precisión de cada algoritmo se puede ver como tanto el área que deja debajo de la curva como su precisión aumentan conforme se incrementa el número de iteraciones a realizar progresivamente. Aumentan lentamente, pero aumentan en todos los conjuntos probados conforme sube el parámetro. La curva ROC donde más gráficamente se ve este comportamiento es la del dataset mobile.
+
+TODO METER GRAFICOS ACCURACY CON MULTI BAR
 
 ## Procesado de datos
 
