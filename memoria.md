@@ -3,7 +3,6 @@
 > Ana Buendía Ruiz-Azuaga
 
 ## Índice
-
 - [Práctica 1: Análisis predictivo mediante clasificación](#práctica-1-análisis-predictivo-mediante-clasificación)
   - [Índice](#índice)
   - [Introducción](#introducción)
@@ -19,11 +18,40 @@
     - [XGBoost (XGB)](#xgboost-xgb)
     - [k-NN (k-NN)](#k-nn-k-nn)
   - [Análisis de resultados](#análisis-de-resultados)
+    - [Heart](#heart-1)
+    - [Mobile](#mobile)
+    - [Bank](#bank-1)
+    - [Tanzania](#tanzania-1)
+    - [Los algoritmos](#los-algoritmos)
   - [Configuración de algoritmos](#configuración-de-algoritmos)
+    - [Árbol de decisión](#árbol-de-decisión)
+      - [Heart](#heart-2)
+      - [Mobile](#mobile-1)
+      - [Bank](#bank-2)
+      - [Tanzania](#tanzania-2)
+    - [XGBoost](#xgboost)
+      - [Heart](#heart-3)
+      - [Mobile](#mobile-2)
+      - [Bank](#bank-3)
+      - [Tanzania](#tanzania-3)
   - [Procesado de datos](#procesado-de-datos)
+      - [Resultado sin preprocesado](#resultado-sin-preprocesado)
+      - [Resultado con preprocesado](#resultado-con-preprocesado)
   - [Interpretación de resultados](#interpretación-de-resultados)
+    - [Heart](#heart-4)
+    - [Mobile](#mobile-3)
+    - [Bank](#bank-4)
+    - [Tanzania](#tanzania-4)
   - [Contenido adicional](#contenido-adicional)
+    - [Workflow](#workflow)
+      - [Heart](#heart-5)
+      - [Mobile](#mobile-4)
+      - [Bank](#bank-5)
+      - [Tanzania](#tanzania-5)
+      - [Parámetros](#parámetros)
   - [Bibliografía](#bibliografía)
+
+<div style="page-break-after: always;"></div>
 
 ## Introducción
 
@@ -37,7 +65,7 @@ El objetivo de este problema consiste en intentar predecir si se tiene o no una 
 
 Para ello, se nos proporciona un conjunto de datos con 918 instancias, de las cuales se nos da información respecto a 11 variables o atributos, y su clase a la que pertencen.
 
-Comenzamos analizando los datos del problema, lo primero en lo que nos fijamos es en que la mayoría ed variables son numéricas, y algunos atributos están marcados con enteros usando 0 o 1 para señalar si una persona posee una característica o no. En el atributo colesterol, cabe destacar que se va a interpretar el valor 0 como valor perdido.
+Comenzamos analizando los datos del problema, lo primero en lo que nos fijamos es en que la mayoría de variables son numéricas, y algunos atributos están marcados con enteros usando 0 o 1 para señalar si una persona posee una característica o no. En el atributo colesterol, cabe destacar que se va a interpretar el valor 0 como valor perdido, ya que no parece un valor razonable a encontrar en una medida de colesterol.
 
 Representamos los datos usando una pie chart para comprobar si las clases están balanceadas o no.
 
@@ -53,9 +81,9 @@ Este problema consiste en intentar predecir a qué rango de precio pertenece un 
 
 Para ello, se nos proporciona un conjunto de datos con 2000 instancias, de las cuales se nos da información respecto a 20 variables o atributos, y su clase a la que pertencen.
 
-Comenzamos analizando los datos del problema, lo primero en lo que nos fijamos es en que la mayoría ed variables son numéricas, y algunos atributos están marcados con enteros usando 0 o 1 para señalar si un teléfono posee o no una carcaterística, por ejemplo, si es azul o no, o si tiene 4G o no.
+Comenzamos analizando los datos del problema, lo primero en lo que nos fijamos es en que la mayoría de variables son numéricas, y algunos atributos están marcados con enteros usando 0 o 1 para señalar si un teléfono posee o no una característica, por ejemplo, si es azul o no, o si tiene 4G o no.
 
-Representamos los datos usando una pie chart para comprobar si las clases están balanceadas o no.
+Representamos los datos usando una pie chart para comprobar si las clases están balanceadas.
 
 ![](./img/pie_mobile.svg)
 
@@ -63,13 +91,13 @@ Observamos que las 4 clases están igualmente representadas, por lo que el conju
 
 Finalmente comprobamos al leer el archivo de datos que el problema no tiene missing values, es decir, no hay ningún atributo que sea desconocido para alguna de las instancias.
 
-Se ha considerado como la clase positiva el rango 0 de precio, aunque se podría haber seleccionado cualquier otro.
+Se ha considerado como la clase positiva el rango 0 de precio, aunque se podría haber seleccionado cualquier otra.
 
 ### Bank
 
 El objetivo de este problema es realizar predicciones sobre si va a aceptarse un depósito en un banco o no basándose en diversos factores.
 
-Para este propósito se nos proporciona un fichero de datos que consta de 41188 instancias, de las cuales conocemos 20 atributos y la clase a la que pertencen, que será sí o no.
+Para este propósito se nos proporciona un fichero de datos que consta de 41188 instancias, de las cuales conocemos 20 atributos y la clase a la que pertencen, que será sí o no, dependiendo de si se ha aceptado el depósito.
 
 Analizamos ahora los datos que nos han proporcionado del problema, al contrario que en el problema de los móviles, aquí podemos observar que hay variables nominales.
 
@@ -81,13 +109,13 @@ Observamos que los datos están bastante desbalanceados, lo que puede afectar al
 
 Para terminar el análisis inicial abrimos el archivo de datos y comprobamos que hay missing values, ya que hay atributos que en ocasiones toman un valor "unknown" o "nonexistent", indicando así que son valores desconocidos o perdidos.
 
-Se ha considerado como la clase positiva "yes", ya que queremos predecir cuándo se va a conceder un crédito.
+Se ha considerado como la clase positiva "yes", ya que queremos predecir cuándo se va a aceptar un depósito.
 
 ### Tanzania
 
 Este problema consiste en tratar de realizar predicciones sobre qué bombas de agua en Tanzania no funcionan para cambiarlas o repararlas.
 
-Para ello, contamos con un conjunto de datos que consta de 55083 instancias, de las cuales conocemos 39 atributos y la clase a la que pertencen, que podrá tomar valores "funcional" o "no funcional".
+Para ello, contamos con un conjunto de datos que consta de 55083 instancias, de las cuales conocemos 39 atributos y la clase a la que pertencen, que podrá tomar valores funcional o no funcional.
 
 Analizamos ahora los datos que nos han proporcionado del problema, de nuevo en este conjunto de datos tenemos atributos nominales a la vez que atributos numéricos.
 
@@ -95,7 +123,7 @@ Usamos una pie chart para ver a simple vista si los datos están balanceados.
 
 ![](./img/pie_tanzania.svg)
 
-Observamos que los datos están bastante desbalanceados, lo que puede afectar al rendimiento de algunos algoritmos que sean sensibles a ello.
+Observamos que los datos están desbalanceados, lo que puede afectar al rendimiento de algunos algoritmos que sean sensibles a ello.
 
 Finalmente abrimos el archivo de datos y comprobamos que hay missing values, ya que hay atributos que en ocasiones toman un valor "unknown" o "nonexistent", o en algunos numéricos se ha consdierado el valor "0" como desconocido, indicando así que son valores desconocidos o perdidos.
 
@@ -111,7 +139,7 @@ Para comenzar, aunque no se ha considerado este algoritmo como uno de los cinco 
 
 El algoritmo ZeroR predice siempre que cualquier instancia pertenece a la clase mayoritaria, por lo tanto no resulta muy útil, pero proporciona una cota inferior al resto de algoritmos, esto es, cualquier algoritmo nos debería proporcionar un valor mayor en las medidas al que nos proporciona ZeroR.
 
-A continuación tenemos la tabla con las medidas obtenidas por este algoritmo en cada dataset:
+A continuación tenemos la tabla con las medidas obtenidas por este algoritmo en cada dataset.
 
 En la siguiente tabla se muestran las medidas tomadas:
 
@@ -138,6 +166,8 @@ Como criterio de selección se ha usado el índice Gini, este índice mide con q
 Sea $p_i$  la frecuencia relativa de la clase $i$ en un conjunto de datos $T$, que contiene ejemplos de $n$ clases, entonces se define:
 $$\displaystyle\text{gini}(T)=1-\sum_{i=1}^{n}p_i^2$$
 
+Las medidas obtenidas por este algoritmo en cada dataset son:
+
 | RowID    | TP    | FP   | TN    | FN   | Precision | Sensitivity | Specificity | F-measure | Accuracy | Cohen's kappa | Gmean  | AUC    | Complejidad |
 | -------- | ----- | ---- | ----- | ---- | --------- | ----------- | ----------- | --------- | -------- | ------------- | ------ | ------ | ----------- |
 | Heart    | 417   | 87   | 323   | 90   | 0,8274    | 0,8225      | 0,7878      | 0,8249    | 0,8070   | 0,6099        | 0,8050 | 0,8086 | 69          |
@@ -145,7 +175,7 @@ $$\displaystyle\text{gini}(T)=1-\sum_{i=1}^{n}p_i^2$$
 | Bank     | 2321  | 1973 | 34365 | 2158 | 0,5405    | 0,5182      | 0,9457      | 0,5291    | 0,8988   | 0,4725        | 0,7000 | 0,7508 | 2689        |
 | Tanzania | 17045 | 4426 | 27655 | 5631 | 0,7939    | 0,7517      | 0,8620      | 0,7722    | 0,8163   | 0,6185        | 0,8050 | 0,8444 | 5042        |
 
-Observamos que funcionó mejor en el dataset e los móviles, y peor en el del banco, aún así ha dado muy buenos resultados en todos los conjuntos de datos, ya que los árboles de decisión trabajan con cualquier valor de datos y gestionan bien los valores perdidos.
+Observamos que funcionó mejor en el dataset e los móviles, y peor en el del banco, aún así ha dado muy buenos resultados en todos los conjuntos de datos, ya que los árboles de decisión trabajan con cualquier valor de datos y admiten los valores perdidos.
 
 En este algoritmo la complejidad se corresponde con el número de hojas que tiene el árbol generado. Para calcular el número de hojas se ha empleado el siguiente workflow:
 
@@ -172,9 +202,13 @@ Veamos la tabla con las medidas tomadas en cada conjunto de datos:
 | Bank     | 2048  | 980  | 35568 | 2592 | 0,6764    | 0,4414      | 0,9732      | 0,5342    | 0,9133   | 0,4887        | 0,6554 | 0,9428 | 100         |
 | Tanzania | 14060 | 8517 | 23742 | 8764 | 0,6228    | 0,6160      | 0,7360      | 0,6194    | 0,6863   | 0,3526        | 0,6733 | 0,7418 | 100         |
 
-Podemos observar que Random Forest obtiene resultados muy buenos en todos los datos, aunque su valor más bajo sn duda está en el problema de Tanzania. En tres de los cuatro problemas a estudiar se ve que random forest es el que mejores resultados obtiene. 
+Podemos observar que Random Forest obtiene resultados muy buenos en todos los datos, aunque su valor más bajo sn duda está en el problema de Tanzania. En dos de los cuatro problemas a estudiar se ve que random forest es el que mejores resultados obtiene.
+
+Cabe destacar también que es el algoritmo más lento a ejecutar de entre todos los seleccionados.
 
 En este algoritmo se considera la complejidad como el número de modelos a generar.
+
+En la imagen, se puede observar que aparte de los nodos indispensables para el algoritmo (x-partitioner, random forest learner, random forest predicor y x-aggregator) hay otros nodos adicionales, que se usarán en la sección de interpretación de resultados para obtener qué atributos son más relevantes.
 
 ### Naive Bayes (NB)
 
@@ -201,13 +235,11 @@ En Naive bayes la complejidad se corresponde con el número de clases multiplica
 
 ![](./img/XGB2.png)
 
-XGBoosting es una algoritmo "ensemble" basado en árboles de decisión que usa "gradient boosting".
+XGBoost es una algoritmo ensemble basado en árboles de decisión que usa gradient boosting.
 
 Se ha escogido este algoritmo ya que se ha considerado que puede competir en medidas con el random forest.
 
-Aunque XGBoosting no requiere de un preprocesamiento de los missing values, sí ha sido necesario convertir todos los atributos a numéricos.
-
-TODO CAMBIAR ESTA CAPTURA
+Aunque XGBoost no requiere de un preprocesamiento de los missing values, sí ha sido necesario convertir todos los atributos a numéricos.
 
 ![](./img/XGB1.png)
 
@@ -220,7 +252,7 @@ Las medidas obtenidas para este algoritmo en los distintos problemas son:
 | Bank     | 1709  | 935  | 35613 | 2931  | 0,6464    | 0,3683      | 0,9744      | 0,4692    | 0,9061   | 0,4220        | 0,5991 | 0,9239 | 100         |
 | Tanzania | 11718 | 5447 | 26812 | 11106 | 0,6827    | 0,5134      | 0,8311      | 0,5861    | 0,6995   | 0,3575        | 0,6532 | 0,7422 | 100         |
 
-Al contrario que en el algoritmo anterior, XGBoosting obtiene mejores resultados en los problemas con datos numéricos, ya que los nominales o categóricos han sido transformados a atributos numéricos.
+Al igual que en el algoritmo anterior, XGBoost obtiene mejores resultados en los problemas con datos numéricos, ya que los nominales o categóricos han sido transformados a atributos numéricos.
 
 Para XGBoost la complejidad es el número de rondas de boost.
 
@@ -230,7 +262,7 @@ Para XGBoost la complejidad es el número de rondas de boost.
 
 El algoritmo k-NN predice las clases calculando cuáles son los $k$ vecinos más cercanos al ejemplo dado y asigna la clase mayoritaria entre ellos. Para calcular qué ejemplos son "más cercanos" se usa la distancia euclídea entre los atributos, aunque en ocasiones puede usarse otra distancia.
 
-Como preprocesamiento mínimo han tenido que tratarse los valores perdidos o missing values, además de, como el algoritmo trabaja con distancias euclídeas, convertir todas las variables a variables numéricas. Y, finalmente, con el fin de no dar más peso a unos valores numéricos que a otros se ha normalizado.
+Como preprocesamiento mínimo han tenido que tratarse los valores perdidos o missing values, además de, como el algoritmo trabaja con distancias euclídeas, convertir todas las variables a variables numéricas. Y, finalmente, con el fin de no dar más peso a unos valores numéricos que a otros se ha normalizado siguiendo un normalizado "Z-score Normalization (Gaussian)", ya que normalizar usando minmax no es la mejor opción si no sabemos si los conjuntos de datos tienen outliers.
 
 ![](./img/k-NN2.png)
 
@@ -282,7 +314,7 @@ Veamos ahora la curva ROC:
 
 ![](./img/ROC_heart.svg)
 
-En esta curva de nuevo se aprecia que el algoritmoXGBoost es el mejor, seguido de cerca por Random forest, y después, con mayor diferencia, Naive Bayes y k-NN.
+En esta curva se aprecia que el algoritmoXGBoost es el mejor, seguido de cerca por Random forest, y después, con mayor diferencia, Naive Bayes y k-NN.
 
 También cabe destacar que en esta gráfica se aprecia como el algoritmo de árboles de decisión es el peor de nuevo, y como el algoritmo ZeroR es ligeramente peor que un selector aleatorio.
 
@@ -308,7 +340,7 @@ En conclusión, el ránking es, de mejor a peor:
 - XGBoost.
 - Naive bayes.
 - k-NN
-- Decission tree.
+- decision tree.
 
 ### Mobile
 
@@ -333,7 +365,7 @@ Lo primero que llama la atención de esta gráfica es que el algoritmo ZeroR no 
 
 De nuevo, el algoritmo con mayor número de verdaderos positivos y menor número de falsos positivos es el random forest, y el peor es k-NN.
 
-En este dataset se nota algo más de diferencia entre los algoritmos, y k-NN funciona peor que en el anterior, pese a que en este conjunto de datos todas las variables son numéricas. Esto puede deberse a que muchos de los atributos, pese a considerarse números enteros, realmente solo toman el valor 0 o 1 para indicar si un móvl tiene o no una característica, es decir, aunque las variables están calificadas como numéricas, realmente actúan como categóricas (sí o no).
+En este dataset se nota algo más de diferencia entre los algoritmos, y k-NN funciona peor que en el anterior, pese a que en este conjunto de datos todas las variables son numéricas. Esto puede deberse a que muchos de los atributos, aunque se consideren números enteros, realmente solo toman el valor 0 o 1 para indicar si un móvl tiene o no una característica, es decir, aunque las variables están calificadas como numéricas, realmente actúan como categóricas (sí o no).
 
 De nuevo, los algoritmos basados en árboles y naive bayes, que trabajan con variables numéricas y nominales no tienen este problema.
 
@@ -345,7 +377,7 @@ En la curva ROC de nuevo se aprecia que el mejor algoritmo es random forest, que
 
 También se ve claramente la diferencia que hay entre todos los algoritmos y k-NN, que queda bastante por detrás.
 
-De nuevo, el mal rendimiento de XGBoost puede deberse a que los atributos del conjunto de datos son numéricos y este algroitmo solo admite atributos nominales.
+Observamos también que los árboles de decisión en este conjunto de datos realizan buenas predicciones, esto puede deberse en parte a que el conjunto de datos está completamente equilibrado, es decir, no está desbalanceado, lo que ayuda a este algoritmo, ya que es bastante sensible al desbalanceo.
 
 Representamos ahora la precisión de los distintos algoritmos:
 
@@ -368,7 +400,7 @@ Finalmente, se hará un ránking de los algoritmos en función de G-mean. Para h
 En conclusión, el ránking es, de mejor a peor:
 
 - Random forest.
-- Decission tree.
+- decision tree.
 - XGBoost.
 - Naive bayes.
 - k-NN.
@@ -394,7 +426,7 @@ Ahora vamos a visualizar como en los ejemplos anteriores estos datos, comenzando
 
 Lo primero a destacar de la gráfica es como la mayoría de valores son verdaderos negaitvos. Si nos fijamos en ZeroR veremos que solo predice negativos, lo cuál es congruente con el análisis inicial de los datos, en el que se veían muy desbalanceados, y con la clase predominante no.
 
-Nosotros hemos considerado la clase positiva como sí, por lo tanto la gráfica tiene sentido, ya que indica que predominan los valores negativos, que son la clase no.
+Nosotros hemos considerado la clase positiva como sí, por lo tanto la gráfica tiene sentido, ya que indica que predominan los valores negativos, que son la clase no. Esto concuerda con el estudio preliminar que realizamos sobre el conjunto de datos en la introducción.
 
 El algoritmo que mayor número de verdaderos positivos proporciona es naive bayes, pero también predice muchos falsos positivos, aunque para este problema no nos preocupan en exceso los falsos positivos, más bien nos interesa reducir los falsos negativos.
 
@@ -422,7 +454,7 @@ Representamos finalmente la matriz de correlaciones de los atributos del conjunt
 
 ![](./img/corr_bank.svg)
 
-Se puede ver que la correlación entre los distintos atributos es más alta que en los otros conjuntos de datos, lo que ha podido afectar al rendimiento de Naive Bayes al asumir que son independientes.
+Se puede ver que la correlación entre los distintos atributos es más alta que en los otros conjuntos de datos, lo que ha podido afectar al rendimiento de Naive Bayes al asumir que son independientes. A pesar de ello, las correlaciones se dan principalmente en subconjuntos de datos focalizados, se distingue especialmente bien el grupo de la esquina inferior derecha. Es decir, pese a que la correlación es más alta, está bastante concentrada en ciertos conjuntos de atributos, no de forma general.
 
 Finalmente, se hará un ránking de los algoritmos en función de G-mean. Para hacer la comparación más sencilla, se realizará un gráfico de barras igual que el de la precisión.
 
@@ -430,7 +462,7 @@ Finalmente, se hará un ránking de los algoritmos en función de G-mean. Para h
 
 En conclusión, el ránking es, de mejor a peor:
 
-- Decission tree.
+- Decision tree.
 - Naive Bayes.
 - Random forest.
 - k-NN.
@@ -457,9 +489,9 @@ Visualizamos la matriz de confusión mediante el gráfico de barras apiladas, co
 
 Lo primero que destacamos es que, como en el ejemplo anterior, la clase mayoritaria es la considerada negativa, lo que se refleja en el algoritmo ZeroR, que asigna a todos los ejemplos esta clase.
 
-El algoritmo con mayor número de verdaderos positivos es los árboles de decisión, aunque destaca que todos los algoritmos producen resultados similares de verdaderos positivos. El algoritmo que peor funciona es XGBoost, que predice menos verdaderos positivos y bastantes falsos positivos. Random forest también genera menos verdaderos positivos que los demás, y a esto se le suma que predice muchos falsos positivos, que nos convienen evitar en este problema.
+El algoritmo con mayor número de verdaderos positivos es los árboles de decisión, aunque destaca que todos los algoritmos producen resultados similares de verdaderos positivos. El algoritmo que peor funciona es XGBoost, que predice menos verdaderos positivos y bastantes falsos positivos. Random forest también genera menos verdaderos positivos que los demás, y a esto se le suma que predice muchos falsos positivos, que nos convienen evitar en este problema para no desperdiciar recursos tratanto de reparar bombas que no van a romperse.
 
-Para analizar mejor las diferencias entre los algoritmos analizamos ahora ala curva ROC:
+Para analizar mejor las diferencias entre los algoritmos analizamos ahora la curva ROC:
 ![](./img/ROC_tanzania.svg)
 
 En la curva ROC se aprecia que el mejor algoritmo es k-NN, seguido de Naive Bayes.
@@ -488,7 +520,7 @@ Finalmente, se hará un ránking de los algoritmos en función de G-mean. Para h
 
 En conclusión, el ránking es, de mejor a peor:
 
-- Decission tree.
+- decision tree.
 - k-NN.
 - Naive bayes.
 - Random forest.
@@ -502,7 +534,7 @@ Vamos a asignar a cada algoritmo 5, 4, 3, 2 y 1 puntos según su posición en lo
 
 Así, el ránking final es:
 
-- Decission tree y Random forest.
+- Decision tree y Random forest.
 - Naive Bayes.
 - k-NN y XGBoost.
 
@@ -512,9 +544,9 @@ El tercer mejor algoritmo es Naive bayes, que tampoco requiere que los datos con
 
 Finalmente los últimos algoritmos tienen restricciones del tipo de datos, ya que k-NN y XGBoost requieren que todos sean numéricos.
 
-En general, se ha comprobado que XGBoost no realiza buenas predicciones para los conjuntos de datos con muchos atributos nominales, lo cuál se ha reflejado en la clasificación ya que la mitad de los conjuntos que se han estudiado tenían principalmente atributos de este tipo, pero al trabajar con atributosnuméricos el algoritmo consigue buenos resultados.
+En general, se ha comprobado que XGBoost no realiza buenas predicciones para los conjuntos de datos con muchos atributos nominales, lo cuál se ha reflejado en la clasificación ya que la mitad de los conjuntos que se han estudiado tenían principalmente atributos de este tipo, pero al trabajar con atributos numéricos el algoritmo consigue buenos resultados.
 
-Así mismo, se comprueba que k-NN también se ve afectado si hay muchos atributos nominales con los que trabajar, en especial si tienen muchos valores perdidos, ya que insertarlos usando estrategias como sustituir por la media o la mediana no es la mejor forma de tratarlos.
+Asimismo, se comprueba que k-NN también se ve afectado si hay muchos atributos nominales con los que trabajar, en especial si tienen muchos valores perdidos, ya que insertarlos usando estrategias como sustituir por la media o la mediana no es la mejor forma de tratarlos.
 
 En general, los algoritmos que mejor parecen generar predicciones para cualquier conjunto de datos son los basados en árboles.
 
@@ -526,7 +558,7 @@ A continuación vamos a probar a modificar distintos parámetros de los algoritm
 
 ### Árbol de decisión
 
-Comenzamos estudiando el comportamiento de los árboles de decisión si aumentamos progresivamente el valor de número mínimo de ejemplos por nodo. Es decir, si un nodo tiene un número de ejemplos menor o igual al número indicado por este parámetro no se sigue desarrollando.
+Comenzamos estudiando el comportamiento de los árboles de decisión si aumentamos progresivamente el valor del número mínimo de ejemplos por nodo. Es decir, si un nodo tiene un número de ejemplos menor o igual al número indicado por este parámetro no se sigue desarrollando.
 
 Probaremos con 5 valores distintos para este parámetro, y se va a ejecutar en cada conjunto de datos de la práctica. A continuación se muestran las medidas y curvas ROC tomadas en cada conjunto de datos para cada valor del parámetro.
 
@@ -660,9 +692,9 @@ Fijándonos en las curvas ROC y en la precisión de cada algoritmo se puede ver 
 
 ## Procesado de datos
 
-En esta sección realizaremos un preprocesado de los datos de un conjunto de datos a estudiar, en este caso se ha elegido el del corazón.
+En esta sección realizaremos un preprocesado de los datos de un problema a estudiar, en este caso se ha elegido el del corazón.
 
-Como el conjunto de datos cuenta con muchos valores de la columna de colesterol como 0, y ese valor no parece muy razonable, se ha considerado valor perdido desde el principio de la práctica, nuestro preprocesado va a centrarse en esto.
+Como el conjunto de datos cuenta con muchos valores de la columna de colesterol como 0, y ese valor no parece muy razonable, como ya se comentó, se ha considerado valor perdido desde el principio de la práctica, nuestro preprocesado va a centrarse en esto.
 
 El preprocesado que vamos a realizar consiste en, usando un predictor basado en árboles de decisión, se van a imputar los valores predichos por este para el colesterol. En resumen, estamos tratando los valores perdidos usando un predictor adecuado para ello.
 
@@ -882,7 +914,43 @@ Además, es más razonable que las variables quantity_group y region, que hacen 
 
 ## Contenido adicional
 
+### Workflow
 
+Para esta práctica se han usado 5 ficheros distintos de knime, uno por cada dataset y otro aparte para los distintos valores de parámetros:
+
+#### Heart
+
+En este dataset está el flujo normal del corazón o el preprocesado a tratar con los datos, se deben cambiar las entradas de cada algoritmo al flujo de arriba y conectar la salida del flujo normal a la entrada del preprocesado.
+
+Actualmente está configurado para ejecutar el preprocesado.
+
+![](./img/P1_heart.svg)
+
+#### Mobile
+
+![](./img/P1_mobile.svg)
+
+#### Bank
+
+![](./img/P1_bank.svg)
+
+#### Tanzania
+
+![](./img/P1_tanzania.svg)
+
+#### Parámetros
+
+En este fichero está preparada la carga de los 4 datasets y todos los algoritmos a ejecutar. Para obtener los resultados de los algoritmos en un dataset concreto se debe conectar la carga de ese dataset a los algoritmos, cambiar la clase positiva en todos los nodos pertinentes (dentro de metanodos medidas, column rename y curva ROC). También es necesario cambiar los ficheros donde van a escribirse dichos datos.
+
+Actualmente está configurado para ejecutar los árboles de decisión con el dataset de Tanzania y XGBoost con Heart.
+
+![](./img/P1_param.svg)
+
+<div style="page-break-after: always;"></div>
 
 ## Bibliografía
 
+- Apuntes de clase
+- https://www.knime.com/
+- https://hub.knime.com/
+- https://plotdb.com
