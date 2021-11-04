@@ -698,6 +698,12 @@ Como el conjunto de datos cuenta con muchos valores de la columna de colesterol 
 
 El preprocesado que vamos a realizar consiste en, usando un predictor basado en árboles de decisión, se van a imputar los valores predichos por este para el colesterol. En resumen, estamos tratando los valores perdidos usando un predictor adecuado para ello.
 
+El flujo de datos para el preprocesado empleado es:
+
+![](./img/captura_preprocesado.png)
+
+Al procesado básico realizado usualmente (rama inferior) se añade un predictor (rama superior) del atributo cholesterol y en cada instancia donde haya un valor perdido en dicho atributo, se sustituye por el valor predicho usando el nodo "Rule engine".
+
 Se han ejecutado todos los algoritmos tras realizar este preprocesado y las medidas tomadas y curva ROC obtenidas han sido:
 
 #### Resultado sin preprocesado
