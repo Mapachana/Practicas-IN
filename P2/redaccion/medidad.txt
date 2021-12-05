@@ -123,6 +123,70 @@ meanshift & 18.233 & 184.067 & 0.40807 & 11 \\
 \end{tabular}
 \end{table}
 
+### PARAMETROS dbscan
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+dbscan & 0.126 & 15.000 & 0.210 & 283.280 & 0.62692 & 2 \\
+dbscan & 0.126 & 20.000 & 0.177 & 304.282 & 0.60850 & 2 \\
+dbscan & 0.126 & 25.000 & 0.185 & 343.349 & 0.59182 & 2 \\
+dbscan & 0.126 & 30.000 & 0.181 & 357.820 & 0.58212 & 2 \\
+dbscan & 0.126 & 35.000 & 0.188 & 361.064 & 0.57576 & 2 \\
+dbscan & 0.130 & 15.000 & 0.190 & 223.006 & 0.63128 & 2 \\
+dbscan & 0.130 & 20.000 & 0.194 & 279.313 & 0.62217 & 2 \\
+dbscan & 0.130 & 25.000 & 0.184 & 324.483 & 0.60954 & 2 \\
+dbscan & 0.130 & 30.000 & 0.193 & 345.157 & 0.60186 & 2 \\
+dbscan & 0.130 & 35.000 & 0.193 & 354.160 & 0.58156 & 2 \\
+dbscan & 0.150 & 15.000 & 0.247 & 133.391 & 0.67010 & 2 \\
+dbscan & 0.150 & 20.000 & 0.212 & 208.220 & 0.65089 & 2 \\
+dbscan & 0.150 & 25.000 & 0.213 & 234.186 & 0.64523 & 2 \\
+dbscan & 0.150 & 30.000 & 0.219 & 244.053 & 0.63871 & 2 \\
+dbscan & 0.150 & 35.000 & 0.232 & 277.293 & 0.63108 & 2 \\
+dbscan & 0.170 & 15.000 & 0.245 & 106.562 & 0.68737 & 2 \\
+dbscan & 0.170 & 20.000 & 0.243 & 112.836 & 0.68127 & 2 \\
+dbscan & 0.170 & 25.000 & 0.241 & 154.421 & 0.66746 & 2 \\
+dbscan & 0.170 & 30.000 & 0.231 & 179.415 & 0.66353 & 2 \\
+dbscan & 0.170 & 35.000 & 0.479 & 197.375 & 0.66118 & 2 \\
+dbscan & 0.200 & 15.000 & 0.283 & 77.501 & 0.69224 & 2 \\
+dbscan & 0.200 & 20.000 & 0.256 & 95.258 & 0.68918 & 2 \\
+dbscan & 0.200 & 25.000 & 0.254 & 103.127 & 0.68949 & 2 \\
+dbscan & 0.200 & 30.000 & 0.252 & 107.818 & 0.68620 & 2 \\
+dbscan & 0.200 & 35.000 & 0.239 & 110.824 & 0.68431 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+### PARAMETROS kmeans
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 3.000 & 0.224 & 960.927 & 0.28417 & 3 \\
+kmeans & 4.000 & 0.122 & 1162.049 & 0.31899 & 4 \\
+kmeans & 5.000 & 0.283 & 1157.588 & 0.31325 & 5 \\
+kmeans & 6.000 & 0.292 & 1174.483 & 0.32302 & 6 \\
+kmeans & 7.000 & 0.328 & 1107.187 & 0.31675 & 7 \\
+kmeans & 8.000 & 0.183 & 1074.974 & 0.31710 & 8 \\
+kmeans & 9.000 & 0.487 & 1031.378 & 0.31904 & 9 \\
+kmeans & 10.000 & 1.043 & 992.485 & 0.29012 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
 
 ## SUBCASO B
 
@@ -144,6 +208,76 @@ meanshift & 68.273 & 211.786 & 0.40726 & 31 \\
 \end{table}
 
 
+
+### PARAMETROS dbscan
+
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+dbscan & 0.126 & 15.000 & 2.367 & 468.250 & 0.76037 & 2 \\
+dbscan & 0.126 & 20.000 & 1.638 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.126 & 25.000 & 1.662 & 509.168 & 0.75308 & 2 \\
+dbscan & 0.126 & 30.000 & 1.580 & 520.993 & 0.75022 & 2 \\
+dbscan & 0.126 & 35.000 & 1.564 & 557.247 & 0.74668 & 2 \\
+dbscan & 0.130 & 15.000 & 1.676 & 444.386 & 0.76270 & 2 \\
+dbscan & 0.130 & 20.000 & 1.624 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.130 & 25.000 & 1.622 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.130 & 30.000 & 1.557 & 502.252 & 0.75391 & 2 \\
+dbscan & 0.130 & 35.000 & 1.516 & 543.389 & 0.74931 & 2 \\
+dbscan & 0.150 & 15.000 & 1.775 & 364.846 & 0.78084 & 2 \\
+dbscan & 0.150 & 20.000 & 1.693 & 401.486 & 0.77691 & 2 \\
+dbscan & 0.150 & 25.000 & 1.640 & 401.486 & 0.77691 & 2 \\
+dbscan & 0.150 & 30.000 & 1.701 & 419.823 & 0.77129 & 2 \\
+dbscan & 0.150 & 35.000 & 1.676 & 431.335 & 0.77072 & 2 \\
+dbscan & 0.170 & 15.000 & 1.725 & 326.815 & 0.78982 & 2 \\
+dbscan & 0.170 & 20.000 & 1.751 & 326.815 & 0.78982 & 2 \\
+dbscan & 0.170 & 25.000 & 1.852 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.170 & 30.000 & 1.673 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.170 & 35.000 & 1.713 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.200 & 15.000 & 1.743 & 234.734 & 0.81097 & 2 \\
+dbscan & 0.200 & 20.000 & 1.728 & 236.469 & 0.80628 & 2 \\
+dbscan & 0.200 & 25.000 & 1.601 & 274.152 & 0.80115 & 2 \\
+dbscan & 0.200 & 30.000 & 1.732 & 277.749 & 0.79948 & 2 \\
+dbscan & 0.200 & 35.000 & 1.686 & 309.161 & 0.79346 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+### PARAMETROS kmeans
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 3.000 & 0.392 & 3085.841 & 0.39834 & 3 \\
+kmeans & 4.000 & 0.243 & 3065.400 & 0.40218 & 4 \\
+kmeans & 5.000 & 0.407 & 2962.319 & 0.30911 & 5 \\
+kmeans & 6.000 & 0.441 & 2878.260 & 0.31752 & 6 \\
+kmeans & 7.000 & 0.496 & 2799.096 & 0.31771 & 7 \\
+kmeans & 8.000 & 0.508 & 2760.228 & 0.27617 & 8 \\
+kmeans & 9.000 & 0.787 & 2707.579 & 0.27781 & 9 \\
+kmeans & 10.000 & 0.891 & 2620.283 & 0.27880 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+
+
 # CASO 3
 
 
@@ -160,6 +294,60 @@ birch & 0.306 & 1564.817 & 0.29725 & 5 \\
 spectral & 14.534 & 2264.359 & 0.26693 & 5 \\
 dbscan & 1.690 & 224.569 & 0.57976 & 2 \\
 meanshift & 54.635 & 142.825 & 0.32008 & 13 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+## PARAMETROS meanshift
+
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+meanshift & 0.178 & 60.351 & 142.825 & 0.32008 & 13 \\
+meanshift & 0.050 & 84.254 & 312.060 & 0.15567 & 383 \\
+meanshift & 0.100 & 65.187 & 335.750 & 0.25020 & 96 \\
+meanshift & 0.200 & 41.351 & 105.436 & 0.44031 & 11 \\
+meanshift & 0.300 & 42.012 & 99.539 & 0.57624 & 6 \\
+meanshift & 0.400 & 32.713 & 24.040 & 0.75065 & 2 \\
+meanshift & 0.500 & 27.309 & 24.040 & 0.75065 & 2 \\
+meanshift & 0.600 & 24.299 & 24.040 & 0.75065 & 2 \\
+meanshift & 0.700 & 20.083 & 24.040 & 0.75065 & 1 \\
+meanshift & 0.800 & 18.197 & 24.040 & 0.75065 & 1 \\
+meanshift & 0.900 & 17.684 & 24.040 & 0.75065 & 1 \\
+meanshift & 1.000 & 17.445 & 24.040 & 0.75065 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+
+## PARAMETROS SPECTRAL
+
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+spectral & 3.000 & 16.169 & 3711.819 & 0.35220 & 3 \\
+spectral & 4.000 & 14.896 & 2632.387 & 0.32530 & 4 \\
+spectral & 5.000 & 14.361 & 2264.359 & 0.26693 & 5 \\
+spectral & 6.000 & 14.513 & 1747.345 & 0.19651 & 6 \\
+spectral & 7.000 & 14.801 & 1927.258 & 0.21646 & 7 \\
+spectral & 8.000 & 14.653 & 1663.712 & 0.20632 & 8 \\
+spectral & 9.000 & 14.943 & 1686.331 & 0.19274 & 9 \\
+spectral & 10.000 & 15.236 & 1393.485 & 0.20780 & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}
