@@ -1,0 +1,82 @@
+# CASO 1
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 0.055 & 5524.525 & 0.62407 & 5 \\
+birch & 0.079 & 3063.221 & 0.55159 & 5 \\
+spectral & 0.778 & 2363.816 & 0.49001 & 5 \\
+dbscan & 0.079 & 4240.452 & 0.62509 & 5 \\
+meanshift & 5.046 & 2689.703 & 0.62645 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+# CASO 2
+
+## SUBCASO A
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 0.385 & 1157.588 & 0.31325 & 5 \\
+birch & 0.124 & 510.565 & 0.26449 & 5 \\
+spectral & 1.739 & 1068.474 & 0.30286 & 5 \\
+dbscan & 0.171 & 304.282 & 0.60850 & 2 \\
+meanshift & 18.233 & 184.067 & 0.40807 & 11 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+## SUBCASO B
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 0.531 & 2962.319 & 0.30911 & 5 \\
+birch & 0.312 & 645.084 & 0.47807 & 5 \\
+spectral & 20.642 & 2145.100 & 0.32184 & 5 \\
+dbscan & 1.532 & 473.629 & 0.75774 & 2 \\
+meanshift & 68.273 & 211.786 & 0.40726 & 31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+# CASO 3
+
+
+\begin{table}[H]
+\centering
+\caption{Caso 1 - Resultados cambio de parámetros Birch}
+\label{tab:param_birch1}
+\begin{tabular}{llrrrrr}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 0.305 & 3093.890 & 0.30029 & 5 \\
+birch & 0.306 & 1564.817 & 0.29725 & 5 \\
+spectral & 14.534 & 2264.359 & 0.26693 & 5 \\
+dbscan & 1.690 & 224.569 & 0.57976 & 2 \\
+meanshift & 54.635 & 142.825 & 0.32008 & 13 \\
+\bottomrule
+\end{tabular}
+\end{table}
