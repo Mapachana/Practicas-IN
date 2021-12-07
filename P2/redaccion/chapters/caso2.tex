@@ -97,11 +97,11 @@ En \eqref{c2A_mds} se aprecia como los clusters están separados entre sí y tie
 
 En \eqref{c2A_parallel} se aprecia como el cluster verde claro, que alcanza mayores valores de asistencia social, es más disperso que los demás, lo que concuerda con la scatter matrix \eqref{c2A_scatter}. De nuevo, es claro que hay dos clusters que se diferencian por sus valores altos en alimentación y gastos.
 
-En la tabla  \eqref{tab:c1_variables} se muestran qué variables son necesarias para identificar cada cluster:
+En la tabla  \eqref{tab:c2A_variables} se muestran qué variables son necesarias para identificar cada cluster:
 
 \begin{table}[H]
 \centering
-\caption{Caso 1 - Variables necesarias para separar el clustering en spectral cluster}
+\caption{Caso 2A - Variables necesarias para separar el clustering en spectral cluster}
 \label{tab:c2A_variables}
 \begin{tabular}{ccccc}
 \toprule
@@ -195,13 +195,192 @@ Aún así, kmeans ha dado resultados buenos en todos los casos y ha demostrado s
 
 
 
+\section{Caso 2 B: Renta alta}
+
+Este caso de estudio consta de $8372$ elementos, cada uno con las cuatro variables especificadas antes.
+
+\subsection{Ejecución de algoritmos}
+
+Ejecutamos la celda del notebook de jupyter correspondiente al caso 2B y obtenemos las diferentes medidas obtenidas para cada algoritmo, que se muestran en \eqref{tab:c2B_alg}.
+
+\begin{table}[H]
+\centering
+\caption{Caso 2B - Resultados de ejecución de algoritmos.}
+\label{tab:c2_alg}
+\begin{tabular}{ccccc}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+kmeans & 0.531 & 2962.319 & 0.30911 & 5 \\
+birch & 0.312 & 645.084 & 0.47807 & 5 \\
+spectral & 20.642 & 2145.100 & 0.32184 & 5 \\
+dbscan & 1.532 & 473.629 & 0.75774 & 2 \\
+meanshift & 68.273 & 211.786 & 0.40726 & 31 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Respecto a los tiempos, de nuevo el algoritmo más lento es meanshift, seguido de spectral cluster. El resto de algoritmos obtienen tiempo similares. Cabe destacar que al incrementarse el número de instancias los tiempo han subido considerablemente, en especial el de meanshift, ya que calcular bandwith es costoso.
+
+Además, al igual que en los casos anteriores DBSCAN ha generado solamente dos clusters, uno con el $99.44\%$ de los datos y los restantes en el cluster -1. Meanshift vuelve a generar más cluster que el resto, agrupando uno de ellos el $93.37\%$ de elementos, y el resto son  agrupaciones de menos el $2\%$ de elementos. Por ello, parece que a pesar de las medidas que han obtenido, estos algoritmos no han realizado un buen agrupamiento.
+
+Finalmente vemos como Birch tiene un valor de Calinski-Harabasz más bajo que kmeans y spectral cluster, aunque obtiene un silhouette mayor.
+
+\subsection{Análisis}
+
+
+Para el análisis se va a usar kmeans, como se hizo en el caso anterior para poder realizar la comparación. Este algoritmo genera 5 clusters. Se ha generado un cluster grande con algo más e la mitad de los datos, uno mediano y el resto pequeños, como se puede ver en \eqref{c2B_tam}.
+
+\begin{figure}[H]
+\caption{Caso 2B- Tamaño de los clusters generados por kmeans}
+\label{c2B_tam}
+\includegraphics[scale=1]{caso2B/kmeans/bar.eps}
+\end{figure}
+
+A continuación observamos la scatter matrix \eqref{c2B_scatter}, donde se puede apreciar como se separan os clusters y qué variables son necesarias para separar cada uno. De manera análoga al caso 2A vemos como se pueden separar varios clusters solamente por valores altos de ciertas variables, que son el cluster 1 con grandes gastos, el 2 con alimentos y el 3 por valores muy altos de renta. Los clusters 0 y 4 requieren de varias variables para distinguirse, que son alimentos y gastos.
+
+\begin{figure}[H]
+\caption{Caso 2B- Scatter matrix de kmeans}
+\label{c2B_scatter}
+\includegraphics[scale=0.45]{caso2B/kmeans/scatter.png}
+\end{figure}
+
+
+\begin{figure}[H]
+\caption{Caso 2B- Heatmap de kmeans}
+\label{c2B_heatmap}
+\includegraphics[scale=0.45]{caso2B/kmeans/heatmap.png}
+\end{figure}
+
+En \eqref{c2B_heatmap} se ve con claridad los tres clusters que se diferencian por tomar valores especialmente altos en una de sus variables. Teniendo en cuenta que la numeración en este gráfico va de 1 a 5 y en la scatter matrix va de 0 a 4, vemos la analogía. En el heatmap se distingue como el cluster 2 toma valores considerablemente más altos en gastos que el resto de clusters, el 3 toma valores más altos en alimentación y el 4 en renta, lo que concuerda con lo visto en la scatter matrix.
+
+
+\begin{figure}[H]
+\caption{Caso 2B- MDS de kmeans}
+\label{c2B_mds}
+\includegraphics[scale=0.45]{caso2B/kmeans/mds.png}
+\end{figure}
+
+En \eqref{c2B_mds} se aprecia como los clusters están separados entre sí y hay un cluster más grande, otro medio y tres más pequeños.
+
+\begin{figure}[H]
+\caption{Caso 2B - Parallel coordinates de kmeans}
+\label{c2B_parallel}
+\includegraphics[scale=0.4]{caso2B/kmeans/parallel.png}
+\end{figure}
+
+En \eqref{c2B_parallel} se aprecia como el cluster verde claro  alcanza mayores valores de alimentos, como veíamos en las gráficas anteriores. De nuevo, es claro que hay dos clusters que se diferencian por sus valores altos en alimentación y gastos.
+
+También resalta mucho en \eqref{c2B_heatmap} y \eqref{c2B_parallel} como la asistencia social, en general, es 0 salvo para algunos objetos.
+
+En la tabla  \eqref{tab:c2B_variables} se muestran qué variables son necesarias para identificar cada cluster:
+
+\begin{table}[H]
+\centering
+\caption{Caso 2B - Variables necesarias para separar el clustering en spectral cluster}
+\label{tab:c2B_variables}
+\begin{tabular}{ccccc}
+\toprule
+ Cluster & renta & alimentos & asistencia social & gastos \\
+\midrule
+0 & & X & & X \\
+1 & & & & X \\
+2 & & X & & \\
+3 & X & & & \\
+4 & & X & & X \\
+\bottomrule
+\end{tabular}
+\end{table}
+Como se aprecia en \eqref{tab:c2B_variables} con una sola variable en cada cluster nos sirve para diferenciarlos entre los clusters 1, 2 y 3, mientras para los clusters 0 y 4 necesitamos dos para diferenciarlos entre ellos.
+
+\subsection{Estudio de parámetros de DBSCAN}
+
+Vamos a analizar el comportamiento de DBSCAN según sus parámetros principales. Para ello ejecutaremos la celda de parámetros de DBSCAN, que nos proporciona las medidas obtenidas para cada par de parámetros fijados.
+
+\begin{table}[H]
+\centering
+\caption{Caso 2B - Cambio de parámetros DBSCAN}
+\label{tab:c2B_dbscan}
+\begin{tabular}{ccccccc}
+\toprule
+ Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+\midrule
+dbscan & 0.126 & 15.000 & 2.367 & 468.250 & 0.76037 & 2 \\
+dbscan & 0.126 & 20.000 & 1.638 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.126 & 25.000 & 1.662 & 509.168 & 0.75308 & 2 \\
+dbscan & 0.126 & 30.000 & 1.580 & 520.993 & 0.75022 & 2 \\
+dbscan & 0.126 & 35.000 & 1.564 & 557.247 & 0.74668 & 2 \\
+dbscan & 0.130 & 15.000 & 1.676 & 444.386 & 0.76270 & 2 \\
+dbscan & 0.130 & 20.000 & 1.624 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.130 & 25.000 & 1.622 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.130 & 30.000 & 1.557 & 502.252 & 0.75391 & 2 \\
+dbscan & 0.130 & 35.000 & 1.516 & 543.389 & 0.74931 & 2 \\
+dbscan & 0.150 & 15.000 & 1.775 & 364.846 & 0.78084 & 2 \\
+dbscan & 0.150 & 20.000 & 1.693 & 401.486 & 0.77691 & 2 \\
+dbscan & 0.150 & 25.000 & 1.640 & 401.486 & 0.77691 & 2 \\
+dbscan & 0.150 & 30.000 & 1.701 & 419.823 & 0.77129 & 2 \\
+dbscan & 0.150 & 35.000 & 1.676 & 431.335 & 0.77072 & 2 \\
+dbscan & 0.170 & 15.000 & 1.725 & 326.815 & 0.78982 & 2 \\
+dbscan & 0.170 & 20.000 & 1.751 & 326.815 & 0.78982 & 2 \\
+dbscan & 0.170 & 25.000 & 1.852 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.170 & 30.000 & 1.673 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.170 & 35.000 & 1.713 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.200 & 15.000 & 1.743 & 234.734 & 0.81097 & 2 \\
+dbscan & 0.200 & 20.000 & 1.728 & 236.469 & 0.80628 & 2 \\
+dbscan & 0.200 & 25.000 & 1.601 & 274.152 & 0.80115 & 2 \\
+dbscan & 0.200 & 30.000 & 1.732 & 277.749 & 0.79948 & 2 \\
+dbscan & 0.200 & 35.000 & 1.686 & 309.161 & 0.79346 & 2 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Como podemos apreciar en \eqref{tab:c2B_dbscan} DBSCAN siempre realiza dos clusters. El tamaño de estos es siempre similar, más del $90\%$ los ejemplos están agrupados en el cluster $0$ y los restantes están en el $-1$.
+
+Este algoritmo no ha hecho ninguna buena agrupación en ningún caso de los probados, pese a que, de nuevo su silhouette es bastante alto.
+
+No podemos interpretar demasiado Calinsk-Harabasz, ya que al no estar normalizado no sabemos si los valores dados son muy altos. Sí podemos decir que los mejores agrupamientos (que han proporcionado un valor de esta medida más alto) se han dado cuando min samples es $35$.
+
+
+\subsection{Estudio de parámetros de Kmeans}
+
+Estudiamos ahora el algoritmo Kmeans. Se ha variado el número de clusters.
+
+\begin{table}[H]
+\centering
+\caption{Caso 2B - Cambio de parámetros Kmeans}
+\label{tab:c2B_kmeans}
+\begin{tabular}{cccccc}
+\toprule
+Algoritmo & n clusters & Tiempo(s) & Silhouette & Calinski-Harabasz & n clusters \\
+\midrule
+kmeans & 3.000 & 0.392 & 3085.841 & 0.39834 & 3 \\
+kmeans & 4.000 & 0.243 & 3065.400 & 0.40218 & 4 \\
+kmeans & 5.000 & 0.407 & 2962.319 & 0.30911 & 5 \\
+kmeans & 6.000 & 0.441 & 2878.260 & 0.31752 & 6 \\
+kmeans & 7.000 & 0.496 & 2799.096 & 0.31771 & 7 \\
+kmeans & 8.000 & 0.508 & 2760.228 & 0.27617 & 8 \\
+kmeans & 9.000 & 0.787 & 2707.579 & 0.27781 & 9 \\
+kmeans & 10.000 & 0.891 & 2620.283 & 0.27880 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Podemos ver en \eqref{tab:c2B_kmeans} como las medidas comienzan subiendo hasta que el número de clusters es 4, donde alcanzan su máximo Silhouette y Calinski-harabasz, para después volver comenzar a decrementarse.
+
+Asimismo el tiempo de ejecución se incrementa a la par que el número de clusters crece, pues hay que hacer más cálculos.
+
+A la vista de estas medidas, parece que la mejor agrupación sería con 4 clusters.
+
+
 \section{Interpretación de la segmentación}
 
-A la vista de los resultados obtenidos, vemos que no se aprecian diferencias significativas en la renta entre las agrupaciones y no se encuentra demasiado dispersa. Esta variable por tanto no es tan relevante como otras.
+Una variable bastante relevante al comparar estos casos ha sido la asistencia social, ya que en el caso de rentas altas la mayor parte de objetos no recibían (valía 0), mientras para rentas bajas ha sido muy relevante a la hora de realizar agrupamientos.
 
-No hay ninguna variable que destaque sobre otra, pero usando solamente las variables gastos, IRPF y alimentacion in podríamos diferenciar con claridad 3 clusters, y los otros dos agruparlos por descarte. Las otras variables nos sirvieron para refinar la diferenciación entre los clusters para lograr diferenciar los $5$.
+En ambos casos los gastos y alimentación han servido para separar dos clusters del resto usando solamente una de ellas. Si comparamos ambas, usando por ejemplos \eqref{c2A_scatter} y \eqref{c2B_scatter} vemos que en el caso de alimentación para rentas altas se considera un valor "alto" de esta variable a partir de $1000$, mientras para rentas bajas es $400$. Igualmente, para gastos en rentas altas el valor de corte es en torno a $500$, pero para rentas bajas se considera más o menos $350$.
 
-Respecto a la hipótesis inicial, que las personas con propiedades alquiladas tienen mayor renta o más comodidades, en principio no parece cierta, pues la renta no ha sido una variable significativa respecto a la que dividir y otros factores son más influyentes.
+Para separar los otros clusters usamos dos variables, donde una de ellas es la renta, por lo tanto es de menos utilidad al compararlos, ya que la renta está sesgada en cada caso de estudio.
+
+Así, vemos como las personas con rentas más altas prácticamente no tienen ayudas sociales y gastan más en alimentos y gastos de alquiler y similares, mientras las personas con rentas bajas cuentan con más ayudas sociales y gastan menos en alimentación y gastos del hogar.
 
 
 
