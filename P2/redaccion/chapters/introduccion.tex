@@ -6,12 +6,15 @@
 \chapter{Introducción}
 
 
+\section{Conjunto de datos}
 En esta práctica nos encontramos ante un problema de aprendizaje no supervisado en el que usaremos algoritmos de agrupamiento o clustering para realizar un análisis relacional.
 
 El conjunto de datos sobre el que trabajaremos es el resultado de la encuesta sobre condiciones de vida en 2020, realizada por el Instituto Nacional de Estadística. A partir de estos datos, se realizarán tres casos de estudio distintos a analizar.
 
 El conjunto de datos consta de $15043$ respuestas a la encuesta, cada una con $209$ variables, tales como la renta, número de miembros en la familia, ayudas sociales, etc. En cada caso de estudio elegiremos un subconjunto de estas variables tratando de obtener la mayor cantidad de información relevante posible.
 
+
+\section{Algoritmos y medidas}
 En cada uno de los casos de estudio aplicaremos cinco algoritmos de clustering, de los cuales se interpretará uno de ellos, y se hará un estudio de parámetros de otros dos. Los cinco algoritmos que se van a estudiar son:
 
 \begin{itemize}
@@ -30,4 +33,13 @@ Para comparar los resultados obtenidos por cada algoritmo se van a usar las sigu
 \item \textbf{Silhouette}: Mide la similaridad entre los objetos de un mismo cluster comparados con los de los clusters restantes. Toma valores en $[-1, 1]$. Un valor cercano a 1 indica clusters concentrados y separados entre sí, mientras un valor cercano a 0 indica clusters cercanos.
 \item \textbf{Número de clusters}: Esta medida no tiene sentido en algoritmos para los que se fija de antemano el número de clusters a realizar, como es kmeans, pero puede ser útil para otros algoritmos, pudiendo ver así si generan pocos o demasiados clusters.  
 \end{itemize}
+
+\section{Preprocesado}
+
+Para la aplicación de los distintos algoritmos se ha usado un preprocesado básico en todos los casos de estudios, que consiste en la imputación de valores perdidos en todas las variables. Notemos que esta imputación no debería tener un efecto importante en el clustering, y por tanto no se tendrá en cuenta de ahora en adelante.
+
+Después se han eliminado outliers usando Zscore. Esto mejora el agrupamiento realizado por muchos algoritmos que no son robustos ante outliers, como kmeans.
+
+Finalmente se ha normalizado usando normalización minmax. La normalización es muy importante para que no se le de más peso a unas variables que a otras basándose en su rango al calcular la distancia.
+
 
