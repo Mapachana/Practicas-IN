@@ -34,7 +34,7 @@ Ejecutamos la celda del notebook de jupyter correspondiente al caso 2A (que se p
 \label{tab:c2_alg}
 \begin{tabular}{ccccc}
 \toprule
- Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+ Algoritmo & Tiempo (s) & Calinski-Harabasz & Silhouette & Número de clusters \\
 \midrule
 kmeans & 0.385 & 1157.588 & 0.31325 & 5 \\
 birch & 0.124 & 510.565 & 0.26449 & 5 \\
@@ -127,33 +127,33 @@ Vamos a analizar el comportamiento de DBSCAN según sus parámetros principales.
 \label{tab:c2A_dbscan}
 \begin{tabular}{ccccccc}
 \toprule
- Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+Algoritmo & eps & min samples & Tiempo(s) & Calinski-Harabasz & Silhouette & n clusters \\
 \midrule
-dbscan & 0.126 & 15.000 & 0.210 & 283.280 & 0.62692 & 2 \\
-dbscan & 0.126 & 20.000 & 0.177 & 304.282 & 0.60850 & 2 \\
-dbscan & 0.126 & 25.000 & 0.185 & 343.349 & 0.59182 & 2 \\
-dbscan & 0.126 & 30.000 & 0.181 & 357.820 & 0.58212 & 2 \\
-dbscan & 0.126 & 35.000 & 0.188 & 361.064 & 0.57576 & 2 \\
-dbscan & 0.130 & 15.000 & 0.190 & 223.006 & 0.63128 & 2 \\
-dbscan & 0.130 & 20.000 & 0.194 & 279.313 & 0.62217 & 2 \\
-dbscan & 0.130 & 25.000 & 0.184 & 324.483 & 0.60954 & 2 \\
-dbscan & 0.130 & 30.000 & 0.193 & 345.157 & 0.60186 & 2 \\
-dbscan & 0.130 & 35.000 & 0.193 & 354.160 & 0.58156 & 2 \\
-dbscan & 0.150 & 15.000 & 0.247 & 133.391 & 0.67010 & 2 \\
-dbscan & 0.150 & 20.000 & 0.212 & 208.220 & 0.65089 & 2 \\
-dbscan & 0.150 & 25.000 & 0.213 & 234.186 & 0.64523 & 2 \\
-dbscan & 0.150 & 30.000 & 0.219 & 244.053 & 0.63871 & 2 \\
-dbscan & 0.150 & 35.000 & 0.232 & 277.293 & 0.63108 & 2 \\
-dbscan & 0.170 & 15.000 & 0.245 & 106.562 & 0.68737 & 2 \\
-dbscan & 0.170 & 20.000 & 0.243 & 112.836 & 0.68127 & 2 \\
-dbscan & 0.170 & 25.000 & 0.241 & 154.421 & 0.66746 & 2 \\
-dbscan & 0.170 & 30.000 & 0.231 & 179.415 & 0.66353 & 2 \\
-dbscan & 0.170 & 35.000 & 0.479 & 197.375 & 0.66118 & 2 \\
-dbscan & 0.200 & 15.000 & 0.283 & 77.501 & 0.69224 & 2 \\
-dbscan & 0.200 & 20.000 & 0.256 & 95.258 & 0.68918 & 2 \\
-dbscan & 0.200 & 25.000 & 0.254 & 103.127 & 0.68949 & 2 \\
-dbscan & 0.200 & 30.000 & 0.252 & 107.818 & 0.68620 & 2 \\
-dbscan & 0.200 & 35.000 & 0.239 & 110.824 & 0.68431 & 2 \\
+dbscan & 0.126 & 15 & 0.210 & 283.280 & 0.62692 & 2 \\
+dbscan & 0.126 & 20 & 0.177 & 304.282 & 0.60850 & 2 \\
+dbscan & 0.126 & 25 & 0.185 & 343.349 & 0.59182 & 2 \\
+dbscan & 0.126 & 30 & 0.181 & 357.820 & 0.58212 & 2 \\
+dbscan & 0.126 & 35 & 0.188 & 361.064 & 0.57576 & 2 \\
+dbscan & 0.130 & 15 & 0.190 & 223.006 & 0.63128 & 2 \\
+dbscan & 0.130 & 20 & 0.194 & 279.313 & 0.62217 & 2 \\
+dbscan & 0.130 & 25 & 0.184 & 324.483 & 0.60954 & 2 \\
+dbscan & 0.130 & 30 & 0.193 & 345.157 & 0.60186 & 2 \\
+dbscan & 0.130 & 35 & 0.193 & 354.160 & 0.58156 & 2 \\
+dbscan & 0.150 & 15 & 0.247 & 133.391 & 0.67010 & 2 \\
+dbscan & 0.150 & 20 & 0.212 & 208.220 & 0.65089 & 2 \\
+dbscan & 0.150 & 25 & 0.213 & 234.186 & 0.64523 & 2 \\
+dbscan & 0.150 & 30 & 0.219 & 244.053 & 0.63871 & 2 \\
+dbscan & 0.150 & 35 & 0.232 & 277.293 & 0.63108 & 2 \\
+dbscan & 0.170 & 15 & 0.245 & 106.562 & 0.68737 & 2 \\
+dbscan & 0.170 & 20 & 0.243 & 112.836 & 0.68127 & 2 \\
+dbscan & 0.170 & 25 & 0.241 & 154.421 & 0.66746 & 2 \\
+dbscan & 0.170 & 30 & 0.231 & 179.415 & 0.66353 & 2 \\
+dbscan & 0.170 & 35 & 0.479 & 197.375 & 0.66118 & 2 \\
+dbscan & 0.200 & 15 & 0.283 & 77.501 & 0.69224 & 2 \\
+dbscan & 0.200 & 20 & 0.256 & 95.258 & 0.68918 & 2 \\
+dbscan & 0.200 & 25 & 0.254 & 103.127 & 0.68949 & 2 \\
+dbscan & 0.200 & 30 & 0.252 & 107.818 & 0.68620 & 2 \\
+dbscan & 0.200 & 35 & 0.239 & 110.824 & 0.68431 & 2 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -175,16 +175,16 @@ Estudiamos ahora el algoritmo Kmeans. Se ha variado el número de clusters.
 \label{tab:c2A_kmeans}
 \begin{tabular}{cccccc}
 \toprule
-Algoritmo & n clusters & Tiempo(s) & Silhouette & Calinski-Harabasz & n clusters \\
+Algoritmo & n clusters & Tiempo(s) & Calinski-Harabasz & Silhouette & n clusters \\
 \midrule
-kmeans & 3.000 & 0.224 & 960.927 & 0.28417 & 3 \\
-kmeans & 4.000 & 0.122 & 1162.049 & 0.31899 & 4 \\
-kmeans & 5.000 & 0.283 & 1157.588 & 0.31325 & 5 \\
-kmeans & 6.000 & 0.292 & 1174.483 & 0.32302 & 6 \\
-kmeans & 7.000 & 0.328 & 1107.187 & 0.31675 & 7 \\
-kmeans & 8.000 & 0.183 & 1074.974 & 0.31710 & 8 \\
-kmeans & 9.000 & 0.487 & 1031.378 & 0.31904 & 9 \\
-kmeans & 10.000 & 1.043 & 992.485 & 0.29012 & 10 \\
+kmeans & 3 & 0.224 & 960.927 & 0.28417 & 3 \\
+kmeans & 4 & 0.122 & 1162.049 & 0.31899 & 4 \\
+kmeans & 5 & 0.283 & 1157.588 & 0.31325 & 5 \\
+kmeans & 6 & 0.292 & 1174.483 & 0.32302 & 6 \\
+kmeans & 7 & 0.328 & 1107.187 & 0.31675 & 7 \\
+kmeans & 8 & 0.183 & 1074.974 & 0.31710 & 8 \\
+kmeans & 9 & 0.487 & 1031.378 & 0.31904 & 9 \\
+kmeans & 10 & 1.043 & 992.485 & 0.29012 & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -209,7 +209,7 @@ Ejecutamos la celda del notebook de jupyter correspondiente al caso 2B y obtenem
 \label{tab:c2_alg}
 \begin{tabular}{ccccc}
 \toprule
- Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+ Algoritmo & Tiempo (s) & Calinski-Harabasz & Silhouette & Número de clusters \\
 \midrule
 kmeans & 0.531 & 2962.319 & 0.30911 & 5 \\
 birch & 0.312 & 645.084 & 0.47807 & 5 \\
@@ -303,33 +303,33 @@ Vamos a analizar el comportamiento de DBSCAN según sus parámetros principales.
 \label{tab:c2B_dbscan}
 \begin{tabular}{ccccccc}
 \toprule
- Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+Algoritmo & eps & min samples & Tiempo(s) & Calinski-Harabasz & Silhouette & n clusters \\
 \midrule
-dbscan & 0.126 & 15.000 & 2.367 & 468.250 & 0.76037 & 2 \\
-dbscan & 0.126 & 20.000 & 1.638 & 473.629 & 0.75774 & 2 \\
-dbscan & 0.126 & 25.000 & 1.662 & 509.168 & 0.75308 & 2 \\
-dbscan & 0.126 & 30.000 & 1.580 & 520.993 & 0.75022 & 2 \\
-dbscan & 0.126 & 35.000 & 1.564 & 557.247 & 0.74668 & 2 \\
-dbscan & 0.130 & 15.000 & 1.676 & 444.386 & 0.76270 & 2 \\
-dbscan & 0.130 & 20.000 & 1.624 & 473.629 & 0.75774 & 2 \\
-dbscan & 0.130 & 25.000 & 1.622 & 473.629 & 0.75774 & 2 \\
-dbscan & 0.130 & 30.000 & 1.557 & 502.252 & 0.75391 & 2 \\
-dbscan & 0.130 & 35.000 & 1.516 & 543.389 & 0.74931 & 2 \\
-dbscan & 0.150 & 15.000 & 1.775 & 364.846 & 0.78084 & 2 \\
-dbscan & 0.150 & 20.000 & 1.693 & 401.486 & 0.77691 & 2 \\
-dbscan & 0.150 & 25.000 & 1.640 & 401.486 & 0.77691 & 2 \\
-dbscan & 0.150 & 30.000 & 1.701 & 419.823 & 0.77129 & 2 \\
-dbscan & 0.150 & 35.000 & 1.676 & 431.335 & 0.77072 & 2 \\
-dbscan & 0.170 & 15.000 & 1.725 & 326.815 & 0.78982 & 2 \\
-dbscan & 0.170 & 20.000 & 1.751 & 326.815 & 0.78982 & 2 \\
-dbscan & 0.170 & 25.000 & 1.852 & 343.916 & 0.78744 & 2 \\
-dbscan & 0.170 & 30.000 & 1.673 & 343.916 & 0.78744 & 2 \\
-dbscan & 0.170 & 35.000 & 1.713 & 343.916 & 0.78744 & 2 \\
-dbscan & 0.200 & 15.000 & 1.743 & 234.734 & 0.81097 & 2 \\
-dbscan & 0.200 & 20.000 & 1.728 & 236.469 & 0.80628 & 2 \\
-dbscan & 0.200 & 25.000 & 1.601 & 274.152 & 0.80115 & 2 \\
-dbscan & 0.200 & 30.000 & 1.732 & 277.749 & 0.79948 & 2 \\
-dbscan & 0.200 & 35.000 & 1.686 & 309.161 & 0.79346 & 2 \\
+dbscan & 0.126 & 15 & 2.367 & 468.250 & 0.76037 & 2 \\
+dbscan & 0.126 & 20 & 1.638 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.126 & 25 & 1.662 & 509.168 & 0.75308 & 2 \\
+dbscan & 0.126 & 30 & 1.580 & 520.993 & 0.75022 & 2 \\
+dbscan & 0.126 & 35 & 1.564 & 557.247 & 0.74668 & 2 \\
+dbscan & 0.130 & 15 & 1.676 & 444.386 & 0.76270 & 2 \\
+dbscan & 0.130 & 20 & 1.624 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.130 & 25 & 1.622 & 473.629 & 0.75774 & 2 \\
+dbscan & 0.130 & 30 & 1.557 & 502.252 & 0.75391 & 2 \\
+dbscan & 0.130 & 35 & 1.516 & 543.389 & 0.74931 & 2 \\
+dbscan & 0.150 & 15 & 1.775 & 364.846 & 0.78084 & 2 \\
+dbscan & 0.150 & 20 & 1.693 & 401.486 & 0.77691 & 2 \\
+dbscan & 0.150 & 25 & 1.640 & 401.486 & 0.77691 & 2 \\
+dbscan & 0.150 & 30 & 1.701 & 419.823 & 0.77129 & 2 \\
+dbscan & 0.150 & 35 & 1.676 & 431.335 & 0.77072 & 2 \\
+dbscan & 0.170 & 15 & 1.725 & 326.815 & 0.78982 & 2 \\
+dbscan & 0.170 & 20 & 1.751 & 326.815 & 0.78982 & 2 \\
+dbscan & 0.170 & 25 & 1.852 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.170 & 30 & 1.673 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.170 & 35 & 1.713 & 343.916 & 0.78744 & 2 \\
+dbscan & 0.200 & 15 & 1.743 & 234.734 & 0.81097 & 2 \\
+dbscan & 0.200 & 20 & 1.728 & 236.469 & 0.80628 & 2 \\
+dbscan & 0.200 & 25 & 1.601 & 274.152 & 0.80115 & 2 \\
+dbscan & 0.200 & 30 & 1.732 & 277.749 & 0.79948 & 2 \\
+dbscan & 0.200 & 35 & 1.686 & 309.161 & 0.79346 & 2 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -351,16 +351,16 @@ Estudiamos ahora el algoritmo Kmeans. Se ha variado el número de clusters.
 \label{tab:c2B_kmeans}
 \begin{tabular}{cccccc}
 \toprule
-Algoritmo & n clusters & Tiempo(s) & Silhouette & Calinski-Harabasz & n clusters \\
+Algoritmo & n clusters & Tiempo(s) & Calinski-Harabasz & Silhouette & n clusters \\
 \midrule
-kmeans & 3.000 & 0.392 & 3085.841 & 0.39834 & 3 \\
-kmeans & 4.000 & 0.243 & 3065.400 & 0.40218 & 4 \\
-kmeans & 5.000 & 0.407 & 2962.319 & 0.30911 & 5 \\
-kmeans & 6.000 & 0.441 & 2878.260 & 0.31752 & 6 \\
-kmeans & 7.000 & 0.496 & 2799.096 & 0.31771 & 7 \\
-kmeans & 8.000 & 0.508 & 2760.228 & 0.27617 & 8 \\
-kmeans & 9.000 & 0.787 & 2707.579 & 0.27781 & 9 \\
-kmeans & 10.000 & 0.891 & 2620.283 & 0.27880 & 10 \\
+kmeans & 3 & 0.392 & 3085.841 & 0.39834 & 3 \\
+kmeans & 4 & 0.243 & 3065.400 & 0.40218 & 4 \\
+kmeans & 5 & 0.407 & 2962.319 & 0.30911 & 5 \\
+kmeans & 6 & 0.441 & 2878.260 & 0.31752 & 6 \\
+kmeans & 7 & 0.496 & 2799.096 & 0.31771 & 7 \\
+kmeans & 8 & 0.508 & 2760.228 & 0.27617 & 8 \\
+kmeans & 9 & 0.787 & 2707.579 & 0.27781 & 9 \\
+kmeans & 10 & 0.891 & 2620.283 & 0.27880 & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}

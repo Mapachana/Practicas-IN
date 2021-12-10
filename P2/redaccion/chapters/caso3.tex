@@ -32,7 +32,7 @@ Las diferentes medidas obtenidas para cada algoritmo se muestran en \eqref{tab:c
 \label{tab:c3_alg}
 \begin{tabular}{ccccc}
 \toprule
- Algoritmo & Tiempo (s) & Silhouette & Calinski-Harabasz & Número de clusters \\
+ Algoritmo & Tiempo (s) & Calinski-Harabasz & Silhouette & Número de clusters \\
 \midrule
 kmeans & 0.145 & 3108.765 & 0.28264 & 5 \\
 birch & 0.277 & 668.429 & 0.35988 & 5 \\
@@ -136,16 +136,16 @@ Vamos a estudiar el comportamiento de spectral cluster variando el número de cl
 \label{tab:c3_spectral}
 \begin{tabular}{ccccccc}
 \toprule
-Algoritmo & num clusters & Tiempo(s) & Silhouette & Calinski-Harabasz & n clusters \\
+Algoritmo & num clusters & Tiempo(s) & Calinski-Harabasz & Silhouette & n clusters \\
 \midrule
-spectral & 3.000 & 10.986 & 3763.346 & 0.33783 & 3 \\
-spectral & 4.000 & 10.916 & 2634.019 & 0.30196 & 4 \\
-spectral & 5.000 & 10.949 & 2192.446 & 0.28476 & 5 \\
-spectral & 6.000 & 10.964 & 1599.167 & 0.20130 & 6 \\
-spectral & 7.000 & 11.258 & 1669.853 & 0.19525 & 7 \\
-spectral & 8.000 & 11.180 & 1766.949 & 0.20175 & 8 \\
-spectral & 9.000 & 11.662 & 1525.245 & 0.17595 & 9 \\
-spectral & 10.000 & 11.725 & 1425.793 & 0.17855 & 10 \\
+spectral & 3 & 10.986 & 3763.346 & 0.33783 & 3 \\
+spectral & 4 & 10.916 & 2634.019 & 0.30196 & 4 \\
+spectral & 5 & 10.949 & 2192.446 & 0.28476 & 5 \\
+spectral & 6 & 10.964 & 1599.167 & 0.20130 & 6 \\
+spectral & 7 & 11.258 & 1669.853 & 0.19525 & 7 \\
+spectral & 8 & 11.180 & 1766.949 & 0.20175 & 8 \\
+spectral & 9 & 11.662 & 1525.245 & 0.17595 & 9 \\
+spectral & 10 & 11.725 & 1425.793 & 0.17855 & 10 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -167,7 +167,7 @@ Estudiamos ahora el algoritmo Meanshift. Se ha ido variando el radio (bandwith) 
 \label{tab:c3_meanshift}
 \begin{tabular}{cccccc}
 \toprule
-Algoritmo & bandwith & Tiempo(s) & Silhouette & Calinski-Harabasz & n clusters \\
+Algoritmo & bandwith & Tiempo(s) & Calinski-Harabasz & Silhouette & n clusters \\
 \midrule
 meanshift & 0.175 & 58.453 & 140.587 & 0.28696 & 15 \\
 meanshift & 0.050 & 55.001 & 251.495 & 0.15194 & 445 \\
@@ -180,7 +180,7 @@ meanshift & 0.600 & 20.824 & 36.994 & 0.79705 & 2 \\
 meanshift & 0.700 & 18.235 & 36.994 & 0.79705 & 2 \\
 meanshift & 0.800 & 15.558 & 36.994 & 0.79705 & 2 \\
 meanshift & 0.900 & 15.321 &  &  & 1 \\
-meanshift & 1.000 & 15.092 &  &  & 1 \\
+meanshift & 1 & 15.092 &  &  & 1 \\
 \bottomrule
 \end{tabular}
 \end{table}
