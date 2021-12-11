@@ -21,6 +21,7 @@ for linea in lineas:
         silhouette.append(float(aux[-2]))
         ch.append(float(aux[-3]))
         param.append(float(aux[1]))
+        print("aa")
         
 print(param)
 print(silhouette)

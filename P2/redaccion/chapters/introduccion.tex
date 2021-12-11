@@ -18,9 +18,9 @@ El conjunto de datos consta de $15043$ respuestas a la encuesta, cada una con $2
 En cada uno de los casos de estudio aplicaremos cinco algoritmos de clustering, de los cuales se interpretará uno de ellos, y se hará un estudio de parámetros de otros dos. Los cinco algoritmos que se van a estudiar son:
 
 \begin{itemize}
-\item \textbf{Kmeans:} Agrupa en tantos clusters como se le indique. Se escogen los centros aleatoriamente, se asigna a cada ejemplo el cluster correspondiente al centro más cercano. Se recalculan los centros y se repite el proceso hasta que ningún se reasigna. Genera clusters convexos y recibe como argumento el número de clusters. En las ejecuciones se usa n clusters=5.
+\item \textbf{Kmeans:} Agrupa en tantos clusters como se le indique. Se escogen los centros aleatoriamente, se asigna a cada ejemplo el cluster correspondiente al centro más cercano. Se recalculan los centros y se repite el proceso hasta que ningún ejemplo se reasigna. Genera clusters convexos y recibe como argumento el número de clusters. En las ejecuciones se usa n clusters=5.
 \item \textbf{Birch:} Es un algoritmo de clustering incremental, esto es, agrupa los objetos según los va recibiendo. Usa un árbol en el que almacena las características necesarias para determinar los clusters. Cada nodo de este árbol tiene un número de subclusters acotado por el factor de ramificación y un umbral para determinar si el nuevo ejemplo que llega está lo bastante cerca del cluster como para añadirlo a este. También recibe el número de clusters. En las ejecuciones se han fijado los parámetros a 15 como factor de ramificación y 0.1 como threshold.
-\item \textbf{Spectral cluster:} Este algoritmo requiere de otro auxiliar, como kmeans. Consiste en diagonaliar la matriz de afinidad, calcular sus autovectores y sobre estos aplica kmeans. Recibe el número de clusters. Para la ejecución se ha usado n clusters=5
+\item \textbf{Spectral cluster:} Este algoritmo requiere de otro auxiliar, como kmeans. Consiste en diagonalizar la matriz de afinidad, calcular sus autovectores y sobre estos aplica kmeans. Recibe el número de clusters. Para la ejecución se ha usado n clusters=5
 \item \textbf{DBSCAN:} Es un algoritmo basado en densidad, por lo que no está forzado a obtener clusters convexos. Usa dos parámetros: $\epsilon$ que determina cuándo un objeto es densamente alcanzable a partir de otro y min samples, un número mínimo de objetos por los que podemos alcanzar a otro para agruparlos en un mismo cluster. Genera un cluster especial, etiquetado como -1 que contiene los puntos que no pueden ser agrupados. En la ejecución se ha usado $\epsilon$=$0.126$ y min samples=20
 \item \textbf{Meanshift:} Es un algoritmo basado en densidad de las muestras, parte de un radio fijo que recibe como parámetro, determina un número de clusters y desplaza sus centros hacia las regiones más densas. Genera clusters convexos. Durante las ejecuciones se ha estimado automáticamente el mejor radio.
 \end{itemize}
@@ -29,14 +29,14 @@ Para comparar los resultados obtenidos por cada algoritmo se van a usar las sigu
 
 \begin{itemize}
 \item \textbf{Tiempo}: No es una medida especialmente relevante, pues no refleja la calidad del clustering realizado por cada algoritmo, pero puede servir para decantarnos por un algoritmo u otro en un momento dado.
-\item \textbf{Calinski-Harabasz}: Ratio entre la dispersión intercluster e intracluster para los clusters. Cuanto más alto sea su valor, mas densos y similares son los grupos y más separados están de los demás. Es más difícil de interpretar pues no está normalizado.
-\item \textbf{Silhouette}: Mide la similaridad entre los objetos de un mismo cluster comparados con los de los clusters restantes. Toma valores en $[-1, 1]$. Un valor cercano a 1 indica clusters concentrados y separados entre sí, mientras un valor cercano a 0 indica clusters cercanos.
+\item \textbf{Calinski-Harabasz}: Ratio entre la dispersión intercluster e intracluster para los clusters. Cuanto más alto sea su valor, mas densos y similares son los grupos y más distintos son de los demás. Es más difícil de interpretar pues no está normalizado.
+\item \textbf{Silhouette}: Mide la similaridad entre los objetos de un mismo cluster comparados con los de los clusters restantes. Toma valores en $[-1, 1]$. Un valor cercano a 1 indica clusters concentrados y separados entre sí.
 \item \textbf{Número de clusters}: Esta medida no tiene sentido en algoritmos para los que se fija de antemano el número de clusters a realizar, como es kmeans, pero puede ser útil para otros algoritmos, pudiendo ver así si generan pocos o demasiados clusters.  
 \end{itemize}
 
 \section{Preprocesado}
 
-Para la aplicación de los distintos algoritmos se ha usado un preprocesado básico en todos los casos de estudios, que consiste en la imputación de valores perdidos en todas las variables. Notemos que esta imputación no debería tener un efecto importante en el clustering, y por tanto no se tendrá en cuenta de ahora en adelante.
+Para la aplicación de los distintos algoritmos se ha usado un preprocesado básico en todos los casos de estudio, que consiste en la imputación de valores perdidos en todas las variables. Notemos que esta imputación no debería tener un efecto importante en el clustering, y por tanto no se tendrá en cuenta de ahora en adelante.
 
 Después se han eliminado outliers usando Zscore. Esto mejora el agrupamiento realizado por muchos algoritmos que no son robustos ante outliers, como kmeans.
 

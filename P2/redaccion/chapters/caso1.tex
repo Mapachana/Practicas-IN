@@ -25,7 +25,7 @@ Este caso de estudio consta de $2292$ respuestas a la encuesta, cada una con las
 
 Ejecutamos ahora la primera celda del notebook de jupyter (que se puede configurar para sacar las distintas gráficas) y obtenemos así las diferentes medidas obtenidas para cada algoritmo, que se muestran en \eqref{tab:c1_alg}.
 
-\begin{table}[H]
+\begin{table}[ht]
 \centering
 \caption{Caso 1 - Resultados de ejecución de algoritmos.}
 \label{tab:c1_alg}
@@ -44,11 +44,11 @@ meanshift & 10.410 & 73.801 & 0.35908 & 32 \\
 
 En primer lugar, nos llama la atención que spectral cluster es el segundo algoritmo que más ha tardado en su ejecucución, pese a que no ha obtenido (a simple vista y basándonos solo en los resultados mostrados en la tabla) mejores resultados que otros algoritmos. El algoritmo más lento ha sido meanshift, lo que puede deberse a tener que calcular el bandwith, que es una operación costosa.
 
-También es destacable como DBSCAN ha generado solamente 2 clusters, donde uno de ellos contiene el $97.21\%$ de los objetos, y el resto se encuentran en el cluster $-1$. Esto causa que su slhouette sea mucho mayor que el del resto de algoritmos.
+También es destacable como DBSCAN ha generado solamente 2 clusters, donde uno de ellos contiene el $97.21\%$ de los objetos, y el resto se encuentran en el cluster $-1$. Esto causa que su silhouette sea mucho mayor que el del resto de algoritmos.
 
 Observamos además que meanshift ha generado $32$ clusters y ha obtenido el valor de Calinski-Harabasz más bajo de todos. Observando los tamaños de los clusters que ha generado meanshift vemos que uno contiene el $90.66\%$ de los datos, muchos de ellos contienen un solo elemento ($0.04\%$ de los datos totales) y ninguno de los restantes supera el $2\%$ de los datos totales. Podemos concluir por tanto que meanshift no ha hecho un buen agrupamiento.
 
-Los algoritmos kmeans, birch y spectral cluster han obtenido resultados similares, siendo birch el que ha obtenido mejor silhouette, aunque esto puede no ser muy representativo, ya que es una medida muy sensible a la separación de los clusters. Por tanto, nos fijamos de nuevo en Calinski-Harabasz, donde kmeans y spectral clustr han conseguido mejores resultados.
+Los algoritmos kmeans, birch y spectral cluster han obtenido resultados similares, siendo birch el que ha obtenido mejor silhouette, aunque esto puede no ser muy representativo, ya que es una medida muy sensible a la separación de los clusters. Por tanto, nos fijamos de nuevo en Calinski-Harabasz, donde kmeans y spectral cluster han conseguido mejores resultados.
 
 
 \section{Análisis}
@@ -56,7 +56,7 @@ Los algoritmos kmeans, birch y spectral cluster han obtenido resultados similare
 
 Para el análisis se va a usar spectral cluster, ya que ha obtenido unos resultados aceptables en las medidas. Este algoritmo genera 5 clusters. uno de tamaño mayor y el resto de tamaños similares, como se puede ver en \eqref{c1_tam}
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \caption{Caso 1- Tamaño de los clusters generados por spectral cluster}
 \label{c1_tam}
 \includegraphics[scale=1]{caso1/spectral/bar.eps}
@@ -64,14 +64,14 @@ Para el análisis se va a usar spectral cluster, ya que ha obtenido unos resulta
 
 A continuación observamos la scatter matrix \eqref{c1_scatter}, donde se puede apreciar como se separan os clusters y qué variables son necesarias para separar cada uno.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \caption{Caso 1- Scatter matrix de spectral cluster}
 \label{c1_scatter}
 \includegraphics[scale=0.45]{caso1/spectral/scatter.png}
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \caption{Caso 1- Boxplot de spectral cluster}
 \label{c1_boxplot}
 \includegraphics[scale=0.45]{caso1/spectral/boxplot.png}
@@ -79,9 +79,9 @@ A continuación observamos la scatter matrix \eqref{c1_scatter}, donde se puede 
 
 En \eqref{c1_boxplot} podemos observar como el cluster 3 toma valores en general mayores en gastos que los otros clusters. Esto también se observa en el cluster 4 con el IRPF y en el 2 con elimentacion in. Mientras los clusters 1 y 5 son más similares.
 
-Notemos que al representar el boxplot la numeración de los clusters está de 1 a 5, mientras en la scatter matrix es de 0 a 4. Por tanto, hemos obtenido conclusiones análogas a las visats en la scatter matrix.
+Notemos que al representar el boxplot la numeración de los clusters está de 1 a 5, mientras en la scatter matrix es de 0 a 4. Por tanto, hemos obtenido conclusiones análogas a las vistas en la scatter matrix.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 \caption{Caso 1- MDS de spectral cluster}
 \label{c1_mds}
 \includegraphics[scale=0.45]{caso1/spectral/mds.png}
@@ -92,7 +92,7 @@ En \eqref{c1_mds} se aprecia como los clusters están considerablemente separado
 
 En la tabla  \eqref{tab:c1_variables} se muestran qué variables son necesarias para identificar cada cluster:
 
-\begin{table}[H]
+\begin{table}[ht]
 \centering
 \caption{Caso 1 - Variables necesarias para separar el clustering en spectral cluster}
 \label{tab:c1_variables}
@@ -100,11 +100,11 @@ En la tabla  \eqref{tab:c1_variables} se muestran qué variables son necesarias 
 \toprule
  Cluster & renta & alimentacion in & gastos & IRPF \\
 \midrule
-0 & X & & X & \\
-1 & & X & & \\
-2 & & & X & \\
-3 & & & & X \\
-4 & X & & X & \\
+0 & Baja & Baja & & \\
+1 & & Alto & & \\
+2 & & & Alto & \\
+3 & & & & Alto \\
+4 & Alta & Baja & & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -114,7 +114,7 @@ Como se aprecia en \eqref{tab:c1_variables} con una sola variable en cada cluste
 
 Vamos a analizar el comportamiento de DBSCAN según sus parámetros principales. Para ello ejecutaremos la celda de parámetros de DBSCAN, que nos proporciona las medidas obtenidas para cada par de parámetros fijados.
 
-\begin{table}[H]
+\begin{table}
 \centering
 \caption{Caso 1 - Cambio de parámetros DBSCAN}
 \label{tab:c1_dbscan}
@@ -151,11 +151,21 @@ dbscan & 0.200 & 35 & 0.141 & 269.916 & 0.72272 & 2 \\
 \end{tabular}
 \end{table}
 
+
 Como podemos apreciar en \eqref{tab:c1_dbscan} DBSCAN siempre realiza dos clusters. El tamaño de estos es siempre similar, más del $90\%$ los ejemplos están agrupados en el cluster $0$ y los restantes están en el $-1$.
 
 Este algoritmo no ha hecho ninguna buena agrupación en ningún caso de los probados, pese a que su silhouette es bastante alto, lo que puede ser consecuencia de que los clusters estén muy separados.
 
-No podemos interpretar demasiado Calinsk-Harabasz, ya que al no estar normalizado no sabemos si los valores dados son muy altos. Sí podemos decir que los mejores agrupamientos (que han proporcionado un valor de esta medida más alto) se han dado cuando min samples es $35$.
+\begin{figure}[H]
+\caption{Caso 1- Parámetros de DBSCAN}
+\label{c1_param_dbscan}
+\includegraphics[scale=0.9]{caso1/parametros_dbscan.eps}
+\end{figure}
+
+No podemos interpretar demasiado Calinsk-Harabasz, ya que al no estar normalizado no sabemos si los valores dados son muy altos. Sí podemos decir que los mejores agrupamientos (que han proporcionado un valor de esta medida más alto) se han dado cuando min samples es $35$, como se puede ver en \eqref{c1_param_dbscan}.
+
+También cabe destacar como el silhouette va creciendo conforme aumenta epsilon y calinski sube ligeramente al principio para valores bajos de min samples pero luego decrece, mientras para valores altos solo decrece. Asimismo resulta llamativo como los valores de min samples que producen valores de Calinski-harabasz más altos producen silhouettes más bajos.
+
 Finalmente, cabe destacar como el tiempo de ejecución se incrementaba a la par que crecían los parámetros.
 
 
@@ -163,7 +173,7 @@ Finalmente, cabe destacar como el tiempo de ejecución se incrementaba a la par 
 
 Estudiamos ahora el algoritmo Birch. Para este de nuevo se han probado distintas combinaciones de parámetros.
 
-\begin{table}[H]
+\begin{table}[ht]
 \centering
 \caption{Caso 1 - Cambio de parámetros Birch}
 \label{tab:c1_birch}
@@ -206,6 +216,14 @@ Sin embargo, si miramos el tamaño de los clusters en muchas ocasiones estos se 
 
 Cabe destacar que es bastante sensible a los parámetros, pues variando solo uno de ellos en ocasiones pasa de hacer 5 clusters a solo 1. Además, en estos casos no se proporcionan valores para las medidas Calinski-Harabasz y Silhouette, ya que para realizar estas es necesario tener más de un cluster.
 
+\begin{figure}[ht]
+\caption{Caso 1- Parámetros de Birch}
+\label{c1_param_birch}
+\includegraphics[scale=0.9]{caso1/parametros_birch.eps}
+\end{figure}
+
+En \eqref{c1_param_birch} se aprecia como para los valores de branch factor que producen mayor calinski-harabasz el silhouette es menor, y viceversa. Además, el silhouette siempre crece, mientras que Calinski-harabasz primero decrece y luego crece.
+
 Teniendo en cuenta que Birch es una algoritmo que no está pensado para realizar clustering obteniendo todos los datos de una misma vez, ha generado un número de clusters razonable, pese a ser estas agrupaciones dudosas, pues los tamaños de estas son demasiado dispares.
 
 
@@ -216,7 +234,7 @@ A la vista de los resultados obtenidos, vemos que no se aprecian diferencias sig
 
 No hay ninguna variable que destaque sobre otra, pero usando solamente las variables gastos, IRPF y alimentacion in podríamos diferenciar con claridad 3 clusters, y los otros dos agruparlos por descarte. Las otras variables nos sirvieron para refinar la diferenciación entre los clusters para lograr diferenciar los $5$.
 
-Respecto a la hipótesis inicial, que las personas con propiedades alquiladas tienen mayor renta o más comodidades, en principio no parece cierta, pues la renta no ha sido una variable significativa respecto a la que dividir y otros factores son más influyentes.
+Respecto a la hipótesis inicial, que las personas con propiedades alquiladas tienen mayor renta y por tanto más comodidades, en principio no parece cierta, pues la renta no ha sido una variable significativa respecto a la que dividir y otros factores son más influyentes.
 
 
 

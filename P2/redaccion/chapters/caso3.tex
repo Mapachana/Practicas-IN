@@ -8,7 +8,7 @@
 \section{Descripción del caso de estudio}
 En este caso de estudio se han elegido las respuestas para las que el régimen de tenencia es distinto de en propiedad sin hipoteca, es decir, pueden estar en propiedad con hipoteca, en alquiler a precio de mercado o inferior o en cesión gratuita.
 
-Se pretende estudiar las relaciones entre gastos en la hipoteca o alquiler, alimentación, número de miembros y ayudas sociales.
+Como en los casos anteriores los gastos, alimentación y ayudas sociales han sido muy relevantes, se intentará estudiar más a fondo la relación entre estas variables y si son más útiles que otras. Se pretende estudiar las relaciones entre gastos en la hipoteca o alquiler, alimentación, número de miembros y ayudas sociales.
 
 Las variables que se van a seleccionar para realizar el análisis son:
 \begin{itemize}
@@ -47,7 +47,9 @@ Al igual que en los otros casos, meanshift sigue tardando mucho más tiempo que 
 
 De nuevo, DBSCAN ha hecho una agrupación mala en dos clusters, el cluster $0$ con el $89.51\%$ de los objetos y los restantes en el cluster $-1$.
 
-Meanshift ha agrupado los objetos en 15 clusters, y ha obtenido un valor de calinski-harabasz bastante bajo en comparación con los demás algoritmos, lo que hace sospechar que su agrupación no va a ser demasiado buena. Mirando el tamaño de los clusters generados ha realizado uno con el $94.67\%$ de los elementos, y el resto los ha agrupado en clusters con tamaños inferiores al $2.6\%$. Por tanto, a pesar de que su silhouette no sea especialmente bajo en comparación con los otros algoritmos, parece que el clustering ha sido bastante malo.
+Meanshift ha agrupado los objetos en 15 clusters, y ha obtenido un valor de Calinski-Harabasz bastante bajo en comparación con los demás algoritmos, lo que hace sospechar que su agrupación no va a ser demasiado buena. Mirando el tamaño de los clusters generados ha realizado uno con el $94.67\%$ de los elementos, y el resto los ha agrupado en clusters con tamaños inferiores al $2.6\%$. Por tanto, a pesar de que su silhouette no sea especialmente bajo en comparación con los otros algoritmos, parece que el clustering ha sido bastante malo.
+
+Estos algoritmos no han proporcionado buenos resultados en ninguno de los casos de estudio en comparación con los otros tres. Incluso birch, que es un algoritmo de clustering incremental y por tanto no se está usando en su campo, está consiguiendo mejores resultados.
 
 De entre los tres algoritmos restantes, pese a que birch tiene el mayor silhouette, su calinski-harabasz es muy bajo. Y entre kmeans y spectral clustering, dado que tienen valores de silhouette similares, a priori kmeans habría realizado mejor agrupamiento, pues su calinski-harabasz es mayor.
 
@@ -100,7 +102,7 @@ En \eqref{c3_mds} se aprecia como los clusters están notablemente separados y c
 \includegraphics[scale=0.4]{caso3/kmeans/parallel.png}
 \end{figure}
 
-Finalmente, en \eqref{c3_parallel} se aprecia muy bien como el número de miembros toma valores discretos, pues se agrupan las líneas en los números enteros de esta columna. También se ve claramente como el cluster verde claro, que es el 3, toma valores mucho más altos en alimentos que el resto, aunque es algo disperso. El cluster rosa, correspondiente al 5 es menos disperso y toma valores de número de miembros más altos que los otros clusters.
+Finalmente, en \eqref{c3_parallel} es fácil observar como el número de miembros toma valores discretos, pues se agrupan las líneas en los números enteros de esta columna. También se ve claramente como el cluster verde claro, que es el 3, toma valores mucho más altos en alimentos que el resto, aunque es algo disperso. El cluster rosa, correspondiente al 5 es menos disperso y toma valores de número de miembros más altos que los otros clusters.
 
 Si combinamos de nuevo la información de las líneas que llegan a alimentos y número de miembros, obtenemos los mismos resultados que mediante la scatter matrix.
 
@@ -116,11 +118,11 @@ En la tabla  \eqref{tab:c3_variables} se muestran qué variables son necesarias 
 \toprule
  Cluster & renta & alimentos & asistencia social & num miembros & gastos \\
 \midrule
-0 & & X & & X & \\
-1 & & X & & X & \\
-2 & & X & & & \\
-3 & & X & & X & \\
-4 & & X & & X & \\
+0 & & Medio & & Medio & \\
+1 & & Bajo & & Medio & \\
+2 & & Alto & & & \\
+3 & & Bajo & & Muy bajo & \\
+4 & & Bajo & & Alto & \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -150,11 +152,20 @@ spectral & 10 & 11.725 & 1425.793 & 0.17855 & 10 \\
 \end{tabular}
 \end{table}
 
-Observamos que el mayor valor de silhouette se da cuando se realizan 3 clusters, así como el mayor valor de Calinski-harabasz. Por tanto, en principio este es el mejor agrupamiento que ha realizado spectral cluster. Si miramos lso tamaños de los clusters generados vemos que son $40.11\%$, $40.08\%$ y $19.81\%$, es decir, están equilibrados dos de ellos y el tercero es algo más pequeño. No parece a priori un mal clustering.
+\begin{figure}[H]
+\caption{Caso 3- Parámetros de Spectral cluster}
+\label{c3_param_spectral}
+\includegraphics[scale=0.9]{caso3/3_parametros_spectral.eps}
+\end{figure}
+
+
+Observamos en \eqref{tab:c3_spectral} y \eqref{c3_param_spectral} que el mayor valor de silhouette se da cuando se realizan 3 clusters, así como el mayor valor de Calinski-harabasz. Ambas medidas son decrecientes según aumena el número de clusters. Por tanto, en principio este es el mejor agrupamiento que ha realizado spectral cluster. Si miramos los tamaños de los clusters generados vemos que son $40.11\%$, $40.08\%$ y $19.81\%$, es decir, están equilibrados dos de ellos y el tercero es algo más pequeño. No parece a priori un mal clustering.
 
 El resto de ejecuciones de spectral cluster también genera clusters de tamaños relativamente equilibrados.
 
 Finalmente, cabe destacar que el tiempo de ejecución se incrementa a medida que el número de clusters aumenta, pero no en una medida exagerada.
+
+A la vista de estas medidas, parece que todas las agrupaciones son decentes y spectral cluster se comporta de manera robusta, generando buenas agrupaciones independientemente del parámetro empleado.
 
 
 \section{Estudio de parámetros de Meanshift}
@@ -177,8 +188,8 @@ meanshift & 0.300 & 38.224 & 62.198 & 0.57110 & 7 \\
 meanshift & 0.400 & 27.835 & 95.624 & 0.69156 & 3 \\
 meanshift & 0.500 & 23.839 & 36.994 & 0.79705 & 2 \\
 meanshift & 0.600 & 20.824 & 36.994 & 0.79705 & 2 \\
-meanshift & 0.700 & 18.235 & 36.994 & 0.79705 & 2 \\
-meanshift & 0.800 & 15.558 & 36.994 & 0.79705 & 2 \\
+meanshift & 0.700 & 18.235 &  &  & 2 \\
+meanshift & 0.800 & 15.558 & & & 2 \\
 meanshift & 0.900 & 15.321 &  &  & 1 \\
 meanshift & 1 & 15.092 &  &  & 1 \\
 \bottomrule
@@ -186,7 +197,20 @@ meanshift & 1 & 15.092 &  &  & 1 \\
 \end{table}
 
 
-En la primera entrada de la tabla se encuentra el radio calculado automáticamente, que genera 15 clusters. Como se comentó al analizar los algoritmos en general para este caso de estudio, no realiza un buen agrupamiento por los tamaños de los clusters.
+En la primera entrada de la tabla \eqref{tab:c3_meanshift} se encuentra el radio calculado automáticamente, que genera 15 clusters. Como se comentó al analizar los algoritmos en general para este caso de estudio, no realiza un buen agrupamiento por los tamaños de los clusters.
+
+En la tabla faltan las medidas cuando meanshift genera un cluster, ya que no tienen sentido, además en las últimas entradas donde genera dos clusters tampoco se muestran, ya que no se podían calcular.
+
+\begin{figure}[H]
+\caption{Caso 3- Parámetros de Meanshift}
+\label{c3_param_meanshift}
+\includegraphics[scale=0.9]{caso3/3_parametros_meanshift.eps}
+\end{figure}
+
+
+En \eqref{c3_param_meanshift}, al no estar los valores en el eje x ordenados de menor a mayor (ya que se desconoce a priori el valor que tomará el radio generado automáticamente) la línea no inicia por el punto más a la izquierda, generando así un cruce de la línea.
+
+Observando la gráfica se aprecia como Calinski-harabasz van decreciendo según se aumenta el radio, salvo cuando este vale 0.1 o 0.4, en el que hay un pico y el silhouette va creciendo. Mirando en la tabla vemos que cuando el radio vale 0.1 se generan 120 clusters, por lo que no parece tampoco un buen agrupamiento.
 
 Es llamativo como a medida que aumenta el radio, el número de clusters se reduce. Los casos más razonables parecen cuando el radio vale $0.3$ y se generan 7 clusters y cuando vale $0.4$ y se generan 3, pero mirando los tamaños de los clusters generados observamos que en ambos casos se genera un cluster con más del $99.5\%$ de los objetos y el resto se agrupa en los clusters restantes. Esto indica que no es un buen agrupamiento.
 
@@ -197,7 +221,7 @@ Finalmente, vemos como el tiempo se reduce drásticamente conforme lo hace el n�
 \section{Interpretación de la segmentación}
 
 
-Fijándonos en los resultados obtenidos, podemos concluir que las variables más relevantes en este caso han sido el número de miembros del hogar y el gasto en alimentación, pues solamente con ellas se pueden distinguir todos los clusters.
+Fijándonos en los resultados obtenidos, podemos concluir que las variables más relevantes en este caso han sido el número de miembros del hogar y el gasto en alimentación, pues solamente con ellas se pueden distinguir todos los clusters. Luego en este caso los gastos y asistencia social no han sido tan relevantes como en los anteriores.
 
 Además, los clusters están bastante separados, lo que puede deberse en gran parte a que el número de miembros solo toma valores enteros naturales, lo que puede estar forzando una separación usando esta variable e incrementando el silhouette artificialmente, pues premia mucho la separación entre los clusters.
 
