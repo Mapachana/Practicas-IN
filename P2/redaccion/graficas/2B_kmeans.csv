@@ -1,0 +1,9 @@
+Algoritmo,n clusters,Tiempo(s),Calinski-Harabasz,Silhouette,n clusters
+kmeans,3,0.392,3085.841,0.39834,3
+kmeans,4,0.243,3065.400,0.40218,4
+kmeans,5,0.407,2962.319,0.30911,5
+kmeans,6,0.441,2878.260,0.31752,6
+kmeans,7,0.496,2799.096,0.31771,7
+kmeans,8,0.508,2760.228,0.27617,8
+kmeans,9,0.787,2707.579,0.27781,9
+kmeans,10,0.891,2620.283,0.27880,10

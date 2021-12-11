@@ -1,0 +1,13 @@
+Algoritmo,bandwith,Tiempo(s),Calinski-Harabasz,Silhouette,n clusters
+meanshift,0.175,58.453,140.587,0.28696,15
+meanshift,0.050,55.001,251.495,0.15194,445
+meanshift,0.100,48.993,294.485,0.25028,120
+meanshift,0.200,40.302,106.456,0.35944,13
+meanshift,0.300,38.224,62.198,0.57110,7
+meanshift,0.400,27.835,95.624,0.69156,3
+meanshift,0.500,23.839,36.994,0.79705,2
+meanshift,0.600,20.824,36.994,0.79705,2
+meanshift,0.700,18.235,36.994,0.79705,2
+meanshift,0.800,15.558,36.994,0.79705,2
+meanshift,0.900,15.321,,,1
+meanshift,1,15.092,,,1
