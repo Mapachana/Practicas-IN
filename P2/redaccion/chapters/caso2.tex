@@ -9,7 +9,7 @@
 \section{Descripción del caso de estudio}
 Este caso de estudio trata de contrastar las diferencias que hay entre grupos con renta baja (menor de $15000$€ al año) y renta alta (mayor de $25000$€ al año).
 
-Para ello, las variables seleccionas son:
+Para ello, las variables seleccionadas son:
 \begin{itemize}
 \item \textbf{Renta}: Renta disponible total del hogar en el año anterior al de encuesta.
 \item \textbf{Alimentos}: Durante el mes pasado, ¿cuál fue aproximadamente el importe que el hogar gastó en alimentos y bebidas no alcohólicas para ser consumidas en casa?
@@ -31,7 +31,7 @@ Ejecutamos la celda del notebook de jupyter correspondiente al caso 2A (que se p
 \begin{table}[H]
 \centering
 \caption{Caso 2A - Resultados de ejecución de algoritmos.}
-\label{tab:c2_alg}
+\label{tab:c2A_alg}
 \begin{tabular}{ccccc}
 \toprule
  Algoritmo & Tiempo (s) & Calinski-Harabasz & Silhouette & Número de clusters \\
@@ -55,7 +55,7 @@ Finalmente vemos como Birch tiene un valor de Calinski-Harabasz y silhouette má
 \subsection{Análisis}
 
 
-Para el análisis se va a usar kmeans, ya que ha obtenido los mejores en las medidas. Este algoritmo genera 5 clusters. Se ha generado un cluster de tamaño menor, y los otros tienen tamaños similares dos a dos, como se puede ver en \eqref{c2A_tam}.
+Para el análisis se va a usar kmeans, ya que ha obtenido las mejores medidas. Este algoritmo genera 5 clusters. Se ha generado un cluster de tamaño menor, y los otros tienen tamaños similares dos a dos, como se puede ver en \eqref{c2A_tam}.
 
 \begin{figure}[H]
 \caption{Caso 2A- Tamaño de los clusters generados por kmeans}
@@ -63,7 +63,7 @@ Para el análisis se va a usar kmeans, ya que ha obtenido los mejores en las med
 \includegraphics[scale=1]{caso2A/kmeans/bar.eps}
 \end{figure}
 
-A continuación observamos la scatter matrix \eqref{c2A_scatter}, donde se puede apreciar como se separan os clusters y qué variables son necesarias para separar cada uno. Hay varios clusters que se diferencian bien con una sola variable, como es el caso de cluster 0, que tiene valores altos de gastos, el 4 tiene valores más altos en asistencia social y el 2 gasta más en alimentación. Los clusters 1 y 3 se distinguen bien usando renta y gastos o renta y alimentos, ya que ambos tienen valores bajos de renta y uno tiene valores mayores que el otro en la variable restante.
+A continuación observamos la scatter matrix \eqref{c2A_scatter}, donde se puede apreciar como se separan los clusters y qué variables son necesarias para diferenciar cada uno. Hay varios clusters que se diferencian bien con una sola variable, como es el caso de cluster 0, que tiene valores altos de gastos, el 4 tiene valores más altos en asistencia social y el 2 gasta más en alimentación. Los clusters 1 y 3 se distinguen bien usando renta y gastos o renta y alimentos, ya que ambos tienen valores bajos de renta y uno tiene valores mayores que el otro en la variable restante.
 
 \begin{figure}[H]
 \caption{Caso 2A- Scatter matrix de kmeans}
@@ -95,7 +95,7 @@ En \eqref{c2A_mds} se observa como los clusters están separados entre sí y tie
 \includegraphics[scale=0.4]{caso2A/kmeans/parallel.png}
 \end{figure}
 
-En \eqref{c2A_parallel} se aprecia como el cluster verde claro, que alcanza mayores valores de asistencia social, es más disperso que los demás, lo que concuerda con la scatter matrix \eqref{c2A_scatter}. De nuevo, es claro que hay dos clusters que se diferencian por sus valores altos en alimentación y gastos.
+En \eqref{c2A_parallel} se aprecia como el cluster rosa, que alcanza mayores valores de asistencia social, es más disperso que los demás, lo que concuerda con la scatter matrix \eqref{c2A_scatter}. De nuevo, es claro que hay dos clusters que se diferencian por sus valores altos en alimentación y gastos.
 
 En la tabla  \eqref{tab:c2A_variables} se muestran qué variables son necesarias para identificar cada cluster:
 
@@ -119,7 +119,7 @@ Como se aprecia en \eqref{tab:c2A_variables} con una sola variable en cada clust
 
 \subsection{Estudio de parámetros de DBSCAN}
 
-Vamos a analizar el comportamiento de DBSCAN según sus parámetros principales. Para ello ejecutaremos la celda de parámetros de DBSCAN, que nos proporciona las medidas obtenidas para cada par de parámetros fijados.
+Vamos a analizar el comportamiento de DBSCAN según sus parámetros principales. Para ello ejecutaremos la celda de parámetros de DBSCAN, que nos proporciona las medidas obtenidas para cada par de parámetros.
 
 \begin{table}[H]
 \centering
@@ -160,7 +160,7 @@ dbscan & 0.200 & 35 & 0.239 & 110.824 & 0.68431 & 2 \\
 
 Como podemos apreciar en \eqref{tab:c2A_dbscan} DBSCAN siempre realiza dos clusters. El tamaño de estos es siempre similar, más del $90\%$ los ejemplos están agrupados en el cluster $0$ y los restantes están en el $-1$.
 
-Este algoritmo no ha hecho ninguna buena agrupación en ningún caso de los probados, pese a que su silhouette es bastante alto, lo que puede ser consecuencia de que los clusters estén muy separados.
+Nuevamente este algoritmo no ha hecho ninguna buena agrupación en ningún caso de los probados, pese a que su silhouette es bastante alto, lo que puede ser consecuencia de que los clusters estén muy separados.
 
 \begin{figure}[H]
 \caption{Caso 2A- Parámetros de DBSCAN}
@@ -168,12 +168,12 @@ Este algoritmo no ha hecho ninguna buena agrupación en ningún caso de los prob
 \includegraphics[scale=0.9]{caso2A/A_parametros_dbscan.eps}
 \end{figure}
 
-No podemos interpretar demasiado Calinsk-Harabasz, ya que al no estar normalizado no sabemos si los valores dados son muy altos. Sí se puede ver en \eqref{c2A_param_dbscan} como, de nuevo, a mayor valor de silhouette menor de Calinski-harabasz, donde este es decreciente y el silhouette creciente. Si quisiéramos maximizar silhouette, tomaríamos min samples como 15 y el mayor vlaor de epsilon, mientras para maximizar Calinski-Harabasz es mejor el valor 35 de min samples con el menor valor de epsilon.
+Respecto a los valores obtenidos de Calinski-Harabasz se puede ver en \eqref{c2A_param_dbscan} como, de nuevo, a mayor valor de silhouette menor de Calinski-harabasz, donde este es decreciente y el silhouette creciente. Si quisiéramos maximizar silhouette, tomaríamos min samples como 15 y el mayor valor de epsilon, mientras para maximizar Calinski-Harabasz es mejor el valor 35 de min samples con el menor valor de epsilon.
 
 
 \subsection{Estudio de parámetros de Kmeans}
 
-Estudiamos ahora el algoritmo Kmeans. Se ha variado el número de clusters.
+Estudiamos ahora el algoritmo Kmeans. Como parámetro se ha variado el número de clusters.
 
 \begin{table}[H]
 \centering
@@ -220,7 +220,7 @@ Ejecutamos la celda del notebook de jupyter correspondiente al caso 2B y obtenem
 \begin{table}[H]
 \centering
 \caption{Caso 2B - Resultados de ejecución de algoritmos.}
-\label{tab:c2_alg}
+\label{tab:c2B_alg}
 \begin{tabular}{ccccc}
 \toprule
  Algoritmo & Tiempo (s) & Calinski-Harabasz & Silhouette & Número de clusters \\
@@ -388,7 +388,7 @@ kmeans & 10 & 0.891 & 2620.283 & 0.27880 & 10 \\
 \end{tabular}
 \end{table}
 
-Podemos ver en \eqref{tab:c2B_kmeans} como las medidas comienzan subiendo hasta que el número de clusters es 4, donde alcanzan su máximo Silhouette y Calinski-harabasz, para después volver comenzar a decrementarse.
+Podemos ver en \eqref{tab:c2B_kmeans} como las medidas comienzan subiendo hasta que el número de clusters es 4, donde alcanzan su máximo Silhouette y el segundo mayor valor de Calinski-harabasz, para después volver comenzar a decrementarse.
 
 Asimismo el tiempo de ejecución se incrementa a la par que el número de clusters crece, pues hay que hacer más cálculos.
 
@@ -409,7 +409,7 @@ A la vista de estas medidas, y a la falta de realizar un estudio mucho más en p
 
 Una variable bastante relevante al comparar estos casos ha sido la asistencia social, ya que en el caso de rentas altas la mayor parte de objetos no recibían (valía 0), mientras para rentas bajas ha sido muy relevante a la hora de realizar agrupamientos, incluso siendo suficiente como para diferenciar un cluster si su valor era alto en las rentas bajas.
 
-En ambos casos los gastos y alimentación han servido para separar dos clusters del resto usando solamente una de ellas. Si comparamos ambas, usando por ejemplos \eqref{c2A_scatter} y \eqref{c2B_scatter} vemos que en el caso de alimentación para rentas altas se considera un valor "alto" de esta variable a partir de $1000$, mientras para rentas bajas es $400$. Igualmente, para gastos en rentas altas el valor de corte es en torno a $500$, pero para rentas bajas se considera más o menos $350$.
+En ambos casos los gastos y alimentación han servido para separar dos clusters del resto usando solamente una de ellas. Si comparamos ambas, usando por ejemplos \eqref{c2A_scatter} y \eqref{c2B_scatter} vemos que en el caso de alimentación para rentas altas se considera un valor alto de esta variable a partir de $1000$, mientras para rentas bajas es $400$. Igualmente, para gastos en rentas altas el valor de corte es en torno a $500$, pero para rentas bajas se considera más o menos $350$.
 
 Además, vemos como en general los valores de gastos y alimentación son considerablemente más altos para rentas altas que para rentas bajas.
 

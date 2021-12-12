@@ -25,7 +25,7 @@ Este caso de estudio consta de $2292$ respuestas a la encuesta, cada una con las
 
 Ejecutamos ahora la primera celda del notebook de jupyter (que se puede configurar para sacar las distintas gráficas) y obtenemos así las diferentes medidas obtenidas para cada algoritmo, que se muestran en \eqref{tab:c1_alg}.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Caso 1 - Resultados de ejecución de algoritmos.}
 \label{tab:c1_alg}
@@ -56,32 +56,32 @@ Los algoritmos kmeans, birch y spectral cluster han obtenido resultados similare
 
 Para el análisis se va a usar spectral cluster, ya que ha obtenido unos resultados aceptables en las medidas. Este algoritmo genera 5 clusters. uno de tamaño mayor y el resto de tamaños similares, como se puede ver en \eqref{c1_tam}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \caption{Caso 1- Tamaño de los clusters generados por spectral cluster}
 \label{c1_tam}
 \includegraphics[scale=1]{caso1/spectral/bar.eps}
 \end{figure}
 
-A continuación observamos la scatter matrix \eqref{c1_scatter}, donde se puede apreciar como se separan os clusters y qué variables son necesarias para separar cada uno.
+A continuación observamos la scatter matrix \eqref{c1_scatter}, donde se puede apreciar como se separan los clusters y qué variables son necesarias para separar cada uno.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \caption{Caso 1- Scatter matrix de spectral cluster}
 \label{c1_scatter}
 \includegraphics[scale=0.45]{caso1/spectral/scatter.png}
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \caption{Caso 1- Boxplot de spectral cluster}
 \label{c1_boxplot}
 \includegraphics[scale=0.45]{caso1/spectral/boxplot.png}
 \end{figure}
 
-En \eqref{c1_boxplot} podemos observar como el cluster 3 toma valores en general mayores en gastos que los otros clusters. Esto también se observa en el cluster 4 con el IRPF y en el 2 con elimentacion in. Mientras los clusters 1 y 5 son más similares.
+En \eqref{c1_boxplot} podemos observar como el cluster 3 toma valores en general mayores en gastos que los otros clusters. Esto también se observa en el cluster 4 con el IRPF y en el 2 con alimentacion in. Mientras los clusters 1 y 5 son más similares.
 
 Notemos que al representar el boxplot la numeración de los clusters está de 1 a 5, mientras en la scatter matrix es de 0 a 4. Por tanto, hemos obtenido conclusiones análogas a las vistas en la scatter matrix.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \caption{Caso 1- MDS de spectral cluster}
 \label{c1_mds}
 \includegraphics[scale=0.45]{caso1/spectral/mds.png}
@@ -92,7 +92,7 @@ En \eqref{c1_mds} se aprecia como los clusters están considerablemente separado
 
 En la tabla  \eqref{tab:c1_variables} se muestran qué variables son necesarias para identificar cada cluster:
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Caso 1 - Variables necesarias para separar el clustering en spectral cluster}
 \label{tab:c1_variables}
@@ -173,7 +173,7 @@ Finalmente, cabe destacar como el tiempo de ejecución se incrementaba a la par 
 
 Estudiamos ahora el algoritmo Birch. Para este de nuevo se han probado distintas combinaciones de parámetros.
 
-\begin{table}[ht]
+\begin{table}[H]
 \centering
 \caption{Caso 1 - Cambio de parámetros Birch}
 \label{tab:c1_birch}
@@ -216,7 +216,7 @@ Sin embargo, si miramos el tamaño de los clusters en muchas ocasiones estos se 
 
 Cabe destacar que es bastante sensible a los parámetros, pues variando solo uno de ellos en ocasiones pasa de hacer 5 clusters a solo 1. Además, en estos casos no se proporcionan valores para las medidas Calinski-Harabasz y Silhouette, ya que para realizar estas es necesario tener más de un cluster.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \caption{Caso 1- Parámetros de Birch}
 \label{c1_param_birch}
 \includegraphics[scale=0.9]{caso1/parametros_birch.eps}

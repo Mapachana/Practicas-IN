@@ -73,7 +73,7 @@ Ahora estudiamos la scatter matrix \eqref{c3_scatter}:
 \includegraphics[scale=0.45]{caso3/kmeans/scatter.png}
 \end{figure}
 
-Analizamos \eqref{c3_scatter}, obteniendo así una distinción relativamente clara de los clusters. El cluster 2, de color verde, solo requiere una variable para identificarse, la de alimentos, mientra que los demás pueden distinguirse entre ellos usando solamente alimentos y el número de miembros del hogar.
+Analizamos \eqref{c3_scatter}, obteniendo así una distinción relativamente clara de los clusters. El cluster 2, de color verde, solo requiere una variable para identificarse, la de alimentos, mientras que los demás pueden distinguirse entre ellos usando solamente alimentos y el número de miembros del hogar.
 
 Llama la atención sobre esta gráfica como el número de miembros, al ser una variable discreta, los puntos se encuentran alineados en los valores enteros.
 
@@ -159,7 +159,7 @@ spectral & 10 & 11.725 & 1425.793 & 0.17855 & 10 \\
 \end{figure}
 
 
-Observamos en \eqref{tab:c3_spectral} y \eqref{c3_param_spectral} que el mayor valor de silhouette se da cuando se realizan 3 clusters, así como el mayor valor de Calinski-harabasz. Ambas medidas son decrecientes según aumena el número de clusters. Por tanto, en principio este es el mejor agrupamiento que ha realizado spectral cluster. Si miramos los tamaños de los clusters generados vemos que son $40.11\%$, $40.08\%$ y $19.81\%$, es decir, están equilibrados dos de ellos y el tercero es algo más pequeño. No parece a priori un mal clustering.
+Observamos en \eqref{tab:c3_spectral} y \eqref{c3_param_spectral} que el mayor valor de silhouette se da cuando se realizan 3 clusters, así como el mayor valor de Calinski-harabasz. Ambas medidas son decrecientes según aumenta el número de clusters. Por tanto, en principio este es el mejor agrupamiento que ha realizado spectral cluster. Si miramos los tamaños de los clusters generados vemos que son $40.11\%$, $40.08\%$ y $19.81\%$, es decir, están equilibrados dos de ellos y el tercero es algo más pequeño. No parece a priori un mal clustering.
 
 El resto de ejecuciones de spectral cluster también genera clusters de tamaños relativamente equilibrados.
 
@@ -212,7 +212,7 @@ En \eqref{c3_param_meanshift}, al no estar los valores en el eje x ordenados de 
 
 Observando la gráfica se aprecia como Calinski-harabasz van decreciendo según se aumenta el radio, salvo cuando este vale 0.1 o 0.4, en el que hay un pico y el silhouette va creciendo. Mirando en la tabla vemos que cuando el radio vale 0.1 se generan 120 clusters, por lo que no parece tampoco un buen agrupamiento.
 
-Es llamativo como a medida que aumenta el radio, el número de clusters se reduce. Los casos más razonables parecen cuando el radio vale $0.3$ y se generan 7 clusters y cuando vale $0.4$ y se generan 3, pero mirando los tamaños de los clusters generados observamos que en ambos casos se genera un cluster con más del $99.5\%$ de los objetos y el resto se agrupa en los clusters restantes. Esto indica que no es un buen agrupamiento.
+Es llamativo como a medida que aumenta el radio, el número de clusters se reduce. Los casos más razonables parecen cuando el radio vale $0.3$ y se generan 7 clusters y cuando vale $0.4$ y se generan 3, pero mirando los tamaños de los clusters generados observamos que en ambos casos se genera un cluster con más del $99.5\%$ de los objetos y el resto se agrupa en los clusters restantes. Esto puede indicar que no es un buen agrupamiento.
 
 Finalmente, vemos como el tiempo se reduce drásticamente conforme lo hace el número de clusters generados.
 
