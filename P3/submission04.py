@@ -132,7 +132,7 @@ print("------ RandomForestClassifier...")
 
 # Creo el modelo normal
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
-rf = RandomForestClassifier(n_estimators=700, min_samples_split=35, min_samples_leaf=3, warm_start=True)
+rf = RandomForestClassifier(n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
 #rf = CatBoostClassifier(iterations=45, depth=6,loss_function='MultiClass')
 # Multioutput classifier, para indicar que tiene que aprender varias etiquetas a la vez
 multi = MultiOutputClassifier(rf)
