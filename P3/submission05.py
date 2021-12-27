@@ -102,6 +102,7 @@ def validacion_cruzada(modelo, X, y, cv):
         y_test = y.loc[test, :].values
         t = time.time()
         print("VOY A HACER FIT")
+        #peso = [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 1, 1, 0.75, 0.75, 0.75, 1, 1, 1, 0.75, 1, 1, 0.75, 1, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
         model = modelo.fit(X_train,y_train)
         tiempo = time.time() - t
         print("VOY A HACER PREDICT")
@@ -132,8 +133,8 @@ print("------ RandomForestClassifier...")
 
 # Creo el modelo normal
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
-rf = RandomForestClassifier(n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
-#rf = CatBoostClassifier(iterations=45, depth=6,loss_function='MultiClass')
+#rf = RandomForestClassifier(class_weight="balanced", n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
+rf = CatBoostClassifier(iterations=45, depth=6, learning_rate= 0.31, loss_function='MultiClass')
 # Multioutput classifier, para indicar que tiene que aprender varias etiquetas a la vez
 multi = MultiOutputClassifier(rf)
 # Aplica validación cruzada y devuelve el modelo
@@ -141,6 +142,32 @@ clf1 = validacion_cruzada(multi,X,data_y,skf)
 
 # Aprendo con todos los ejemplos
 clf1 = clf1.fit(X,data_y)
+
+# Miro importancia atributos
+'''feature_names = [f"feature {i}" for i in range(X.shape[1])]
+forest = clf1
+
+feat_impts = [] 
+for cl in forest.estimators_:
+    feat_impts.append(cl.feature_importances_)
+
+feat_impts = np.mean(feat_impts, axis=0)
+
+importances = feat_impts
+std = np.std([tree.feature_importances_ for tree in forest.estimators_], axis=0)
+
+forest_importances = pd.Series(importances, index=X.columns)
+
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+forest_importances.plot.bar(yerr=std, ax=ax)
+ax.set_title("Feature importances using MDI")
+ax.set_ylabel("Mean decrease in impurity")
+fig.tight_layout()
+plt.savefig("atributos.eps", format="eps")'''
+
+
+
 # Aplico probabilidad
 preds = clf1.predict_proba(X_tst)
 df_submission = pd.read_csv('submission_format.csv')
