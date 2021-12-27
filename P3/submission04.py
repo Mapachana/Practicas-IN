@@ -28,24 +28,6 @@ data_x = pd.read_csv('training_set_features.csv')
 data_y = pd.read_csv('training_set_labels.csv')
 data_x_tst = pd.read_csv('test_set_features.csv')
 
-# Obtener indices de filas con valores nulos en income poverty y education nan
-mask_empty_data = data_x["education"].isna() & data_x["marital_status"].isna() & data_x["income_poverty"].isna()
-
-# ESTO NO FUFA QUITAR PARA LA 02
-#data_x = data_x[~mask_empty_data]
-#data_x.reset_index(inplace=True)
-#print(data_x.columns)
-#data_x.drop(columns='index', inplace=True)
-#data_y = data_y[~mask_empty_data]
-#data_y.reset_index(inplace=True)
-#data_y.drop(columns='index', inplace=True)
-
-# ESTO BAJA EL AUC
-#data_x.drop(columns="employment_industry", inplace=True)
-#data_x.drop(columns="employment_occupation", inplace=True)
-
-#data_x_tst.drop(columns="employment_industry", inplace=True)
-#data_x_tst.drop(columns="employment_occupation", inplace=True)
 
 print((data_y['h1n1_vaccine'] == 1).sum())
 print((data_y['seasonal_vaccine'] == 1).sum())
@@ -84,7 +66,7 @@ print("LLEGO 4")
 for col in data_x_tmp.columns:
     data_x_tmp[col] = labels[col].transform(data_x_tmp[col])
 
-print("LLEGO 4")
+print("LLEGO 4B")
 # Conjunto final de aprendizaje
 X = data_x_tmp
 y = data_y.values
@@ -150,8 +132,8 @@ print("------ RandomForestClassifier...")
 
 # Creo el modelo normal
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
-#rf = RandomForestClassifier()
-rf = CatBoostClassifier(iterations=45, depth=6,loss_function='MultiClass')
+rf = RandomForestClassifier(n_estimators=700, min_samples_split=35, min_samples_leaf=3, warm_start=True)
+#rf = CatBoostClassifier(iterations=45, depth=6,loss_function='MultiClass')
 # Multioutput classifier, para indicar que tiene que aprender varias etiquetas a la vez
 multi = MultiOutputClassifier(rf)
 # Aplica validación cruzada y devuelve el modelo
@@ -176,4 +158,4 @@ y_test_preds = pd.DataFrame(
 df_submission['h1n1_vaccine'] = y_test_preds.h1n1_vaccine
 df_submission['seasonal_vaccine'] = y_test_preds.seasonal_vaccine
 # Escribo el fichero de salida
-df_submission.to_csv("submission_03.csv", index=False)
+df_submission.to_csv("submission_05.csv", index=False)
