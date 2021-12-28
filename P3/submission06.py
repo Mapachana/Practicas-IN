@@ -28,10 +28,10 @@ data_x = pd.read_csv('training_set_features.csv')
 data_y = pd.read_csv('training_set_labels.csv')
 data_x_tst = pd.read_csv('test_set_features.csv')
 
-
+'''
 print((data_y['h1n1_vaccine'] == 1).sum())
 print((data_y['seasonal_vaccine'] == 1).sum())
-print(((data_y['seasonal_vaccine'] == 1) & (data_y['h1n1_vaccine'] == 1)).sum())
+print(((data_y['seasonal_vaccine'] == 1) & (data_y['h1n1_vaccine'] == 1)).sum())'''
 
 
 print("LLEGO")
@@ -127,14 +127,16 @@ def validacion_cruzada(modelo, X, y, cv):
 
 
 from sklearn.multioutput import MultiOutputClassifier
-from catboost import CatBoostClassifier
+from catboost import CatBoostClassifier, EFstrType, Pool
 
 print("------ RandomForestClassifier...")
 
+#pesos = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.1, 0.1]
+# feature_weights=pesos,
 # Creo el modelo normal
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
 #rf = RandomForestClassifier(class_weight="balanced", n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
-rf = CatBoostClassifier(iterations=45, depth=6, learning_rate= 0.31, loss_function='MultiClass')
+rf = CatBoostClassifier(iterations=70, depth=6, learning_rate= 0.31, loss_function='MultiClass')
 # Multioutput classifier, para indicar que tiene que aprender varias etiquetas a la vez
 multi = MultiOutputClassifier(rf)
 # Aplica validación cruzada y devuelve el modelo
@@ -165,9 +167,7 @@ ax.set_title("Feature importances using MDI")
 ax.set_ylabel("Mean decrease in impurity")
 fig.tight_layout()
 plt.savefig("atributos.eps", format="eps")'''
-
-
-
+                       
 # Aplico probabilidad
 preds = clf1.predict_proba(X_tst)
 df_submission = pd.read_csv('submission_format.csv')
@@ -185,4 +185,4 @@ y_test_preds = pd.DataFrame(
 df_submission['h1n1_vaccine'] = y_test_preds.h1n1_vaccine
 df_submission['seasonal_vaccine'] = y_test_preds.seasonal_vaccine
 # Escribo el fichero de salida
-df_submission.to_csv("submission_05.csv", index=False)
+df_submission.to_csv("submission_07.csv", index=False)
