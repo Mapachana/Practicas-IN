@@ -28,6 +28,31 @@ data_x = pd.read_csv('training_set_features.csv')
 data_y = pd.read_csv('training_set_labels.csv')
 data_x_tst = pd.read_csv('test_set_features.csv')
 
+
+# INTENTO RESAMPLE
+from sklearn.utils import resample
+
+X_oversampled, y_oversampled = resample(data_x[data_y['h1n1_vaccine'] == 1],
+                                        data_y['h1n1_vaccine'][data_y['h1n1_vaccine'] == 1],
+                                        replace=True,
+                                        n_samples=2000,
+                                        random_state=123)
+
+y_oversampled= pd.DataFrame(y_oversampled)
+#print(y_oversampled)
+y_oversampled['seasonal_vaccine'] = 1
+#print(y_oversampled)
+
+data_x = pd.concat((data_x, pd.DataFrame(X_oversampled)))
+data_y = pd.concat([data_y, y_oversampled])
+
+data_x.reset_index(inplace=True)
+data_x.drop(columns='index', inplace=True)
+data_y.reset_index(inplace=True)
+data_y.drop(columns='index', inplace=True)
+#print(data_x)
+#print(data_y)
+#print(pd.concat([data_y, y_oversampled]))
 '''
 print((data_y['h1n1_vaccine'] == 1).sum())
 print((data_y['seasonal_vaccine'] == 1).sum())
@@ -102,7 +127,6 @@ def validacion_cruzada(modelo, X, y, cv):
         y_test = y.loc[test, :].values
         t = time.time()
         print("VOY A HACER FIT")
-        #peso = [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 1, 1, 0.75, 0.75, 0.75, 1, 1, 1, 0.75, 1, 1, 0.75, 1, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
         model = modelo.fit(X_train,y_train)
         tiempo = time.time() - t
         print("VOY A HACER PREDICT")
@@ -130,10 +154,8 @@ from sklearn.multioutput import MultiOutputClassifier
 from catboost import CatBoostClassifier, EFstrType, Pool
 from lightgbm import LGBMClassifier
 
-print("------ RandomForestClassifier...")
+print("------ LightGBMClassifier...")
 
-#pesos = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.1, 0.1]
-# feature_weights=pesos,
 # Creo el modelo normal
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
 #rf = RandomForestClassifier(class_weight="balanced", n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
@@ -187,4 +209,4 @@ y_test_preds = pd.DataFrame(
 df_submission['h1n1_vaccine'] = y_test_preds.h1n1_vaccine
 df_submission['seasonal_vaccine'] = y_test_preds.seasonal_vaccine
 # Escribo el fichero de salida
-df_submission.to_csv("submission_07.csv", index=False)
+df_submission.to_csv("submission_08.csv", index=False)
