@@ -128,6 +128,7 @@ def validacion_cruzada(modelo, X, y, cv):
 
 from sklearn.multioutput import MultiOutputClassifier
 from catboost import CatBoostClassifier, EFstrType, Pool
+from lightgbm import LGBMClassifier
 
 print("------ RandomForestClassifier...")
 
@@ -136,7 +137,8 @@ print("------ RandomForestClassifier...")
 # Creo el modelo normal
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
 #rf = RandomForestClassifier(class_weight="balanced", n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
-rf = CatBoostClassifier(iterations=70, depth=6, learning_rate= 0.31, loss_function='MultiClass')
+#rf = CatBoostClassifier(iterations=70, depth=6, learning_rate= 0.31, loss_function='MultiClass')
+rf = LGBMClassifier(n_estimators=100, learning_rate=0.072, num_leaves=29, min_child_samples=110)
 # Multioutput classifier, para indicar que tiene que aprender varias etiquetas a la vez
 multi = MultiOutputClassifier(rf)
 # Aplica validación cruzada y devuelve el modelo
