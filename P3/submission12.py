@@ -122,7 +122,7 @@ def validacion_cruzada(modelo, X, y, cv):
 
 from sklearn.multioutput import MultiOutputClassifier
 from catboost import CatBoostClassifier, EFstrType, Pool
-from lightgbm import LGBMClassifier
+from lightgbm import LGBMClassifier, Booster
 
 print("------ LightGBMClassifier...")
 
@@ -130,7 +130,11 @@ print("------ LightGBMClassifier...")
 # lr = LogisticRegression(penalty="l2", C=1, max_iter=300)
 #rf = RandomForestClassifier(class_weight="balanced", n_estimators=1200, min_samples_split=35, min_samples_leaf=3, n_jobs=2)
 #rf = CatBoostClassifier(iterations=70, depth=6, learning_rate= 0.31, loss_function='MultiClass')
-rf = LGBMClassifier(boosting_type="goss", top_rate=0.42, max_depth=0, subsample_for_bin=3000, n_estimators=2500, learning_rate=0.005, num_leaves=29, min_child_samples=100)
+#aux.save_model('prueba.txt')
+
+#rf = LGBMClassifier(boosting_type="goss", top_rate=0.42, max_depth=0, subsample_for_bin=3000, n_estimators=2500, learning_rate=0.005, num_leaves=29, min_child_samples=100, path_smooth=100)
+rf = LGBMClassifier(boosting_type="goss", top_rate=0.42, max_depth=0, subsample_for_bin=3000, n_estimators=2500, learning_rate=0.005, num_leaves=29, min_child_samples=100, path_smooth=10)
+
 # Multioutput classifier, para indicar que tiene que aprender varias etiquetas a la vez
 multi = MultiOutputClassifier(rf)
 # Aplica validación cruzada y devuelve el modelo
@@ -156,4 +160,4 @@ y_test_preds = pd.DataFrame(
 df_submission['h1n1_vaccine'] = y_test_preds.h1n1_vaccine
 df_submission['seasonal_vaccine'] = y_test_preds.seasonal_vaccine
 # Escribo el fichero de salida
-df_submission.to_csv("submission_10.csv", index=False)
+df_submission.to_csv("submission_11.csv", index=False)
