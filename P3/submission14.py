@@ -12,6 +12,7 @@ Contenido:
     Universidad de Granada
 """
 
+from os import name
 import pandas as pd
 import numpy as np
 import time
@@ -19,6 +20,7 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score, auc, roc_auc_score
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import OneHotEncoder
 
 '''
 lectura de datos
@@ -43,41 +45,84 @@ mask = data_x.isnull()
 # import ipdb; ipdb.set_trace()
 
 # Vamos a imputar valores con cabeza
+#data_x.drop(columns=['health_insurance'], inplace=True)
+#data_x_tst.drop(columns=['health_insurance'], inplace=True)
+
 no_empleado = "no empleado"
 no_procede = "no procede"
 empleado_healthcare_industry = "fcxhlnwr"
 empleado_healthcare_occupation = "cmhcxjea"
 
-mask_no_empleado_health = (data_x['health_worker'] == 1) & (data_x['employment_status'] == "Unemployed") & (data_x['employment_industry'].isna())
+#mask_no_empleado_health = (data_x['health_worker'] == 1) & (data_x['employment_status'] == "Unemployed") & (data_x['employment_industry'].isna())
 data_x_tmp = data_x
-data_x_tmp.loc[mask_no_empleado_health, 'employment_industry'] = empleado_healthcare_industry 
-data_x_tmp.loc[mask_no_empleado_health, 'employment_occupation'] = empleado_healthcare_occupation
 
-mask_no_empleado_health = (data_x_tst['health_worker'] == 1) & (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst['employment_industry'].isna())
+#print(data_x_tmp["employment_industry"])
 
-data_x_tst.loc[mask_no_empleado_health, 'employment_industry'] = empleado_healthcare_industry 
-data_x_tst.loc[mask_no_empleado_health, 'employment_occupation'] = empleado_healthcare_occupation
+mask = (data_x["health_worker"] == 1) &  data_x["employment_status"].isna() 
+data_x_tmp.loc[mask, "employment_status"] = "Employed" 
 
+mask = (data_x_tst["health_worker"] == 1) &  data_x_tst["employment_status"].isna() 
+data_x_tst.loc[mask, "employment_status"] = "Employed" 
 
-mask_no_empleado = (data_x['employment_status'] == "Unemployed") & (data_x['employment_industry'].isna())
+mask =  ~data_x_tmp["employment_status"].isna() 
+#print(mask)
+#print(mask.shape)
+#print(data_y.shape)
 
-data_x_tmp.loc[mask_no_empleado, 'employment_industry'] = no_empleado
-data_x_tmp.loc[mask_no_empleado, 'employment_occupation'] = no_empleado
+data_y = data_y.mask(mask)
+data_x_tmp = data_x_tmp.mask(mask)
+#data_x_tmp.loc[mask, "employment_status"] = "unknown"
 
-mask_no_empleado = (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst['employment_industry'].isna())
+mask = data_x_tst["employment_status"].isna() 
+#data_x_tst.drop(data_x_tst[mask].index, inplace=True)
 
-data_x_tst.loc[mask_no_empleado, 'employment_industry'] = no_empleado
-data_x_tst.loc[mask_no_empleado, 'employment_occupation'] = no_empleado
+#data_x_tst.loc[mask, "employment_status"] = "unknown"
 
-mask_no_procede = (data_x['employment_status'] == "Not in Labor Force") & (data_x['employment_industry'].isna())
+for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupation], ["employment_industry", "employment_occupation"]):
+    #mask = (data_x['health_worker'] == 1) & (data_x['employment_status'] == "Unemployed") & (data_x[col].isna())
+    #data_x_tmp.loc[mask, col] = hwdata 
 
-data_x_tmp.loc[mask_no_procede, 'employment_industry'] = no_procede
-data_x_tmp.loc[mask_no_procede, 'employment_occupation'] = no_procede
+    #mask = (data_x_tst['health_worker'] == 1) & (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst[col].isna())
+    #data_x_tst.loc[mask, col] = hwdata 
 
-mask_no_procede = (data_x_tst['employment_status'] == "Not in Labor Force") & (data_x_tst['employment_industry'].isna())
+    mask = (data_x["health_worker"] == 1) & (data_x["employment_status"] == "Employed") & (data_x[col].isna())
+    data_x_tmp.loc[mask, col] = hwdata
 
-data_x_tst.loc[mask_no_procede, 'employment_industry'] = no_procede
-data_x_tst.loc[mask_no_procede, 'employment_occupation'] = no_procede
+    mask = (data_x_tst["health_worker"] == 1) & (data_x_tst["employment_status"] == "Employed") & (data_x_tst[col].isna())
+    data_x_tst.loc[mask, col] = hwdata
+
+    mask = (data_x['employment_status'] == "Unemployed") & (data_x[col].isna())
+    data_x_tmp.loc[mask, col] = no_empleado
+
+    mask = (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst[col].isna())
+    data_x_tst.loc[mask, col] = no_empleado
+
+    mask = (data_x['employment_status'] == "Not in Labor Force") & (data_x[col].isna())
+    data_x_tmp.loc[mask, col] = no_procede
+
+    mask = (data_x_tst['employment_status'] == "Not in Labor Force") & (data_x_tst[col].isna())
+    data_x_tst.loc[mask, col] = no_procede
+
+    mask = data_x_tmp[col].isna()
+    print(mask.sum())
+    data_x_tmp.loc[mask, col] = "unknown"
+    mask = data_x_tst[col].isna()
+    data_x_tst.loc[mask, col] = "unknown"
+    """
+    most_frequent = data_x_tmp[col].value_counts().index
+    selected = 0
+
+    #print(data_x_tmp[col].value_counts())
+    #print(data_x_tmp[col].isna().sum())
+
+    while most_frequent[selected] == no_procede or most_frequent[selected] == no_empleado or most_frequent[selected] == hwdata:
+        selected += 1
+        
+    data_x_tmp[col].fillna(most_frequent[selected], inplace=True)
+    data_x_tst[col].fillna(most_frequent[selected], inplace=True)
+    """
+
+print(data_x_tmp["employment_occupation"].isna().sum())
 
 data_all_features = pd.concat([data_x_tmp, data_x_tst])
 
@@ -87,10 +132,10 @@ imp = SimpleImputer(missing_values=np.nan, strategy='most_frequent')
 data_x_tmp = data_x_tmp.astype(str)
 
 # Vamos a imputar valores con cabeza
-print(data_x_tmp)
+#print(data_x_tmp)
 print(data_x_tmp.columns)
 
-print(data_x_tmp)
+#print(data_x_tmp)
 # Uso SimpleImputer para "eliminar los nulos", como elimina los nombres de las columnas los vuelvo a poner
 cols = data_x_tmp.columns
 data_x_tmp = pd.DataFrame(imp.fit_transform(data_x_tmp))
@@ -109,6 +154,8 @@ print("LLEGO 4")
 for col in data_x_tmp.columns:
     data_x_tmp[col] = labels[col].transform(data_x_tmp[col])
 
+
+
 print("LLEGO 4B")
 # Conjunto final de aprendizaje
 X = data_x_tmp
@@ -125,7 +172,7 @@ for col in data_x_tmp.columns:
 
 print("LLEGO 6")
 # Conjunto final de test
-X_tst = data_x_tmp.values
+X_tst = data_x_tmp
 print("HASTA DEF DE FUNC")
 
 #------------------------------------------------------------------------
@@ -144,6 +191,9 @@ def validacion_cruzada(modelo, X, y, cv):
         X_test = X.loc[test, :]
         y_train = y.loc[train,:].values
         y_test = y.loc[test, :].values
+
+        #print(X_test['employment_status'])
+        #print((X_test['employment_status'] == 0).sum())
         t = time.time()
         print("VOY A HACER FIT")
         model = modelo.fit(X_train,y_train)
@@ -171,7 +221,7 @@ def validacion_cruzada(modelo, X, y, cv):
 
 from sklearn.multioutput import MultiOutputClassifier
 from catboost import CatBoostClassifier, EFstrType, Pool
-from lightgbm import LGBMClassifier, Booster
+from lightgbm import LGBMClassifier, Dataset
 
 print("------ LightGBMClassifier...")
 
@@ -181,6 +231,40 @@ print("------ LightGBMClassifier...")
 #rf = CatBoostClassifier(iterations=70, depth=6, learning_rate= 0.31, loss_function='MultiClass')
 #aux.save_model('prueba.txt')
 
+variables_categoricas = ['age_group',
+       'education', 'race', 'sex', 'income_poverty', 'marital_status',
+       'rent_or_own', 'employment_status', 'hhs_geo_region', 'census_msa',
+       'employment_industry',
+       'employment_occupation']
+
+X = X.astype(int)
+X[variables_categoricas] = X[variables_categoricas].astype("category")
+
+"""
+variables_categoricas = ['age_group',
+       'education', 'income_poverty',
+       'rent_or_own', 'employment_status']
+
+
+data_x_tmp.drop(columns=['hhs_geo_region', 'census_msa', 'race', 'sex', 'marital_status', 'employment_industry', 'employment_occupation'], inplace=True)
+X.drop(columns=['hhs_geo_region', 'census_msa', 'race', 'sex', 'marital_status', 'employment_industry', 'employment_occupation'], inplace=True)
+
+encoder = OneHotEncoder()
+encoder.fit(data_x_tmp[variables_categoricas])
+print("!!!!")
+print(encoder.categories_)
+onehots = pd.DataFrame(encoder.transform(data_x_tmp[variables_categoricas]).toarray())
+print(onehots.shape)
+#onehots2 = pd.DataFrame(encoder.transform(data_x_tmp["race"]).toarray())
+#print(onehots2)
+xnuevo = X.drop(columns=variables_categoricas)
+X = xnuevo.join(onehots)
+del xnuevo, onehots 
+"""
+
+
+
+#name_var_cat = ["name:"+v for v in variables_categoricas]
 #rf = LGBMClassifier(boosting_type="goss", top_rate=0.42, max_depth=0, subsample_for_bin=3000, n_estimators=2500, learning_rate=0.005, num_leaves=29, min_child_samples=100, path_smooth=100)
 rf = LGBMClassifier(boosting_type="goss", top_rate=0.42, max_depth=0, subsample_for_bin=3000, n_estimators=2500, learning_rate=0.005, num_leaves=29, min_child_samples=100, path_smooth=10)
 
@@ -209,4 +293,4 @@ y_test_preds = pd.DataFrame(
 df_submission['h1n1_vaccine'] = y_test_preds.h1n1_vaccine
 df_submission['seasonal_vaccine'] = y_test_preds.seasonal_vaccine
 # Escribo el fichero de salida
-df_submission.to_csv("submission_12.csv", index=False)
+df_submission.to_csv("submission_14.csv", index=False)
