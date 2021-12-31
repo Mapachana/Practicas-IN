@@ -58,22 +58,22 @@ data_x_tmp = data_x
 
 #print(data_x_tmp["employment_industry"])
 
-mask = (data_x["health_worker"] == 1) &  data_x["employment_status"].isna() 
-data_x_tmp.loc[mask, "employment_status"] = "Employed" 
+#mask = (data_x["health_worker"] == 1) &  data_x["employment_status"].isna() 
+#data_x_tmp.loc[mask, "employment_status"] = "Employed" 
 
-mask = (data_x_tst["health_worker"] == 1) &  data_x_tst["employment_status"].isna() 
-data_x_tst.loc[mask, "employment_status"] = "Employed" 
+#mask = (data_x_tst["health_worker"] == 1) &  data_x_tst["employment_status"].isna() 
+#data_x_tst.loc[mask, "employment_status"] = "Employed" 
 
-mask =  ~data_x_tmp["employment_status"].isna() 
+#mask =  ~data_x_tmp["employment_status"].isna() 
 #print(mask)
 #print(mask.shape)
 #print(data_y.shape)
 
-data_y = data_y.mask(mask)
-data_x_tmp = data_x_tmp.mask(mask)
+#data_y = data_y.mask(mask)
+#data_x_tmp = data_x_tmp.mask(mask)
 #data_x_tmp.loc[mask, "employment_status"] = "unknown"
 
-mask = data_x_tst["employment_status"].isna() 
+#mask = data_x_tst["employment_status"].isna() 
 #data_x_tst.drop(data_x_tst[mask].index, inplace=True)
 
 #data_x_tst.loc[mask, "employment_status"] = "unknown"
@@ -85,7 +85,7 @@ for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupa
     #mask = (data_x_tst['health_worker'] == 1) & (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst[col].isna())
     #data_x_tst.loc[mask, col] = hwdata 
 
-    mask = (data_x["health_worker"] == 1) & (data_x["employment_status"] == "Employed") & (data_x[col].isna())
+    '''mask = (data_x["health_worker"] == 1) & (data_x["employment_status"] == "Employed") & (data_x[col].isna())
     data_x_tmp.loc[mask, col] = hwdata
 
     mask = (data_x_tst["health_worker"] == 1) & (data_x_tst["employment_status"] == "Employed") & (data_x_tst[col].isna())
@@ -104,10 +104,9 @@ for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupa
     data_x_tst.loc[mask, col] = no_procede
 
     mask = data_x_tmp[col].isna()
-    print(mask.sum())
     data_x_tmp.loc[mask, col] = "unknown"
     mask = data_x_tst[col].isna()
-    data_x_tst.loc[mask, col] = "unknown"
+    data_x_tst.loc[mask, col] = "unknown"'''
     """
     most_frequent = data_x_tmp[col].value_counts().index
     selected = 0
@@ -121,8 +120,30 @@ for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupa
     data_x_tmp[col].fillna(most_frequent[selected], inplace=True)
     data_x_tst[col].fillna(most_frequent[selected], inplace=True)
     """
+    pass
 
-print(data_x_tmp["employment_occupation"].isna().sum())
+#print(data_x_tmp["employment_occupation"].isna().sum())
+
+variables_categoricas = ['age_group',
+       'education', 'race', 'sex', 'income_poverty', 'marital_status',
+       'rent_or_own', 'employment_status', 'hhs_geo_region', 'census_msa',
+       'employment_industry',
+       'employment_occupation', 'behavioral_antiviral_meds', 'behavioral_avoidance', 'behavioral_face_mask',
+       'behavioral_wash_hands', 'behavioral_large_gatherings', 'behavioral_outside_home', 'behavioral_touch_face',
+       'doctor_recc_h1n1', 'doctor_recc_seasonal', 'chronic_med_condition', 'child_under_6_months', 'health_worker', 'health_insurance']
+
+variables_numericas = np.setdiff1d(data_x.columns,variables_categoricas)
+
+
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = StandardScaler()
+scaler.fit(data_x[variables_numericas])
+data_x[variables_numericas] = scaler.transform(data_x[variables_numericas])
+data_x_tst[variables_numericas] = scaler.transform(data_x_tst[variables_numericas])
+print(data_x)
+
+
 
 data_all_features = pd.concat([data_x_tmp, data_x_tst])
 
@@ -133,7 +154,7 @@ data_x_tmp = data_x_tmp.astype(str)
 
 # Vamos a imputar valores con cabeza
 #print(data_x_tmp)
-print(data_x_tmp.columns)
+#print(data_x_tmp.columns)
 
 #print(data_x_tmp)
 # Uso SimpleImputer para "eliminar los nulos", como elimina los nombres de las columnas los vuelvo a poner
@@ -142,7 +163,7 @@ data_x_tmp = pd.DataFrame(imp.fit_transform(data_x_tmp))
 data_x_tmp.columns = cols
 print("LLEGO 3")
 
-print(data_x_tmp)
+#print(data_x_tmp)
 
 # Aprendo las etiquetas
 for col in data_all_features.columns:
@@ -161,7 +182,7 @@ print("LLEGO 4B")
 X = data_x_tmp
 y = data_y.values
 
-print(X)
+#print(X)
 data_x_tmp = data_x_tst.astype(str)
 data_x_tmp = pd.DataFrame(imp.transform(data_x_tmp))
 data_x_tmp.columns = cols
@@ -231,15 +252,20 @@ print("------ LightGBMClassifier...")
 #rf = CatBoostClassifier(iterations=70, depth=6, learning_rate= 0.31, loss_function='MultiClass')
 #aux.save_model('prueba.txt')
 
-variables_categoricas = ['age_group',
+'''variables_categoricas = ['age_group',
        'education', 'race', 'sex', 'income_poverty', 'marital_status',
        'rent_or_own', 'employment_status', 'hhs_geo_region', 'census_msa',
        'employment_industry',
-       'employment_occupation']
+       'employment_occupation']'''
 
-X = X.astype(int)
+
+
+X = X.astype(float)
+X_tst = X_tst.astype(float)
 X[variables_categoricas] = X[variables_categoricas].astype("category")
-
+X_tst[variables_categoricas] = X_tst[variables_categoricas].astype("category")
+#print("COMPRUEBA TIRPO")
+#print(X.dtypes)
 """
 variables_categoricas = ['age_group',
        'education', 'income_poverty',
