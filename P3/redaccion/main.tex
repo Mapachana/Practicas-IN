@@ -102,19 +102,129 @@ manychapters,pdfspacing]{classicthesis}
 
 \ThisULCornerWallPaper{1}{figures/ugrA4.pdf}
 \maketitle
+
+
+\phantomsection
+\addcontentsline{toc}{section}{Tabla de submissions en DrivenData}
+
+\begin{figure}
+\includegraphics[scale=1]{submissions.png}
+\caption{Tabla de submissions de DrivenData}
+\end{figure}
+
+\newpage
 \tableofcontents
+\newpage
 
-%\input{preliminares/resumen}
+\section{Introducción}
+
+Para la realización de esta práctica se ha participado en la competición de DrivenData \href{https://www.drivendata.org/competitions/66/flu-shot-learning/}{Flu Shot Learning: Predict H1N1 and Seasonal Flu Vaccines}.
+
+El objetivo de la competición es predecir si una persona se ha vacunado con la vacuna de H1N1 o la vacuna de la gripe estacional usando 36 atributos distintos, siendo estos tanto categóricos como ordinales. Cabe destacar que algunos atributos, como respondent\_id, solo sirven para identificar el ejemplo.
+
+El conjunto de entrenamiento consta de $26707$ instancias con sus etiquetas:
+
+\begin{itemize}
+\item \textbf{h1n1\_vaccine}: Indica si la persona está vacunada contra el H1N1 (1) o no (0).
+\item \textbf{seasonal\_vaccine}: Indica si la persona está vacunada contra la gripe estacional (1) o no (0).
+\end{itemize}
+
+Como método de evaluación se usará el área bajo la curva ROC (AUC) para cada una de las variables, siendo la media de estas la puntuación obtenida.
+
+\newpage
+\section{Exploración de los datos}
+
+El primer paso en la commpetición es analizar el conjunto de datos y como está distribuido para entender mejor el problema y poder abordarlo de forma eficaz.
+
+\subsection{Balanceo de clases}
+
+Comenzamos comparando si las clases de nuestro problema están balanceadas o no, ya que si no lo están puede influir mucho en los clasificadores.
+
+\begin{figure}[H]
+\includegraphics[scale=1]{desbalanceo.pdf}
+\caption{Desbalanceo entre las vacunas}
+\label{desbalanceo}
+\end{figure}
+
+Observamos en \eqref{desbalanceo} que la clase de las vacunas estacionales está más o menos balanceada, mientras que muy poca gente se ha vacunado de h1n1.
+
+\subsection{Correlaciones}
+
+Vamos a representar también un heatmap que muestre las correlaciones entre las distintas variables y las vacunas, para así tener una idea aproximada de qué variables proporcionan información similar y cuáles pueden ser mejores predictores de las vacunas.
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{correlaciones.pdf}
+\caption{Correlaciones entre las variables y las clases}
+\label{correlaciones}
+\end{figure}
+
+En \eqref{correlaciones} lo primero que llama la atención es como ambas vacunas están correlacionadas.
+
+Además, vemos varias agrupaciones con correlación bastante alta, como por ejemplo todo el cúmulo de variables de las opiniones, las recomendaciones de los médicos sobre si ponerse o no una vacuna o todas las variables de comportamientos (lavarse las manos, evitar aglomeraciones etc).
+
+Nos fijamos en que las recomendaciones de los doctores de vacunarse están muy relacionadas con ponerse las vacunas, al igual que las opiniones de los riesgos.
+
+\subsection{Características}
+
+Mirando el conjunto de características es claro que hay muchos valores perdidos, y, de cara al preprocesado, es necesario comprender la distribución de estas variables para realizar una buena imputacion de valores.
+
+Comenzamos analizando qué códigos de empleo e industria se corresponden con trabajadores de la salud, con el fin de hacer una imputación más correcta.
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{industry.pdf}
+\caption{Industrias en las que trabajan sanitarios y no sanitarios}
+\label{industry}
+\end{figure}
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{occupation.pdf}
+\caption{Ocupación de sanitarios y no sanitarios}
+\label{occupation}
+\end{figure}
+
+Como vemos en \eqref{industry} y \eqref{occupation}, los sanitarios están en muchas industrias, pero sobre todo están en una de ellas, al igual que sucede con la ocupación. Por tanto, cada vez que tengamos un sanitario con empleo desconocido, parece razonable asignar esas etiquetas.
+
+Además, muchos de los valores perdidos en industria y ocupación se encuentran en personas en desempleo o que no están en busca de empleo. Vamos a analizar también la correlación entre no estar trabajando, así como su edad y ser sanitario:
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{edad_hw.pdf}
+\caption{Estado de desempleados o sin buscar trabajo según edad de los sanitarios}
+\label{edad_empleo_hw}
+\end{figure}
+
+Y comparamos los resultados con los de la población general:
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{unemployed_edad.pdf}
+\caption{Estado de desempleados o sin buscar trabajo según edad de toda la población}
+\label{edad_empleo}
+\end{figure}
+
+En \eqref{edad_empleo_hw} y \eqref{edad_empleo} se ve más o menos la misma tendencia, con quizá maás estudiantes en medicina que en general.
+
+Estudiamos ahora el estado de empleo según la edad:
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{employment_status_segun_age.pdf}
+\caption{Estado de empleo según edad de toda la población}
+\label{edad_empleo_completo}
+\end{figure}
+
+Observando \eqref{edad_empleo_completo} vemos que el desempleo es bajo para edades menores de 55 años y después sube. También hay muchos estudiantes en el primer grupo. ¿Estos grupos tienen ingresos? Realizamos otra representación para comprobarlo, ya que en las correlaciones parece una variable relevante.
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{edad_segun_income.pdf}
+\caption{Ingresos según la edad}
+\label{ingresos}
+\end{figure}
+
+En \eqref{ingresos} se confirma como las personas mayores tienen más ingresos quelas personas jóvenes, pero no parece aportar demasiada información relevante que podamos usar.
 
 
-% Part I
-%\input{chapters/capitulo_0}
-
-%\input{chapters/capitulo_1}
 
 
-% Part II
-%\input{chapters/chapter5}
+
+
 
 % ----------------------- %
 % BIBLIOGRAFÍA
@@ -125,6 +235,7 @@ manychapters,pdfspacing]{classicthesis}
 % FUENTE CUSTOM
 %\bibliographystyle{apa-good}
 % formato de citas original
+\newpage
 \bibliographystyle{unsrtnat}
 
 %[citestyle=numeric]
