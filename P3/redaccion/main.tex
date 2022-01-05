@@ -90,7 +90,7 @@ manychapters,pdfspacing]{classicthesis}
 \usepackage{titling} % Facilita los datos de la portada
 \author{Ana Buendía Ruiz-Azuaga} 
 \date{\today}
-\title{Modelos Epidemiológicos}
+\title{Práctica 3: Competición}
 
 % Portada
 \include{imports/titlepage}
@@ -105,7 +105,7 @@ manychapters,pdfspacing]{classicthesis}
 
 
 \phantomsection
-\addcontentsline{toc}{section}{Tabla de submissions en DrivenData}
+\addcontentsline{toc}{chapter}{Tabla de submissions en DrivenData}
 
 \begin{figure}
 \includegraphics[scale=1]{submissions.png}
@@ -116,6 +116,7 @@ manychapters,pdfspacing]{classicthesis}
 \tableofcontents
 \newpage
 
+\chapter{Práctica 3}
 \section{Introducción}
 
 Para la realización de esta práctica se ha participado en la competición de DrivenData \href{https://www.drivendata.org/competitions/66/flu-shot-learning/}{Flu Shot Learning: Predict H1N1 and Seasonal Flu Vaccines}.
@@ -131,6 +132,12 @@ El conjunto de entrenamiento consta de $26707$ instancias con sus etiquetas:
 
 Como método de evaluación se usará el área bajo la curva ROC (AUC) para cada una de las variables, siendo la media de estas la puntuación obtenida.
 
+\newpage
+\section{Estructura}
+El primer archivo de subida es \textit{ejemplo\_flu.py}, proporcionado por los profesores, con su correspondiente submission \textit{submission\_ejemplo\_flu\_rf.csv}. Cada uno de ellos se encuentra en su carpeta correspondiente: los archivos fuente se encuentran en \textit{src} (contiene archivos numerados de submissions) y sus correspondientes resultados se encuentran análogamente numerados en la carpeta \textit{submission}.
+
+Además, en el directorio raíz se encuentra este documento de memoria de la práctica, así como el archivo excel editable y su exportación a pdf de la tabla resumen de subidas y la captura de pantalla de las submissions en DrivenData.
+´
 \newpage
 \section{Exploración de los datos}
 
@@ -236,9 +243,9 @@ En \eqref{ingresos} se confirma como las personas mayores tienen más ingresos q
         27/12/21 & 17:15:00 & 322 & 0.8609 & 0.8554 & Imputación de valores simple & Random forest & n\_estimators 300, min\_samples\_split 35, min\_samples\_leaf 3  & Pruebo ajuste parámetros de RF \\ \hline
         27/12/21 & 18:39:00 & 320 & 0.8656 & 0.8581 & Imputación de valores simple & CatboostClassifier & Iterations 45, depth 6 learning\_rate 0.31 & Añado otro paremtro a catboost \\ \hline
         28/12/21 & 00:50:00 & 320 & 0.8583 & 0.8515 & Imputación de valores simple & CatboostClassifier & Iterations 70, depth6,  learning rate 0.31 weights todo a 1 salvo las reccomendations a 2 & No quería subir esa :’) \\ \hline
-        28/12/21 & 17:59:00 & 213 & 0.8669 & 0.8609 & Imputación de valores simple & LightXGBoost & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=110 & Probando LXGB con parametros \\ \hline
-        28/12/21 & 20:25:00 & 213 & 0.8708 & 0.8601 & Imputaciónd de valores simple y oversampling de 2000 instancias & LightXGBoost & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=111 & Pruebo a hacer oversampling, ha ido mejor de lo esperado \\ \hline
-        29/12/21 & 00:00:00 & 214 & 0.8675 & 0.8609 & Imputación de valores simple y undersampling de 200 instancias & LightXGBoost & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=112 & Pruebo el undersampling (la hora esta bien, ha sido a las 00 justas) \\ \hline
+        28/12/21 & 17:59:00 & 213 & 0.8669 & 0.8609 & Imputación de valores simple & LGBM & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=110 & Probando LGBM con parametros \\ \hline
+        28/12/21 & 20:25:00 & 213 & 0.8708 & 0.8601 & Imputaciónd de valores simple y oversampling de 2000 instancias & LGBM & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=111 & Pruebo a hacer oversampling, ha ido mejor de lo esperado \\ \hline
+        29/12/21 & 00:00:00 & 214 & 0.8675 & 0.8609 & Imputación de valores simple y undersampling de 200 instancias & LGBM & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=112 & Pruebo el undersampling (la hora esta bien, ha sido a las 00 justas) \\ \hline
         29/12/21 & 20:06:00 & 68 & 0.8683 & 0.8630 & Imputacion de valores simple & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100 & Ajusto parametros \\ \hline
         29/12/21 & 23:44:00 & 69 & 0.8683 & 0.8630 & Imputacion de valores simple & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=10 & Intento mejorar parametros \\ \hline
         30/12/21 & 00:47:00 & 69 & 0.8682 & 0.8628 & Imputacion de valores inteligente & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=10 & Intento otro preprocesado sin éxito \\ \hline
@@ -246,7 +253,7 @@ En \eqref{ingresos} se confirma como las personas mayores tienen más ingresos q
         31/12/21 & 21:20:00 & 69 & 0.8675 & 0.8620 & Imputacion de valores simple y normalizacion & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=11 & Intento preprocesado sin xito \\ \hline
         31/12/21 & 21:25:00 & 69 & 0.8683 & 0.8630 & Imputacion de valores simple y normalizacion & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=12 & Intento normalizar de nuev o sin éxito \\ \hline
 
-\caption{Submissions realizadas}
+\caption{Submissions realizadas. Puede consultarse en el excel adjunto. Mejor marca $0.8630$ en posición $69$}
 \label{tabla}
 
 \end{longtable}
@@ -303,7 +310,8 @@ no_procede = "no procede"
 empleado_healthcare_industry = "fcxhlnwr"
 empleado_healthcare_occupation = "cmhcxjea"
 
-mask_no_empleado_health = (data_x['health_worker'] == 1) & (data_x['employment_status'] == "Unemployed") & (data_x['employment_industry'].isna())
+mask_no_empleado_health = (data_x['health_worker'] == 1) & 
+(data_x['employment_status'] == "Unemployed") & (data_x['employment_industry'].isna())
 data_x_tmp = data_x
 
 mask = (data_x["health_worker"] == 1) &  data_x["employment_status"].isna() 
@@ -322,24 +330,31 @@ mask = data_x_tst["employment_status"].isna()
 data_x_tst.drop(data_x_tst[mask].index, inplace=True)
 data_x_tst.loc[mask, "employment_status"] = "unknown"
 
-for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupation], ["employment_industry", "employment_occupation"]):
+for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupation],
+["employment_industry", "employment_occupation"]):
 
-    mask = (data_x["health_worker"] == 1) & (data_x["employment_status"] == "Employed") & (data_x[col].isna())
+    mask = (data_x["health_worker"] == 1) & 
+    (data_x["employment_status"] == "Employed") & (data_x[col].isna())
     data_x_tmp.loc[mask, col] = hwdata
 
-    mask = (data_x_tst["health_worker"] == 1) & (data_x_tst["employment_status"] == "Employed") & (data_x_tst[col].isna())
+    mask = (data_x_tst["health_worker"] == 1) & 
+    (data_x_tst["employment_status"] == "Employed") & (data_x_tst[col].isna())
     data_x_tst.loc[mask, col] = hwdata
 
-    mask = (data_x['employment_status'] == "Unemployed") & (data_x[col].isna())
+    mask = (data_x['employment_status'] == "Unemployed") & 
+    (data_x[col].isna())
     data_x_tmp.loc[mask, col] = no_empleado
 
-    mask = (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst[col].isna())
+    mask = (data_x_tst['employment_status'] == "Unemployed") & 
+    (data_x_tst[col].isna())
     data_x_tst.loc[mask, col] = no_empleado
 
-    mask = (data_x['employment_status'] == "Not in Labor Force") & (data_x[col].isna())
+    mask = (data_x['employment_status'] == "Not in Labor Force") & 
+    (data_x[col].isna())
     data_x_tmp.loc[mask, col] = no_procede
 
-    mask = (data_x_tst['employment_status'] == "Not in Labor Force") & (data_x_tst[col].isna())
+    mask = (data_x_tst['employment_status'] == "Not in Labor Force") & 
+    (data_x_tst[col].isna())
     data_x_tst.loc[mask, col] = no_procede
 
     mask = data_x_tmp[col].isna()
@@ -350,7 +365,8 @@ for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupa
     most_frequent = data_x_tmp[col].value_counts().index
     selected = 0
 
-    while most_frequent[selected] == no_procede or most_frequent[selected] == no_empleado or most_frequent[selected] == hwdata:
+    while most_frequent[selected] == no_procede or
+     most_frequent[selected] == no_empleado or most_frequent[selected] == hwdata:
         selected += 1
         
     data_x_tmp[col].fillna(most_frequent[selected], inplace=True)
@@ -394,12 +410,15 @@ for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupa
 \newpage
 \bibliographystyle{unsrtnat}
 
-FALTA LA BIBLOGRAFIA QUE NO SE TE OLVIDE
-%[citestyle=numeric]
-
-% Añadimos la bibliografía al índice
-\phantomsection
-\addcontentsline{toc}{chapter}{Bibliografía}
+\chapter{Bibliografía}
+\begin{itemize}
+\item Diapositivas de la asignatura.
+\item \href{https://pandas.pydata.org/docs/}{https://pandas.pydata.org/docs/}
+\item \href{https://matplotlib.org/}{https://matplotlib.org/}
+\item \href{https://scikit-learn.org/stable/}{https://scikit-learn.org/stable/}
+\item \href{https://catboost.ai/en/docs/concepts/python-reference\_catboostclassifier}{https://catboost.ai/en/docs/concepts/python-reference\_catboostclassifier}
+\item \href{https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html}{https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.LGBMClassifier.html}
+\end{itemize}
 
 \bibliography{bib/library}
 
