@@ -96,7 +96,7 @@ manychapters,pdfspacing]{classicthesis}
 \include{imports/titlepage}
 \usepackage{wallpaper}
 \usepackage[main=spanish]{babel}
-
+\usepackage{longtable}
 
 \begin{document}
 
@@ -220,8 +220,164 @@ Observando \eqref{edad_empleo_completo} vemos que el desempleo es bajo para edad
 
 En \eqref{ingresos} se confirma como las personas mayores tienen más ingresos quelas personas jóvenes, pero no parece aportar demasiada información relevante que podamos usar.
 
+\newpage
+\section{Progreso}
+
+\subsection{Tabla de progresos}
+
+\tiny
+\begin{longtable}{|l|l|l|l|l|m{7em}|m{7em}|m{7em}|m{7em}|}
+
+        Fecha & Hora(CET) & Posición & Sc. Train. & Sc. Test & Preprocesado & Algoritmos & Parámetros & Comentarios \\ \hline
+        23/12/21 & 22:35:00 & 344 & 0.8543 & 0.8513 & Imputación de valores & Random forest & Por defecto & Fichero de prueba del profesor \\ \hline
+        26/12/21 & 20:52:00 & 344 & 0.8589 & 0.8483 & Eliminando instancias con muchos nulos  e imputación de valores simple & Random forest & Por defecto & ~ \\ \hline
+        27/12/21 & 00:04:00 & 344 & 0.8502 & 0.8448 & Imputación de valores simple & CatboostClassifier & Iterations 10, depth 2, learning\_rate 1 & Probando el catboost \\ \hline
+        27/12/21 & 00:21:00 & 322 & 0.8624 & 0.8576 & Imputación de valores simple & CatboostClassifier & Iterations 45, depth 6 & Ajustados parámetros de catboost para resultado óptimo \\ \hline
+        27/12/21 & 17:15:00 & 322 & 0.8609 & 0.8554 & Imputación de valores simple & Random forest & n\_estimators 300, min\_samples\_split 35, min\_samples\_leaf 3  & Pruebo ajuste parámetros de RF \\ \hline
+        27/12/21 & 18:39:00 & 320 & 0.8656 & 0.8581 & Imputación de valores simple & CatboostClassifier & Iterations 45, depth 6 learning\_rate 0.31 & Añado otro paremtro a catboost \\ \hline
+        28/12/21 & 00:50:00 & 320 & 0.8583 & 0.8515 & Imputación de valores simple & CatboostClassifier & Iterations 70, depth6,  learning rate 0.31 weights todo a 1 salvo las reccomendations a 2 & No quería subir esa :’) \\ \hline
+        28/12/21 & 17:59:00 & 213 & 0.8669 & 0.8609 & Imputación de valores simple & LightXGBoost & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=110 & Probando LXGB con parametros \\ \hline
+        28/12/21 & 20:25:00 & 213 & 0.8708 & 0.8601 & Imputaciónd de valores simple y oversampling de 2000 instancias & LightXGBoost & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=111 & Pruebo a hacer oversampling, ha ido mejor de lo esperado \\ \hline
+        29/12/21 & 00:00:00 & 214 & 0.8675 & 0.8609 & Imputación de valores simple y undersampling de 200 instancias & LightXGBoost & n\_estimators=100, learning\_rate=0.072, num\_leaves=29, min\_child\_samples=112 & Pruebo el undersampling (la hora esta bien, ha sido a las 00 justas) \\ \hline
+        29/12/21 & 20:06:00 & 68 & 0.8683 & 0.8630 & Imputacion de valores simple & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100 & Ajusto parametros \\ \hline
+        29/12/21 & 23:44:00 & 69 & 0.8683 & 0.8630 & Imputacion de valores simple & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=10 & Intento mejorar parametros \\ \hline
+        30/12/21 & 00:47:00 & 69 & 0.8682 & 0.8628 & Imputacion de valores inteligente & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=10 & Intento otro preprocesado sin éxito \\ \hline
+        31/12/21 & 00:33:00 & 69 & 0.8684 & 0.8629 & Imputación de valores inteligente mejorada & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=10 & Intento otro preprocesado sin éxito \\ \hline
+        31/12/21 & 21:20:00 & 69 & 0.8675 & 0.8620 & Imputacion de valores simple y normalizacion & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=11 & Intento preprocesado sin xito \\ \hline
+        31/12/21 & 21:25:00 & 69 & 0.8683 & 0.8630 & Imputacion de valores simple y normalizacion & LGBM & boosting\_type="goss", top\_rate=0.42, max\_depth=0, subsample\_for\_bin=3000, n\_estimators=2500, learning\_rate=0.005, num\_leaves=29, min\_child\_samples=100, path\_smooth=12 & Intento normalizar de nuev o sin éxito \\ \hline
+
+\caption{Submissions realizadas}
+\label{tabla}
+
+\end{longtable}
+
+\normalsize
+
+\subsection{Avances}
+
+La primera entrega fue el fichero proporcionado por los profesores que usa random forest, se usó sin ninguna modificación para probar el sistema de subidas y marcar la medida a superar con las siguientes subidas. En este fichero el único preprocesado consiste en imputar todos los valores perdidos por el más frecuente, y es a lo que nos referiremos de ahora en adelante como imputación de valores simple.
+
+A partir de este fichero, todas las entregas están nombradas como submission<numero>.py y su correspondiente .csv para su fácil identificación.
+
+En segundo lugar se probó un preprocesado en el que se eliminaban todas las instancias con más de tres valores nulos en la misma fila, para comprobar si mejoraba el rendimiento del algoritmo, pero no fue así. Igualmente tampoco mejoró al eliminar algunas columnas que tenían gran cantidad de valores perdidos, como industry u occupation.
+
+Después, dado que en la primera práctica el algoritmo XGBoost dio buen resultado, se ha probado la implementación de CatBoostClassifier, ya que trabaja bien con variables categóricas. Esta subida fue solamente el algoritmo, y en la siguiente se cambiaron los parámetros del mismo para mejorar la marca.
+
+Dado que el resultado mejoró notablemente al cambiar los parámetros, se volvió al algoritmo random forest y se probó a modificar los parámetros allí para la siguiente subida.
+
+Como no se mejoraron los resultados obtenidos por CatBoostClassifier, se volvió a este clasificador y se probaron más combinaciones de parámetros en las dos siguientes subidas, sin lograr mejorar la marca.
+
+Con este algoritmo, aunque no se realizaron subidas ya que bajaba el score incluso en training, se han probado los métodos de smote, oversampling y undersampling, así como normalización minmax y standard usando las herramientas de sklearn.
+
+Como ninguno de los preprocesados probados ha funcionado, probé el LGBMClassifier habiendo modificado los parámetros.
+
+También, pese a que bajaba ligeramente el training probé a subir a drivendata los resultados de aplicar oversampling y undersampling por si reducían overfitting, pero no fue así.
+
+Se probó entonces a cambiar el método de imputación de valores a la media en las variables ordinales, pero no mejoró, así como se probaron también de sklearn el KNNImputer y el IterativeImputer con distintos métodos predictivos y parámetros cada uno, pero de nuevo bajaron el score en training. Asimismo se volvió a incluir la normalización minmax y standard, pero tampoco mejoraban el resultado. Así, ninguna submission de drivendata cuenta con estos métodos, a pesar de que se ha trabajado en ellos.
+
+\begin{figure}[H]
+\includegraphics[scale=1]{atributos.pdf}
+\caption{Importancia de los atributos según random forest}
+\label{arbol}
+\end{figure}
+
+Asimismo, se probó a modificar la importancia de las variables basándonos en la relevancia de cada una de ellas, obtenidas a partir del clasificador RandomForest, como se muestra en \eqref{arbol}.
+
+Por tanto, las dos siguientes entregas de nuevo fueron modificar los parámetros de LGBMClassifier, obteniendo así 0.8630, que es la puntuación más alta que se ha alcanzado.
+
+Finalmente se volvió a intentar con distintos preprocesados, donde destaca la imputación de valores a la que en la tabla nos referimos como "\textbf{imputación de valores inteligente}", pues se basa en la exploración de datos realizada antes.
+
+En este preprocesado las personas que sean sanitarios aparecerán como empleados (employment\_status) y los códigos de industry y occupation son los que se dan con más frecuencia en los sanitarios, vistos antes.
+
+Además, si alguien está desempleado, como valor en su industry y occupation aparecerá "no trabaja" si los campos no están rellenos, variable global de sustitución.
+
+De igual manera, si su estado es "not in labor force" se rellena con "no procede".
+
+Los valores perdidos restantes se rellenan con el valor  más frecuente distinto de estás variables globales.
+
+El código es el siguiente:
+
+\begin{verbatim}
+no_empleado = "no empleado"
+no_procede = "no procede"
+empleado_healthcare_industry = "fcxhlnwr"
+empleado_healthcare_occupation = "cmhcxjea"
+
+mask_no_empleado_health = (data_x['health_worker'] == 1) & (data_x['employment_status'] == "Unemployed") & (data_x['employment_industry'].isna())
+data_x_tmp = data_x
+
+mask = (data_x["health_worker"] == 1) &  data_x["employment_status"].isna() 
+data_x_tmp.loc[mask, "employment_status"] = "Employed" 
+
+mask = (data_x_tst["health_worker"] == 1) &  data_x_tst["employment_status"].isna() 
+data_x_tst.loc[mask, "employment_status"] = "Employed" 
+
+mask =  ~data_x_tmp["employment_status"].isna() 
+
+data_y = data_y.mask(mask)
+data_x_tmp = data_x_tmp.mask(mask)
+data_x_tmp.loc[mask, "employment_status"] = "unknown"
+
+mask = data_x_tst["employment_status"].isna() 
+data_x_tst.drop(data_x_tst[mask].index, inplace=True)
+data_x_tst.loc[mask, "employment_status"] = "unknown"
+
+for hwdata, col in zip([empleado_healthcare_industry, empleado_healthcare_occupation], ["employment_industry", "employment_occupation"]):
+
+    mask = (data_x["health_worker"] == 1) & (data_x["employment_status"] == "Employed") & (data_x[col].isna())
+    data_x_tmp.loc[mask, col] = hwdata
+
+    mask = (data_x_tst["health_worker"] == 1) & (data_x_tst["employment_status"] == "Employed") & (data_x_tst[col].isna())
+    data_x_tst.loc[mask, col] = hwdata
+
+    mask = (data_x['employment_status'] == "Unemployed") & (data_x[col].isna())
+    data_x_tmp.loc[mask, col] = no_empleado
+
+    mask = (data_x_tst['employment_status'] == "Unemployed") & (data_x_tst[col].isna())
+    data_x_tst.loc[mask, col] = no_empleado
+
+    mask = (data_x['employment_status'] == "Not in Labor Force") & (data_x[col].isna())
+    data_x_tmp.loc[mask, col] = no_procede
+
+    mask = (data_x_tst['employment_status'] == "Not in Labor Force") & (data_x_tst[col].isna())
+    data_x_tst.loc[mask, col] = no_procede
+
+    mask = data_x_tmp[col].isna()
+    data_x_tmp.loc[mask, col] = "unknown"
+    mask = data_x_tst[col].isna()
+    data_x_tst.loc[mask, col] = "unknown"'''
+    
+    most_frequent = data_x_tmp[col].value_counts().index
+    selected = 0
+
+    while most_frequent[selected] == no_procede or most_frequent[selected] == no_empleado or most_frequent[selected] == hwdata:
+        selected += 1
+        
+    data_x_tmp[col].fillna(most_frequent[selected], inplace=True)
+    data_x_tst[col].fillna(most_frequent[selected], inplace=True)
+\end{verbatim}
+
+\newpage
+\section{Herramientas con las que se ha trabajado}
+
+\begin{itemize}
+\item RandomForest classifier
+\item CatBoostClassifier
+\item LGBMClassifier
+\item sklearn.preprocessing SimpleImputer
+\item sklearn.preprocessing KNNImputer
+\item sklearn.preprocessing IterativeImputer
+\item sklearn.preprocessing MinMaxScaler
+\item sklearn.preprocessing StandardScaler
+\item sklearn.preprocessing OneHotEncoder
+\item sklearn.utils Resample
+\item imblearn smote
+\item sklearn.preprocessing LabelEncoder
+\item sklearn.model\_selection Kfold
+\item sklearn.multioutput MultiOutputClassifier
 
 
+\end{itemize}
 
 
 
@@ -238,6 +394,7 @@ En \eqref{ingresos} se confirma como las personas mayores tienen más ingresos q
 \newpage
 \bibliographystyle{unsrtnat}
 
+FALTA LA BIBLOGRAFIA QUE NO SE TE OLVIDE
 %[citestyle=numeric]
 
 % Añadimos la bibliografía al índice
